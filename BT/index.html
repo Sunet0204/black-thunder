@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.hidden{
+    display: none;
+}
+</style>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>ブラックサンダ-</title>
+    </head>
+    <button id="showAllBtn">全表示</button>
+    <input type="text" id="searchBox" placeholder="name">
+    <body>
+        <h1>ブラックサンダー</h1>
+        <p>種類</p>
+
+
+        <script>
+            function makeTable(jsonFile, tableId) {
+            fetch(jsonFile)
+                .then(res => res.json())
+                .then(items => {
+                const tbody = document.getElementById(tableId);
+
+                    for (let i = 0; i < items.length; i++) {
+                        const tr = document.createElement("tr");
+
+                        for (let j = 0; j <= 4; j++) {
+                            const td = document.createElement("td");
+
+                            if (j === 0) {
+                                const a = document.createElement("a");
+                                a.textContent = items[i][j];
+                                a.href = items[i][5];
+                                td.appendChild(a);
+
+                            } else if (j === 4) {
+                                const img = document.createElement("img");
+                                img.src = items[i][j];
+                                img.alt = items[i][0];
+                                img.width = 100;
+                                td.appendChild(img);
+
+                            } else {
+                                td.textContent = items[i][j];
+                            }
+
+                            tr.appendChild(td);
+                        }
+                        tbody.appendChild(tr);
+                    }
+                });
+        }
+        const years = [1994, 2000, 2003, 2005, 2006, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+
+            function makelist(listname){
+                const list = ["名前","発売日","二つ名","サイズ","画像"];
+                const tr = document.getElementById(listname);
+                for(let i = 0;i < list.length; i++){
+                    const th = document.createElement("th");
+                    th.textContent = list[i]
+                    tr.appendChild(th);
+                }
+            }
+
+            for(let i = 0;i<years.length;i++){
+                const year = years[i];
+                const h2 = document.createElement("h2");
+                h2.textContent = year;
+
+                const table = document.createElement("table");
+                table.classList.add("hidden");
+
+                const thead = document.createElement("thead");
+                const tr = document.createElement("tr");
+                tr.id = "list" + year;
+
+                const tbody = document.createElement("tbody");
+                tbody.id = "table" + year;
+
+                thead.appendChild(tr);
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                
+                h2.style.cursor = "pointer";
+                h2.onclick = function(){
+                    table.classList.toggle("hidden");
+                };
+                document.body.appendChild(h2);
+                document.body.appendChild(table);
+
+                makeTable("json/"+years[i]+".json","table"+years[i]);
+                makelist("list"+years[i]);
+            }
+            document.getElementById("searchBox").addEventListener("input", function () {
+            const keyword = this.value.toLowerCase();
+
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const nameCell = row.children[0]; // 1列目（名前）
+                const text = nameCell.textContent.toLowerCase();
+
+                if (text.includes(keyword)) {
+                    row.style.display = "";
+             } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+
+        document.getElementById("showAllBtn").addEventListener("click", function () {
+        // すべての行を表示
+        const rows = document.querySelectorAll("tbody tr");
+        rows.forEach(row => {
+        row.style.display = "";
+        });
+        // すべてのテーブルも開く（←これが重要）
+    const tables = document.querySelectorAll("table");
+    tables.forEach(table => {
+        table.classList.remove("hidden");
+    });
+});
+    
+        </script>
+    </body>
+</html>
