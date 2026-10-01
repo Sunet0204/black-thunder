@@ -497,7 +497,8 @@
     function makeTable(
         jsonFile,
         tbody,
-        type
+        type,
+        year
     ) {
 
 
@@ -535,7 +536,17 @@
                     const tr =
                         document.createElement("tr");
 
+                    // ==================================
+                    // 個別商品ページのURL
+                    // ==================================
 
+                    const productUrl =
+                        "product.html?type=" +
+                        encodeURIComponent(type) +
+                        "&year=" +
+                        encodeURIComponent(year) +
+                        "&id=" +
+                        encodeURIComponent(i);
                     // ==================================
                     // [3]
                     //
@@ -614,7 +625,7 @@
 
 
                             a.href =
-                                items[i][5];
+                                productUrl;
 
 
                             td.appendChild(a);
@@ -628,26 +639,33 @@
 
                         else if (j === 4) {
 
+                            const a =
+                                document.createElement(
+                                    "a"
+                                );
+
+                            a.href =
+                                productUrl;
+
 
                             const img =
                                 document.createElement(
                                     "img"
                                 );
 
-
                             img.src =
                                 items[i][j];
 
-
                             img.alt =
                                 items[i][0];
-
 
                             img.width =
                                 100;
 
 
-                            td.appendChild(img);
+                            a.appendChild(img);
+
+                            td.appendChild(a);
 
                         }
 
@@ -1053,7 +1071,9 @@
 
                 tbody,
 
-                type
+                type,
+
+                year
 
             );
 

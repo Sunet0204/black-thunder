@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>商品紹介</title>
+
+
+    <style>
+
+        body {
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding: 20px;
+
+            font-family:
+                sans-serif;
+
+        }
+
+
+        #productImage {
+
+            max-width: 400px;
+
+            width: 100%;
+
+            height: auto;
+
+        }
+
+
+        .product-info {
+
+            margin-top: 20px;
+
+        }
+
+
+        .product-info p {
+
+            margin:
+                10px 0;
+
+        }
+
+
+        #seriesArea {
+
+            margin-top: 10px;
+
+        }
+
+
+        .series {
+
+            display: inline-block;
+
+            margin-right: 5px;
+
+            margin-bottom: 5px;
+
+            padding:
+                4px 8px;
+
+            border:
+                1px solid #999;
+
+            border-radius:
+                4px;
+
+        }
+
+
+        #officialLink {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+        }
+
+
+        #backLink {
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+        }
+
+
+        #errorMessage {
+
+            color: red;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================= -->
+    <!-- エラー表示 -->
+    <!-- ============================= -->
+
+    <p id="errorMessage"></p>
+
+
+
+    <!-- ============================= -->
+    <!-- 商品 -->
+    <!-- ============================= -->
+
+    <main id="productArea">
+
+
+        <h1 id="productName">
+            読み込み中...
+        </h1>
+
+
+        <img
+            id="productImage"
+            src=""
+            alt=""
+        >
+
+
+        <div class="product-info">
+
+
+            <p>
+                <strong>発売日：</strong>
+                <span id="releaseDate"></span>
+            </p>
+
+
+            <p>
+                <strong>二つ名：</strong>
+                <span id="nickname"></span>
+            </p>
+
+
+            <p id="fourthRow">
+
+                <strong id="fourthTitle">
+                    サイズ：
+                </strong>
+
+                <span id="fourthValue"></span>
+
+            </p>
+
+
+            <p id="flavorRow">
+
+                <strong>
+                    味：
+                </strong>
+
+                <span id="flavor"></span>
+
+            </p>
+
+
+            <div id="seriesRow">
+
+                <strong>
+                    シリーズ区分：
+                </strong>
+
+                <div id="seriesArea"></div>
+
+            </div>
+
+
+            <a
+                id="officialLink"
+                href=""
+            >
+                公式・参考ページを見る
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <br>
+
+
+    <a
+        id="backLink"
+        href="index.html"
+    >
+        ← 商品一覧に戻る
+    </a>
+
+
+
+<script>
+
+
+// ==========================================
+// URLから情報を取得
+// ==========================================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const type =
+    params.get("type");
+
+
+const year =
+    params.get("year");
+
+
+const id =
+    Number(
+        params.get("id")
+    );
+
+
+
+// ==========================================
+// JSONの場所を決定
+// ==========================================
+
+function getJsonPath(
+    type,
+    year
+) {
+
+
+    if (type === "index") {
+
+        return (
+            "json/" +
+            year +
+            ".json"
+        );
+
+    }
+
+
+    else if (type === "thun2") {
+
+        return (
+            "json2/" +
+            year +
+            "-2.json"
+        );
+
+    }
+
+
+    else if (type === "thun3") {
+
+        return (
+            "json3/" +
+            year +
+            "-3.json"
+        );
+
+    }
+
+
+    return null;
+
+}
+
+
+
+// ==========================================
+// JSON読み込み
+// ==========================================
+
+const jsonPath =
+    getJsonPath(
+        type,
+        year
+    );
+
+
+if (
+    jsonPath === null ||
+    !Number.isInteger(id) ||
+    id < 0
+) {
+
+    showError(
+        "商品情報が正しく指定されていません。"
+    );
+
+}
+
+else {
+
+
+    fetch(jsonPath)
+
+        .then(
+            response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "JSONを読み込めませんでした。"
+                    );
+
+                }
+
+                return response.json();
+
+            }
+        )
+
+
+        .then(
+            items => {
+
+
+                // 商品が存在するか確認
+
+                if (
+                    id >= items.length
+                ) {
+
+                    throw new Error(
+                        "商品が見つかりませんでした。"
+                    );
+
+                }
+
+
+                const item =
+                    items[id];
+
+
+                showProduct(
+                    item,
+                    type
+                );
+
+            }
+        )
+
+
+        .catch(
+            error => {
+
+                console.error(
+                    error
+                );
+
+                showError(
+                    "商品情報の読み込みに失敗しました。"
+                );
+
+            }
+        );
+
+}
+
+
+
+// ==========================================
+// 商品表示
+// ==========================================
+
+function showProduct(
+    item,
+    type
+) {
+
+
+    // --------------------------------------
+    // 商品名
+    // --------------------------------------
+
+    document
+        .getElementById(
+            "productName"
+        )
+        .textContent =
+            item[0] || "";
+
+
+    // ブラウザタイトル
+
+    document.title =
+        (item[0] || "商品紹介") +
+        " | ブラックサンダー";
+
+
+
+    // --------------------------------------
+    // 画像
+    // --------------------------------------
+
+    const image =
+        document.getElementById(
+            "productImage"
+        );
+
+
+    image.src =
+        item[4] || "";
+
+
+    image.alt =
+        item[0] || "";
+
+
+
+    // --------------------------------------
+    // 発売日
+    // --------------------------------------
+
+    document
+        .getElementById(
+            "releaseDate"
+        )
+        .textContent =
+            item[1] || "不明";
+
+
+
+    // --------------------------------------
+    // 二つ名
+    // --------------------------------------
+
+    document
+        .getElementById(
+            "nickname"
+        )
+        .textContent =
+            item[2] || "";
+
+
+
+    // --------------------------------------
+    // [3]
+    // --------------------------------------
+
+    const fourthTitle =
+        document.getElementById(
+            "fourthTitle"
+        );
+
+
+    const fourthValue =
+        document.getElementById(
+            "fourthValue"
+        );
+
+
+    if (type === "thun3") {
+
+        fourthTitle.textContent =
+            "コラボ先：";
+
+    }
+
+    else {
+
+        fourthTitle.textContent =
+            "サイズ：";
+
+    }
+
+
+    fourthValue.textContent =
+        item[3] || "";
+
+
+
+    // ======================================
+    // ブラックサンダー
+    // ======================================
+
+    if (type === "index") {
+
+
+        // ----------------------------------
+        // 味
+        // ----------------------------------
+
+        document
+            .getElementById(
+                "flavor"
+            )
+            .textContent =
+                item[6] || "";
+
+
+
+        // ----------------------------------
+        // シリーズ区分
+        // ----------------------------------
+
+        let seriesList =
+            item[7] || [];
+
+
+        // 古いJSONにも対応
+
+        if (
+            !Array.isArray(
+                seriesList
+            )
+        ) {
+
+            seriesList =
+                [seriesList];
+
+        }
+
+
+        const seriesArea =
+            document.getElementById(
+                "seriesArea"
+            );
+
+
+        seriesArea.innerHTML =
+            "";
+
+
+        seriesList.forEach(
+            series => {
+
+
+                if (!series) {
+
+                    return;
+
+                }
+
+
+                const span =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                span.classList.add(
+                    "series"
+                );
+
+
+                span.textContent =
+                    series;
+
+
+                seriesArea.appendChild(
+                    span
+                );
+
+            }
+        );
+
+    }
+
+
+    // ======================================
+    // その他・コラボ
+    // ======================================
+
+    else {
+
+        document
+            .getElementById(
+                "flavorRow"
+            )
+            .style
+            .display =
+                "none";
+
+
+        document
+            .getElementById(
+                "seriesRow"
+            )
+            .style
+            .display =
+                "none";
+
+    }
+
+
+
+    // --------------------------------------
+    // 公式・参考URL
+    // --------------------------------------
+
+    const officialLink =
+        document.getElementById(
+            "officialLink"
+        );
+
+
+    if (item[5]) {
+
+        officialLink.href =
+            item[5];
+
+
+        officialLink.target =
+            "_blank";
+
+
+        officialLink.rel =
+            "noopener noreferrer";
+
+    }
+
+    else {
+
+        officialLink.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+// ==========================================
+// エラー
+// ==========================================
+
+function showError(
+    message
+) {
+
+
+    document
+        .getElementById(
+            "errorMessage"
+        )
+        .textContent =
+            message;
+
+
+    document
+        .getElementById(
+            "productArea"
+        )
+        .style
+        .display =
+            "none";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
