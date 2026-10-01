@@ -2,20 +2,20 @@
 <html lang="ja">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ブラックサンダー</title>
 
-
     <style>
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid black;
             border-collapse: collapse;
         }
@@ -36,24 +36,13 @@
             cursor: pointer;
         }
 
-
-        /* =====================================
-           収録商品数
-        ===================================== */
-
         #totalCount {
             font-weight: bold;
             margin-bottom: 20px;
         }
 
-
-        /* =====================================
-           絞り込みボタン
-        ===================================== */
-
         #filterArea {
-            margin-top: 15px;
-            margin-bottom: 15px;
+            margin: 15px 0;
         }
 
         #filterArea button {
@@ -65,24 +54,10 @@
             margin-bottom: 8px;
         }
 
-
-        /* 選択中 */
-
         .filter-group button.selected {
             background-color: #333;
             color: white;
             font-weight: bold;
-        }
-
-
-        /* =====================================
-           スマホ用
-        ===================================== */
-
-        body {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
 
         img {
@@ -99,65 +74,24 @@
             font-size: 16px;
             padding: 6px 10px;
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <h1 id="mainTitle">ブラックサンダー</h1>
 
-    <!-- ==========================================
-         主題
-    =========================================== -->
-
-    <h1 id="mainTitle">
-        ブラックサンダー
-    </h1>
-
-
-    <!-- ==========================================
-         ★収録商品数
-    =========================================== -->
-
-    <p id="totalCount">
-        収録商品数：0件
-    </p>
-
+    <p id="totalCount">収録商品数：0件</p>
 
     <p>種類</p>
 
-
-    <!-- ==========================================
-         表示切り替え
-    =========================================== -->
-
     <div class="menu">
-
-        <button onclick="changeType('index')">
-            ブラックサンダー
-        </button>
-
-        <button onclick="changeType('thun2')">
-            ユーラク他商品
-        </button>
-
-        <button onclick="changeType('thun3')">
-            コラボメニュー
-        </button>
-
+        <button onclick="changeType('index')">ブラックサンダー</button>
+        <button onclick="changeType('thun2')">ユーラク他商品</button>
+        <button onclick="changeType('thun3')">コラボメニュー</button>
     </div>
 
-
-    <!-- ==========================================
-         全表示・名前検索
-    =========================================== -->
-
-    <button id="showAllBtn">
-        全表示
-    </button>
-
+    <button id="showAllBtn">全表示</button>
 
     <input
         type="text"
@@ -165,2036 +99,1137 @@
         placeholder="商品名を検索"
     >
 
-
-    <!-- ==========================================
-         絞り込み
-    =========================================== -->
-
     <div id="filterArea"></div>
-
-
-    <!-- ==========================================
-         商品一覧
-    =========================================== -->
 
     <div id="tableArea"></div>
 
 
-
 <script>
 
+// ==========================================
+// 状態
+// ==========================================
 
-    // ==========================================
-    // 現在の種類
-    // ==========================================
+let currentType = "index";
 
-    let currentType = "index";
-
-
-    // ==========================================
-    // 絞り込み条件
-    // ==========================================
-
-    let selectedSize = "";
-    let selectedFlavor = "";
-    let selectedEvent = "";
-    let selectedCollab = "";
+let selectedSize = "";
+let selectedFlavor = "";
+let selectedEvent = "";
+let selectedCollab = "";
 
 
-    // ==========================================
-    // 各ページの設定
-    // ==========================================
+// ==========================================
+// 各種類の設定
+// ==========================================
 
-    const dataTypes = {
+const dataTypes = {
+
+    index: {
+        title: "ブラックサンダー",
+
+        years: [
+            1994, 2000, 2003, 2005, 2006,
+            2008, 2009, 2010, 2011, 2012,
+            2013, 2014, 2015, 2016, 2017,
+            2018, 2019, 2020, 2021, 2022,
+            2023, 2024, 2025, 2026
+        ],
+
+        getPath: year =>
+            `json/${year}.json`
+    },
 
 
-        // --------------------------------------
-        // ブラックサンダー
-        // --------------------------------------
+    thun2: {
+        title: "ユーラク他商品",
 
-        index: {
+        years: [
+            1994, 2002, 2003, 2005, 2006,
+            2008, 2009, 2010, 2011, 2012,
+            2013, 2014, 2015, 2016, 2017,
+            2018, 2019, 2020, 2021, 2022,
+            2023, 2024, 2025, 2026
+        ],
 
-            title: "ブラックサンダー",
+        getPath: year =>
+            `json2/${year}-2.json`
+    },
 
-            years: [
 
-                1994, 2000, 2003, 2005, 2006,
+    thun3: {
+        title: "コラボメニュー",
 
-                2008, 2009, 2010, 2011, 2012,
+        years: [
+            1994, 2002, 2003, 2005, 2006,
+            2008, 2009, 2010, 2011, 2012,
+            2013, 2014, 2015, 2016, 2017,
+            2018, 2019, 2020, 2021, 2022,
+            2023, 2024, 2025, 2026
+        ],
 
-                2013, 2014, 2015, 2016, 2017,
+        getPath: year =>
+            `json3/${year}-3.json`
+    }
 
-                2018, 2019, 2020, 2021, 2022,
+};
 
-                2023, 2024, 2025, 2026
 
-            ],
+// ==========================================
+// 年代見出し
+// ==========================================
 
-            getPath: function(year) {
+function updateYearHeading(h2, table) {
 
-                return "json/" + year + ".json";
+    const year = h2.dataset.year;
 
+    const count =
+        table.querySelectorAll("tbody tr").length;
+
+    const mark =
+        table.classList.contains("hidden")
+            ? "▶"
+            : "▼";
+
+    h2.textContent =
+        `${mark} ${year}（${count}件）`;
+}
+
+
+// ==========================================
+// 全年代見出し更新
+// ==========================================
+
+function updateAllYearHeadings() {
+
+    document
+        .querySelectorAll("#tableArea table")
+        .forEach(table => {
+
+            const h2 =
+                table.previousElementSibling;
+
+            if (h2) {
+                updateYearHeading(h2, table);
             }
 
-        },
+        });
+}
 
 
-        // --------------------------------------
-        // ユーラク他商品
-        // --------------------------------------
+// ==========================================
+// 商品件数更新
+// ==========================================
 
-        thun2: {
+function updateCounts() {
 
-            title: "ユーラク他商品",
+    let total = 0;
 
-            years: [
+    document
+        .querySelectorAll("#tableArea table")
+        .forEach(table => {
 
-                1994, 2002, 2003, 2005, 2006,
+            const count =
+                table.querySelectorAll(
+                    "tbody tr"
+                ).length;
 
-                2008, 2009, 2010, 2011, 2012,
+            total += count;
 
-                2013, 2014, 2015, 2016, 2017,
+            const h2 =
+                table.previousElementSibling;
 
-                2018, 2019, 2020, 2021, 2022,
-
-                2023, 2024, 2025, 2026
-
-            ],
-
-            getPath: function(year) {
-
-                return "json2/" + year + "-2.json";
-
+            if (h2) {
+                updateYearHeading(h2, table);
             }
 
-        },
+        });
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        `収録商品数：${total}件`;
+}
 
 
-        // --------------------------------------
-        // コラボメニュー
-        // --------------------------------------
+// ==========================================
+// 商品一覧作成
+// ==========================================
 
-        thun3: {
+function makeTable(
+    jsonFile,
+    tbody,
+    type,
+    year
+) {
 
-            title: "コラボメニュー",
+    fetch(jsonFile)
 
-            years: [
+        .then(res => {
 
-                1994, 2002, 2003, 2005, 2006,
-
-                2008, 2009, 2010, 2011, 2012,
-
-                2013, 2014, 2015, 2016, 2017,
-
-                2018, 2019, 2020, 2021, 2022,
-
-                2023, 2024, 2025, 2026
-
-            ],
-
-            getPath: function(year) {
-
-                return "json3/" + year + "-3.json";
-
+            if (!res.ok) {
+                throw new Error(
+                    `${jsonFile} を読み込めません`
+                );
             }
 
-        }
+            return res.json();
+        })
 
-    };
+        .then(items => {
 
-
-
-    // ==========================================
-    // ★商品件数を更新
-    // ==========================================
-
-    function updateCounts() {
+            // 表示種類が途中で変わった場合
+            if (type !== currentType) {
+                return;
+            }
 
 
-        const tables =
-            document.querySelectorAll(
-                "#tableArea table"
+            items.forEach((item, i) => {
+
+                const tr =
+                    document.createElement("tr");
+
+
+                // 個別商品ページ
+                const productUrl =
+                    `product.html?type=${encodeURIComponent(type)}&year=${encodeURIComponent(year)}&id=${encodeURIComponent(i)}`;
+
+
+                // [3]
+                // index / thun2 = サイズ
+                // thun3 = コラボ先
+
+                tr.dataset.filter =
+                    item[3] || "";
+
+
+                // ブラックサンダー専用
+                if (type === "index") {
+
+                    // [6] 味
+                    tr.dataset.flavor =
+                        item[6] || "";
+
+
+                    // [7] シリーズ区分
+                    let seriesList =
+                        item[7] || [];
+
+                    if (
+                        !Array.isArray(seriesList)
+                    ) {
+                        seriesList =
+                            [seriesList];
+                    }
+
+                    tr.dataset.event =
+                        JSON.stringify(
+                            seriesList
+                        );
+                }
+
+
+                // ----------------------------------
+                // 表示列
+                // ----------------------------------
+
+                for (let j = 0; j <= 4; j++) {
+
+                    const td =
+                        document.createElement("td");
+
+
+                    // 商品名
+                    if (j === 0) {
+
+                        const a =
+                            document.createElement("a");
+
+                        a.textContent =
+                            item[0] || "";
+
+                        a.href =
+                            productUrl;
+
+                        td.appendChild(a);
+                    }
+
+
+                    // 画像
+                    else if (j === 4) {
+
+                        const a =
+                            document.createElement("a");
+
+                        a.href =
+                            productUrl;
+
+
+                        const img =
+                            document.createElement("img");
+
+                        img.src =
+                            item[4] || "";
+
+                        img.alt =
+                            item[0] || "";
+
+                        img.width =
+                            100;
+
+                        // 画面外画像を遅延読み込み
+                        img.loading =
+                            "lazy";
+
+
+                        a.appendChild(img);
+
+                        td.appendChild(a);
+                    }
+
+
+                    // その他
+                    else {
+
+                        td.textContent =
+                            item[j] || "";
+                    }
+
+
+                    tr.appendChild(td);
+                }
+
+
+                tbody.appendChild(tr);
+            });
+
+
+            createFilterButtons(type);
+
+            updateCounts();
+
+
+            if (isFiltering()) {
+                applyFilters();
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                `${jsonFile} の読み込みに失敗しました`,
+                error
             );
 
+        });
+}
 
-        let total = 0;
+
+// ==========================================
+// 表見出し
+// ==========================================
+
+function makeList(tr, type) {
+
+    const fourthColumn =
+        type === "thun3"
+            ? "コラボ先"
+            : "サイズ";
+
+    const list = [
+        "名前",
+        "発売日",
+        "二つ名",
+        fourthColumn,
+        "画像"
+    ];
+
+    list.forEach(text => {
+
+        const th =
+            document.createElement("th");
+
+        th.textContent =
+            text;
+
+        tr.appendChild(th);
+    });
+}
 
 
-        tables.forEach(function(table) {
+// ==========================================
+// 種類変更
+// ==========================================
 
+function changeType(type) {
+
+    currentType =
+        type;
+
+    const setting =
+        dataTypes[type];
+
+
+    // タイトル
+    document.getElementById(
+        "mainTitle"
+    ).textContent =
+        setting.title;
+
+    document.title =
+        setting.title;
+
+
+    // 件数
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        "収録商品数：0件";
+
+
+    // 絞り込み条件リセット
+    selectedSize = "";
+    selectedFlavor = "";
+    selectedEvent = "";
+    selectedCollab = "";
+
+
+    const area =
+        document.getElementById(
+            "tableArea"
+        );
+
+    const filterArea =
+        document.getElementById(
+            "filterArea"
+        );
+
+    const searchBox =
+        document.getElementById(
+            "searchBox"
+        );
+
+
+    area.innerHTML = "";
+    filterArea.innerHTML = "";
+    searchBox.value = "";
+
+
+    // --------------------------------------
+    // 年代ごとに作成
+    // --------------------------------------
+
+    setting.years.forEach(year => {
+
+        // 年代見出し
+        const h2 =
+            document.createElement("h2");
+
+        h2.dataset.year =
+            year;
+
+        h2.textContent =
+            `▶ ${year}（0件）`;
+
+
+        // table
+        const table =
+            document.createElement("table");
+
+        table.classList.add(
+            "hidden"
+        );
+
+
+        // thead
+        const thead =
+            document.createElement("thead");
+
+        const headerRow =
+            document.createElement("tr");
+
+        makeList(
+            headerRow,
+            type
+        );
+
+        thead.appendChild(
+            headerRow
+        );
+
+
+        // tbody
+        const tbody =
+            document.createElement("tbody");
+
+
+        table.append(
+            thead,
+            tbody
+        );
+
+
+        // 年代クリック
+        h2.addEventListener(
+            "click",
+            () => {
+
+                table.classList.toggle(
+                    "hidden"
+                );
+
+                updateYearHeading(
+                    h2,
+                    table
+                );
+            }
+        );
+
+
+        area.append(
+            h2,
+            table
+        );
+
+
+        // JSON読み込み
+        const jsonPath =
+            setting.getPath(year);
+
+        makeTable(
+            jsonPath,
+            tbody,
+            type,
+            year
+        );
+
+    });
+}
+
+
+// ==========================================
+// 絞り込みボタン作成
+// ==========================================
+
+function createButtonGroup(
+    filterArea,
+    titleText,
+    values,
+    selectedValue,
+    clickFunction
+) {
+
+    const div =
+        document.createElement("div");
+
+    div.classList.add(
+        "filter-group"
+    );
+
+
+    const title =
+        document.createElement("strong");
+
+    title.textContent =
+        `${titleText}：`;
+
+    div.appendChild(title);
+
+
+    // --------------------------------------
+    // ボタン作成共通処理
+    // --------------------------------------
+
+    function addButton(
+        text,
+        value
+    ) {
+
+        const button =
+            document.createElement("button");
+
+        button.textContent =
+            text;
+
+
+        if (
+            selectedValue === value
+        ) {
+            button.classList.add(
+                "selected"
+            );
+        }
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                div
+                    .querySelectorAll("button")
+                    .forEach(btn =>
+                        btn.classList.remove(
+                            "selected"
+                        )
+                    );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                clickFunction(value);
+            }
+        );
+
+
+        div.appendChild(button);
+    }
+
+
+    // すべて
+    addButton(
+        "すべて",
+        ""
+    );
+
+
+    // 各値
+    values.forEach(value => {
+        addButton(
+            value,
+            value
+        );
+    });
+
+
+    filterArea.appendChild(div);
+}
+
+
+// ==========================================
+// 絞り込みボタン更新
+// ==========================================
+
+function createFilterButtons(type) {
+
+    if (type !== currentType) {
+        return;
+    }
+
+
+    const filterArea =
+        document.getElementById(
+            "filterArea"
+        );
+
+    const rows =
+        document.querySelectorAll(
+            "#tableArea tbody tr"
+        );
+
+
+    // --------------------------------------
+    // ブラックサンダー
+    // --------------------------------------
+
+    if (type === "index") {
+
+        const sizes =
+            new Set();
+
+        const flavors =
+            new Set();
+
+        const events =
+            new Set();
+
+
+        rows.forEach(row => {
+
+            const size =
+                row.dataset.filter;
+
+            const flavor =
+                row.dataset.flavor;
+
+            let eventList = [];
+
+            try {
+                eventList =
+                    JSON.parse(
+                        row.dataset.event ||
+                        "[]"
+                    );
+            }
+
+            catch {
+                eventList = [];
+            }
+
+
+            if (size) {
+                sizes.add(size);
+            }
+
+            if (flavor) {
+                flavors.add(flavor);
+            }
+
+            eventList.forEach(event => {
+
+                if (event) {
+                    events.add(event);
+                }
+
+            });
+        });
+
+
+        filterArea.innerHTML = "";
+
+
+        createButtonGroup(
+            filterArea,
+            "サイズ",
+            sizes,
+            selectedSize,
+            value => {
+
+                selectedSize =
+                    value;
+
+                applyFilters();
+            }
+        );
+
+
+        createButtonGroup(
+            filterArea,
+            "味",
+            flavors,
+            selectedFlavor,
+            value => {
+
+                selectedFlavor =
+                    value;
+
+                applyFilters();
+            }
+        );
+
+
+        createButtonGroup(
+            filterArea,
+            "シリーズ区分",
+            events,
+            selectedEvent,
+            value => {
+
+                selectedEvent =
+                    value;
+
+                applyFilters();
+            }
+        );
+    }
+
+
+    // --------------------------------------
+    // コラボメニュー
+    // --------------------------------------
+
+    else if (type === "thun3") {
+
+        const collabs =
+            new Set();
+
+
+        rows.forEach(row => {
+
+            const collab =
+                row.dataset.filter;
+
+            if (collab) {
+                collabs.add(
+                    collab
+                );
+            }
+
+        });
+
+
+        filterArea.innerHTML = "";
+
+
+        createButtonGroup(
+            filterArea,
+            "コラボ先",
+            collabs,
+            selectedCollab,
+            value => {
+
+                selectedCollab =
+                    value;
+
+                applyFilters();
+            }
+        );
+    }
+
+
+    // --------------------------------------
+    // ユーラク他商品
+    // --------------------------------------
+
+    else {
+
+        filterArea.innerHTML = "";
+    }
+}
+
+
+// ==========================================
+// 絞り込み中か
+// ==========================================
+
+function isFiltering() {
+
+    const keyword =
+        document
+            .getElementById(
+                "searchBox"
+            )
+            .value
+            .toLowerCase();
+
+    return Boolean(
+        keyword ||
+        selectedSize ||
+        selectedFlavor ||
+        selectedEvent ||
+        selectedCollab
+    );
+}
+
+
+// ==========================================
+// 検索・絞り込み
+// ==========================================
+
+function applyFilters() {
+
+    const keyword =
+        document
+            .getElementById(
+                "searchBox"
+            )
+            .value
+            .toLowerCase();
+
+    const filtering =
+        Boolean(
+            keyword ||
+            selectedSize ||
+            selectedFlavor ||
+            selectedEvent ||
+            selectedCollab
+        );
+
+
+    document
+        .querySelectorAll(
+            "#tableArea table"
+        )
+        .forEach(table => {
 
             const rows =
                 table.querySelectorAll(
                     "tbody tr"
                 );
 
-
-            // ==================================
-            // この年代の商品数
-            // ==================================
-
-            const count =
-                rows.length;
+            let visibleCount = 0;
 
 
-            total += count;
+            rows.forEach(row => {
+
+                let show = true;
 
 
-            // ==================================
-            // 対応する年代h2
-            // ==================================
+                // ----------------------------------
+                // 商品名
+                // ----------------------------------
 
-            const h2 =
-                table.previousElementSibling;
-
-
-            if (h2) {
-
-
-                const year =
-                    h2.dataset.year;
+                const name =
+                    row.children[0]
+                        ?.textContent
+                        .toLowerCase() || "";
 
 
-                // 閉じている場合
                 if (
-                    table.classList.contains(
-                        "hidden"
-                    )
+                    keyword &&
+                    !name.includes(keyword)
+                ) {
+                    show = false;
+                }
+
+
+                // ----------------------------------
+                // ブラックサンダー
+                // ----------------------------------
+
+                if (
+                    currentType === "index"
                 ) {
 
-                    h2.textContent =
-                        "▶ " +
-                        year +
-                        "（" +
-                        count +
-                        "件）";
-
-                }
-
-
-                // 開いている場合
-                else {
-
-                    h2.textContent =
-                        "▼ " +
-                        year +
-                        "（" +
-                        count +
-                        "件）";
-
-                }
-
-            }
-
-        });
-
-
-
-        // ======================================
-        // 全体の商品数
-        // ======================================
-
-        document
-            .getElementById("totalCount")
-            .textContent =
-                "収録商品数：" +
-                total +
-                "件";
-
-    }
-
-
-
-    // ==========================================
-    // ★年代の▶▼を更新
-    // ==========================================
-
-    function updateYearHeading(
-        h2,
-        table
-    ) {
-
-
-        const year =
-            h2.dataset.year;
-
-
-        const count =
-            table.querySelectorAll(
-                "tbody tr"
-            ).length;
-
-
-        if (
-            table.classList.contains(
-                "hidden"
-            )
-        ) {
-
-            h2.textContent =
-                "▶ " +
-                year +
-                "（" +
-                count +
-                "件）";
-
-        }
-
-        else {
-
-            h2.textContent =
-                "▼ " +
-                year +
-                "（" +
-                count +
-                "件）";
-
-        }
-
-    }
-
-
-
-    // ==========================================
-    // ★すべての年代表示を更新
-    // ==========================================
-
-    function updateAllYearHeadings() {
-
-
-        const tables =
-            document.querySelectorAll(
-                "#tableArea table"
-            );
-
-
-        tables.forEach(function(table) {
-
-
-            const h2 =
-                table.previousElementSibling;
-
-
-            if (h2) {
-
-                updateYearHeading(
-                    h2,
-                    table
-                );
-
-            }
-
-        });
-
-    }
-
-
-
-    // ==========================================
-    // JSON読み込み
-    // ==========================================
-
-    function makeTable(
-        jsonFile,
-        tbody,
-        type,
-        year
-    ) {
-
-
-        fetch(jsonFile)
-
-
-            .then(res => res.json())
-
-
-            .then(items => {
-
-
-                // 表示を切り替えた後に
-                // 古いfetchが返ってきた場合
-
-                if (type !== currentType) {
-
-                    return;
-
-                }
-
-
-
-                // ==================================
-                // 商品作成
-                // ==================================
-
-                for (
-                    let i = 0;
-                    i < items.length;
-                    i++
-                ) {
-
-
-                    const tr =
-                        document.createElement("tr");
-
-                    // ==================================
-                    // 個別商品ページのURL
-                    // ==================================
-
-                    const productUrl =
-                        "product.html?type=" +
-                        encodeURIComponent(type) +
-                        "&year=" +
-                        encodeURIComponent(year) +
-                        "&id=" +
-                        encodeURIComponent(i);
-                    // ==================================
-                    // [3]
-                    //
-                    // ブラックサンダー
-                    // → サイズ
-                    //
-                    // コラボメニュー
-                    // → コラボ先
-                    // ==================================
-
-                    tr.dataset.filter =
-                        items[i][3] || "";
-
-
-                    // ==================================
-                    // ブラックサンダー
-                    // ==================================
-
-                    if (type === "index") {
-
-
-                        // [6] 味
-
-                        tr.dataset.flavor =
-                            items[i][6] || "";
-
-
-                    // [7] シリーズ区分
-                    // 複数指定可能
-
-                    let seriesList = items[i][7] || [];
-
-                    // 古いJSONのように文字列で書かれていても対応
-                    if (!Array.isArray(seriesList)) {
-                         seriesList = [seriesList];
-                    }
-
-                    // datasetにはJSON文字列として保存
-                    tr.dataset.event =
-                    JSON.stringify(seriesList);
-
-                    }
-
-                    // ==================================
-                    // 表示する列
-                    // ==================================
-
-                    for (
-                        let j = 0;
-                        j <= 4;
-                        j++
-                    ) {
-
-
-                        const td =
-                            document.createElement(
-                                "td"
+                    const size =
+                        row.dataset.filter || "";
+
+                    const flavor =
+                        row.dataset.flavor || "";
+
+                    let eventList = [];
+
+                    try {
+                        eventList =
+                            JSON.parse(
+                                row.dataset.event ||
+                                "[]"
                             );
+                    }
 
-
-                        // ------------------------------
-                        // 名前
-                        // ------------------------------
-
-                        if (j === 0) {
-
-
-                            const a =
-                                document.createElement(
-                                    "a"
-                                );
-
-
-                            a.textContent =
-                                items[i][j];
-
-
-                            a.href =
-                                productUrl;
-
-
-                            td.appendChild(a);
-
-                        }
-
-
-                        // ------------------------------
-                        // 画像
-                        // ------------------------------
-
-                        else if (j === 4) {
-
-                            const a =
-                                document.createElement(
-                                    "a"
-                                );
-
-                            a.href =
-                                productUrl;
-
-
-                            const img =
-                                document.createElement(
-                                    "img"
-                                );
-
-                            img.src =
-                                items[i][j];
-
-                            img.alt =
-                                items[i][0];
-
-                            img.width =
-                                100;
-
-
-                            a.appendChild(img);
-
-                            td.appendChild(a);
-
-                        }
-
-
-                        // ------------------------------
-                        // その他
-                        // ------------------------------
-
-                        else {
-
-
-                            td.textContent =
-                                items[i][j];
-
-                        }
-
-
-                        tr.appendChild(td);
-
+                    catch {
+                        eventList = [];
                     }
 
 
-                    tbody.appendChild(tr);
+                    if (
+                        selectedSize &&
+                        size !== selectedSize
+                    ) {
+                        show = false;
+                    }
 
+
+                    if (
+                        selectedFlavor &&
+                        flavor !== selectedFlavor
+                    ) {
+                        show = false;
+                    }
+
+
+                    if (
+                        selectedEvent &&
+                        !eventList.includes(
+                            selectedEvent
+                        )
+                    ) {
+                        show = false;
+                    }
                 }
 
 
+                // ----------------------------------
+                // コラボメニュー
+                // ----------------------------------
 
-                // ==================================
-                // 絞り込みボタン更新
-                // ==================================
+                else if (
+                    currentType === "thun3"
+                ) {
 
-                createFilterButtons(type);
+                    const collab =
+                        row.dataset.filter || "";
 
-
-
-                // ==================================
-                // ★件数更新
-                // ==================================
-
-                updateCounts();
-
-
-
-                // ==================================
-                // 検索・絞り込みを再適用
-                // ==================================
-
-                if (isFiltering()) {
-
-                    applyFilters();
-
+                    if (
+                        selectedCollab &&
+                        collab !== selectedCollab
+                    ) {
+                        show = false;
+                    }
                 }
 
-            })
+
+                row.style.display =
+                    show
+                        ? ""
+                        : "none";
 
 
-            .catch(error => {
-
-
-                console.error(
-
-                    jsonFile +
-                    " の読み込みに失敗しました",
-
-                    error
-
-                );
+                if (show) {
+                    visibleCount++;
+                }
 
             });
 
-    }
-
-
-
-    // ==========================================
-    // 表の見出し
-    // ==========================================
-
-    function makeList(
-        tr,
-        type
-    ) {
-
-
-        let fourthColumn =
-            "サイズ";
-
-
-        if (type === "thun3") {
-
-            fourthColumn =
-                "コラボ先";
-
-        }
-
-
-
-        const list = [
-
-            "名前",
-
-            "発売日",
-
-            "二つ名",
-
-            fourthColumn,
-
-            "画像"
-
-        ];
-
-
-
-        for (
-            let i = 0;
-            i < list.length;
-            i++
-        ) {
-
-
-            const th =
-                document.createElement(
-                    "th"
-                );
-
-
-            th.textContent =
-                list[i];
-
-
-            tr.appendChild(th);
-
-        }
-
-    }
-
-
-
-    // ==========================================
-    // 種類変更
-    // ==========================================
-
-    function changeType(type) {
-
-
-        currentType =
-            type;
-
-
-        const setting =
-            dataTypes[type];
-
-
-
-        // ======================================
-        // 主題変更
-        // ======================================
-
-        document
-            .getElementById(
-                "mainTitle"
-            )
-            .textContent =
-                setting.title;
-
-
-
-        // ======================================
-        // ブラウザタイトル変更
-        // ======================================
-
-        document.title =
-            setting.title;
-
-
-
-        // ======================================
-        // 件数を一度0にする
-        // ======================================
-
-        document
-            .getElementById(
-                "totalCount"
-            )
-            .textContent =
-                "収録商品数：0件";
-
-
-
-        // ======================================
-        // 条件リセット
-        // ======================================
-
-        selectedSize =
-            "";
-
-        selectedFlavor =
-            "";
-
-        selectedEvent =
-            "";
-
-        selectedCollab =
-            "";
-
-
-
-        const area =
-            document.getElementById(
-                "tableArea"
-            );
-
-
-        const filterArea =
-            document.getElementById(
-                "filterArea"
-            );
-
-
-
-        area.innerHTML =
-            "";
-
-
-        filterArea.innerHTML =
-            "";
-
-
-
-        document
-            .getElementById(
-                "searchBox"
-            )
-            .value =
-                "";
-
-
-
-        const years =
-            setting.years;
-
-
-
-        // ======================================
-        // 年ごとに作成
-        // ======================================
-
-        for (
-            let i = 0;
-            i < years.length;
-            i++
-        ) {
-
-
-            const year =
-                years[i];
-
-
-
-            // ----------------------------------
-            // 年代
-            // ----------------------------------
 
             const h2 =
-                document.createElement(
-                    "h2"
+                table.previousElementSibling;
+
+
+            // ----------------------------------
+            // 絞り込み中
+            // ----------------------------------
+
+            if (filtering) {
+
+                if (visibleCount > 0) {
+
+                    if (h2) {
+
+                        h2.style.display = "";
+
+                        h2.textContent =
+                            `▼ ${h2.dataset.year}（${visibleCount}件）`;
+                    }
+
+                    table.classList.remove(
+                        "hidden"
+                    );
+                }
+
+                else {
+
+                    if (h2) {
+                        h2.style.display =
+                            "none";
+                    }
+
+                    table.classList.add(
+                        "hidden"
+                    );
+                }
+            }
+
+
+            // ----------------------------------
+            // 絞り込みなし
+            // ----------------------------------
+
+            else {
+
+                if (h2) {
+                    h2.style.display = "";
+                }
+
+                table.classList.add(
+                    "hidden"
                 );
 
-
-            // ★元の年代を保存
-
-            h2.dataset.year =
-                year;
-
-
-            // ★最初は0件
-
-            h2.textContent =
-                "▶ " +
-                year +
-                "（0件）";
-
-
-
-            // ----------------------------------
-            // table
-            // ----------------------------------
-
-            const table =
-                document.createElement(
-                    "table"
-                );
-
-
-            table.classList.add(
-                "hidden"
-            );
-
-
-
-            // ----------------------------------
-            // thead
-            // ----------------------------------
-
-            const thead =
-                document.createElement(
-                    "thead"
-                );
-
-
-            const headerRow =
-                document.createElement(
-                    "tr"
-                );
-
-
-            makeList(
-                headerRow,
-                type
-            );
-
-
-            thead.appendChild(
-                headerRow
-            );
-
-
-
-            // ----------------------------------
-            // tbody
-            // ----------------------------------
-
-            const tbody =
-                document.createElement(
-                    "tbody"
-                );
-
-
-            table.appendChild(
-                thead
-            );
-
-
-            table.appendChild(
-                tbody
-            );
-
-
-
-            // ==================================
-            // ★年代クリック
-            // ==================================
-
-            h2.onclick =
-                function() {
-
-
-                    // 開閉
-
-                    table
-                        .classList
-                        .toggle(
-                            "hidden"
-                        );
-
-
-                    // ▶ / ▼ を更新
-
+                if (h2) {
                     updateYearHeading(
                         h2,
                         table
                     );
-
-                };
-
-
-
-            area.appendChild(
-                h2
-            );
-
-
-            area.appendChild(
-                table
-            );
-
-
-
-            // ==================================
-            // JSON読み込み
-            // ==================================
-
-            const jsonPath =
-                setting.getPath(
-                    year
-                );
-
-
-            makeTable(
-
-                jsonPath,
-
-                tbody,
-
-                type,
-
-                year
-
-            );
-
-        }
-
-    }
-
-
-
-    // ==========================================
-    // ボタングループ作成
-    // ==========================================
-
-    function createButtonGroup(
-
-        filterArea,
-
-        titleText,
-
-        values,
-
-        selectedValue,
-
-        clickFunction
-
-    ) {
-
-
-        const div =
-            document.createElement(
-                "div"
-            );
-
-
-        div.classList.add(
-            "filter-group"
-        );
-
-
-
-        const title =
-            document.createElement(
-                "strong"
-            );
-
-
-        title.textContent =
-            titleText + "：";
-
-
-        div.appendChild(
-            title
-        );
-
-
-
-        // ======================================
-        // すべて
-        // ======================================
-
-        const allButton =
-            document.createElement(
-                "button"
-            );
-
-
-        allButton.textContent =
-            "すべて";
-
-
-
-        if (
-            selectedValue === ""
-        ) {
-
-
-            allButton
-                .classList
-                .add(
-                    "selected"
-                );
-
-        }
-
-
-
-        allButton.onclick =
-            function() {
-
-
-                const buttons =
-                    div.querySelectorAll(
-                        "button"
-                    );
-
-
-                buttons.forEach(
-                    button => {
-
-
-                        button
-                            .classList
-                            .remove(
-                                "selected"
-                            );
-
-                    }
-                );
-
-
-                allButton
-                    .classList
-                    .add(
-                        "selected"
-                    );
-
-
-                clickFunction("");
-
-            };
-
-
-
-        div.appendChild(
-            allButton
-        );
-
-
-
-        // ======================================
-        // 各ボタン
-        // ======================================
-
-        values.forEach(
-            value => {
-
-
-                const button =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                button.textContent =
-                    value;
-
-
-
-                if (
-                    selectedValue === value
-                ) {
-
-
-                    button
-                        .classList
-                        .add(
-                            "selected"
-                        );
-
                 }
-
-
-
-                button.onclick =
-                    function() {
-
-
-                        const buttons =
-                            div.querySelectorAll(
-                                "button"
-                            );
-
-
-                        buttons.forEach(
-                            btn => {
-
-
-                                btn
-                                    .classList
-                                    .remove(
-                                        "selected"
-                                    );
-
-                            }
-                        );
-
-
-                        button
-                            .classList
-                            .add(
-                                "selected"
-                            );
-
-
-                        clickFunction(
-                            value
-                        );
-
-                    };
-
-
-
-                div.appendChild(
-                    button
-                );
-
             }
-        );
+
+        });
+}
 
 
+// ==========================================
+// 名前検索
+// ==========================================
 
-        filterArea.appendChild(
-            div
-        );
-
-    }
-
-
-
-    // ==========================================
-    // 絞り込みボタン
-    // ==========================================
-
-    function createFilterButtons(type) {
+document
+    .getElementById("searchBox")
+    .addEventListener(
+        "input",
+        applyFilters
+    );
 
 
-        if (
-            type !== currentType
-        ) {
+// ==========================================
+// 全表示
+// ==========================================
 
-            return;
+document
+    .getElementById("showAllBtn")
+    .addEventListener(
+        "click",
+        () => {
 
-        }
+            // 条件リセット
+            selectedSize = "";
+            selectedFlavor = "";
+            selectedEvent = "";
+            selectedCollab = "";
 
-
-
-        const filterArea =
             document.getElementById(
-                "filterArea"
-            );
+                "searchBox"
+            ).value = "";
 
 
-        const rows =
-            document.querySelectorAll(
-                "#tableArea tbody tr"
-            );
+            // 全商品表示
+            document
+                .querySelectorAll(
+                    "#tableArea tbody tr"
+                )
+                .forEach(row => {
+                    row.style.display = "";
+                });
 
 
-
-        // ======================================
-        // ブラックサンダー
-        // ======================================
-
-        if (type === "index") {
-
-
-            const sizes =
-                new Set();
+            // 全年代見出し表示
+            document
+                .querySelectorAll(
+                    "#tableArea h2"
+                )
+                .forEach(h2 => {
+                    h2.style.display = "";
+                });
 
 
-            const flavors =
-                new Set();
-
-
-            const events =
-                new Set();
-
-
-
-            rows.forEach(
-            row => {
-
-                const size =
-                    row.dataset.filter;
-
-                const flavor =
-                    row.dataset.flavor;
-
-
-                // シリーズ区分を配列として取得
-                const eventList =
-                    JSON.parse(
-                        row.dataset.event || "[]"
+            // 全年代を開く
+            document
+                .querySelectorAll(
+                    "#tableArea table"
+                )
+                .forEach(table => {
+                    table.classList.remove(
+                        "hidden"
                     );
+                });
 
 
-                if (size) {
+            updateAllYearHeadings();
 
-                    sizes.add(size);
 
-                }
+            // 絞り込みボタンを
+            // 「すべて」に戻す
+            document
+                .querySelectorAll(
+                    ".filter-group"
+                )
+                .forEach(group => {
 
-
-                if (flavor) {
-
-                    flavors.add(flavor);
-
-                }
-
-
-                // シリーズ区分を1つずつ追加
-                eventList.forEach(
-                    event => {
-
-                        if (event) {
-
-                            events.add(event);
-
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-
-
-            filterArea.innerHTML =
-                "";
-
-
-
-            // ----------------------------------
-            // サイズ
-            // ----------------------------------
-
-            createButtonGroup(
-
-                filterArea,
-
-                "サイズ",
-
-                sizes,
-
-                selectedSize,
-
-                function(value) {
-
-
-                    selectedSize =
-                        value;
-
-
-                    applyFilters();
-
-                }
-
-            );
-
-
-
-            // ----------------------------------
-            // 味
-            // ----------------------------------
-
-            createButtonGroup(
-
-                filterArea,
-
-                "味",
-
-                flavors,
-
-                selectedFlavor,
-
-                function(value) {
-
-
-                    selectedFlavor =
-                        value;
-
-
-                    applyFilters();
-
-                }
-
-            );
-
-
-
-            // ----------------------------------
-            // シリーズ区分
-            // ----------------------------------
-
-            createButtonGroup(
-
-                filterArea,
-
-                "シリーズ区分",
-
-                events,
-
-                selectedEvent,
-
-                function(value) {
-
-
-                    selectedEvent =
-                        value;
-
-
-                    applyFilters();
-
-                }
-
-            );
-
-        }
-
-
-
-        // ======================================
-        // コラボメニュー
-        // ======================================
-
-        else if (
-            type === "thun3"
-        ) {
-
-
-            const collabs =
-                new Set();
-
-
-
-            rows.forEach(
-                row => {
-
-
-                    const collab =
-                        row.dataset.filter;
-
-
-                    if (collab) {
-
-                        collabs.add(
-                            collab
+                    const buttons =
+                        group.querySelectorAll(
+                            "button"
                         );
 
-                    }
-
-                }
-            );
-
-
-
-            filterArea.innerHTML =
-                "";
-
-
-
-            createButtonGroup(
-
-                filterArea,
-
-                "コラボ先",
-
-                collabs,
-
-                selectedCollab,
-
-                function(value) {
-
-
-                    selectedCollab =
-                        value;
-
-
-                    applyFilters();
-
-                }
-
-            );
-
-        }
-
-
-
-        // ======================================
-        // ユーラク他商品
-        // ======================================
-
-        else {
-
-
-            filterArea.innerHTML =
-                "";
-
-        }
-
-    }
-
-
-
-    // ==========================================
-    // 検索・絞り込み中か
-    // ==========================================
-
-    function isFiltering() {
-
-
-        const keyword =
-            document
-                .getElementById(
-                    "searchBox"
-                )
-                .value
-                .toLowerCase();
-
-
-
-        return (
-
-            keyword !== "" ||
-
-            selectedSize !== "" ||
-
-            selectedFlavor !== "" ||
-
-            selectedEvent !== "" ||
-
-            selectedCollab !== ""
-
-        );
-
-    }
-
-
-
-    // ==========================================
-    // 検索・絞り込み
-    // ==========================================
-
-    function applyFilters() {
-
-
-        const keyword =
-            document
-                .getElementById(
-                    "searchBox"
-                )
-                .value
-                .toLowerCase();
-
-
-
-        const tables =
-            document.querySelectorAll(
-                "#tableArea table"
-            );
-
-
-
-        const filtering =
-
-            keyword !== "" ||
-
-            selectedSize !== "" ||
-
-            selectedFlavor !== "" ||
-
-            selectedEvent !== "" ||
-
-            selectedCollab !== "";
-
-
-
-        tables.forEach(
-            table => {
-
-
-                const rows =
-                    table.querySelectorAll(
-                        "tbody tr"
-                    );
-
-
-                let found =
-                    false;
-
-
-                // ==================================
-                // ★絞り込み後の商品数
-                // ==================================
-
-                let visibleCount =
-                    0;
-
-
-
-                rows.forEach(
-                    row => {
-
-
-                        let show =
-                            true;
-
-
-
-                        // ==============================
-                        // 名前検索
-                        // ==============================
-
-                        const nameCell =
-                            row.children[0];
-
-
-                        if (nameCell) {
-
-
-                            const name =
-                                nameCell
-                                    .textContent
-                                    .toLowerCase();
-
-
-                            if (
-
-                                keyword !== "" &&
-
-                                !name.includes(
-                                    keyword
-                                )
-
-                            ) {
-
-
-                                show =
-                                    false;
-
-                            }
-
-                        }
-
-
-
-                        // ==============================
-                        // ブラックサンダー
-                        // ==============================
-
-                        if (
-                            currentType ===
-                            "index"
-                        ) {
-
-
-                            const size =
-                                row.dataset.filter
-                                || "";
-
-
-                            const flavor =
-                                row.dataset.flavor
-                                || "";
-
-
-                            const eventList =
-                                JSON.parse(
-                                    row.dataset.event || "[]"
-                                );
-
-
-
-                            if (
-
-                                selectedSize !== "" &&
-
-                                size !==
-                                selectedSize
-
-                            ) {
-
-
-                                show =
-                                    false;
-
-                            }
-
-
-
-                            if (
-
-                                selectedFlavor !== "" &&
-
-                                flavor !==
-                                selectedFlavor
-
-                            ) {
-
-
-                                show =
-                                    false;
-
-                            }
-
-
-
-                        if (
-
-                            selectedEvent !== "" &&
-
-                            !eventList.includes(
-                                selectedEvent
+                    buttons.forEach(
+                        button =>
+                            button.classList.remove(
+                                "selected"
                             )
-
-                        ) {
-
-                            show =
-                                false;
-
-                        }
-
-
-
-                        // ==============================
-                        // コラボ
-                        // ==============================
-                        }
-                        else if (
-                            currentType ===
-                            "thun3"
-                        ) {
-
-
-                            const collab =
-                                row.dataset.filter
-                                || "";
-
-
-                            if (
-
-                                selectedCollab !== "" &&
-
-                                collab !==
-                                selectedCollab
-
-                            ) {
-
-
-                                show =
-                                    false;
-
-                            }
-
-                        }
-
-
-
-                        // ==============================
-                        // 表示
-                        // ==============================
-
-                        if (show) {
-
-
-                            row.style.display =
-                                "";
-
-
-                            found =
-                                true;
-
-
-                            visibleCount++;
-
-                        }
-
-
-                        else {
-
-
-                            row.style.display =
-                                "none";
-
-                        }
-
-                    }
-                );
-
-
-
-                // ==================================
-                // 年代
-                // ==================================
-
-                const yearHeading =
-                    table
-                        .previousElementSibling;
-
-
-
-                // ==================================
-                // 絞り込み中
-                // ==================================
-
-                if (filtering) {
-
-
-                    // ------------------------------
-                    // 1件以上
-                    // ------------------------------
-
-                    if (found) {
-
-
-                        if (yearHeading) {
-
-
-                            yearHeading
-                                .style
-                                .display =
-                                "";
-
-
-                            // ★絞り込み後の件数
-
-                            yearHeading
-                                .textContent =
-
-                                "▼ " +
-
-                                yearHeading
-                                    .dataset
-                                    .year +
-
-                                "（" +
-
-                                visibleCount +
-
-                                "件）";
-
-                        }
-
-
-                        table
-                            .classList
-                            .remove(
-                                "hidden"
-                            );
-
-                    }
-
-
-                    // ------------------------------
-                    // 0件
-                    // ------------------------------
-
-                    else {
-
-
-                        if (yearHeading) {
-
-
-                            yearHeading
-                                .style
-                                .display =
-                                "none";
-
-                        }
-
-
-                        table
-                            .classList
-                            .add(
-                                "hidden"
-                            );
-
-                    }
-
-                }
-
-
-
-                // ==================================
-                // 絞り込みしていない
-                // ==================================
-
-                else {
-
-
-                    if (yearHeading) {
-
-
-                        yearHeading
-                            .style
-                            .display =
-                            "";
-
-                    }
-
-
-                    table
-                        .classList
-                        .add(
-                            "hidden"
-                        );
-
-
-                    if (yearHeading) {
-
-
-                        updateYearHeading(
-                            yearHeading,
-                            table
-                        );
-
-                    }
-
-                }
-
-            }
-        );
-
-    }
-
-
-
-    // ==========================================
-    // 名前検索
-    // ==========================================
-
-    document
-        .getElementById(
-            "searchBox"
-        )
-        .addEventListener(
-            "input",
-            function() {
-
-
-                applyFilters();
-
-            }
-        );
-
-
-
-    // ==========================================
-    // 全表示
-    // ==========================================
-
-    document
-        .getElementById(
-            "showAllBtn"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-
-                // ==================================
-                // 条件リセット
-                // ==================================
-
-                selectedSize =
-                    "";
-
-                selectedFlavor =
-                    "";
-
-                selectedEvent =
-                    "";
-
-                selectedCollab =
-                    "";
-
-
-
-                document
-                    .getElementById(
-                        "searchBox"
-                    )
-                    .value =
-                        "";
-
-
-
-                // ==================================
-                // 全商品表示
-                // ==================================
-
-                const rows =
-                    document.querySelectorAll(
-                        "#tableArea tbody tr"
                     );
 
-
-                rows.forEach(
-                    row => {
-
-
-                        row.style.display =
-                            "";
-
-                    }
-                );
+                    buttons[0]
+                        ?.classList
+                        .add("selected");
+                });
+        }
+    );
 
 
+// ==========================================
+// 初期表示
+// ==========================================
 
-                // ==================================
-                // 全年代表示
-                // ==================================
-
-                const headings =
-                    document.querySelectorAll(
-                        "#tableArea h2"
-                    );
-
-
-                headings.forEach(
-                    h2 => {
-
-
-                        h2.style.display =
-                            "";
-
-                    }
-                );
-
-
-
-                // ==================================
-                // 全テーブルを開く
-                // ==================================
-
-                const tables =
-                    document.querySelectorAll(
-                        "#tableArea table"
-                    );
-
-
-                tables.forEach(
-                    table => {
-
-
-                        table
-                            .classList
-                            .remove(
-                                "hidden"
-                            );
-
-                    }
-                );
-
-
-
-                // ==================================
-                // ★▼と件数を更新
-                // ==================================
-
-                updateAllYearHeadings();
-
-
-
-                // ==================================
-                // ボタンをすべてに戻す
-                // ==================================
-
-                const groups =
-                    document.querySelectorAll(
-                        ".filter-group"
-                    );
-
-
-                groups.forEach(
-                    group => {
-
-
-                        const buttons =
-                            group
-                                .querySelectorAll(
-                                    "button"
-                                );
-
-
-                        buttons.forEach(
-                            button => {
-
-
-                                button
-                                    .classList
-                                    .remove(
-                                        "selected"
-                                    );
-
-                            }
-                        );
-
-
-                        if (
-                            buttons[0]
-                        ) {
-
-
-                            buttons[0]
-                                .classList
-                                .add(
-                                    "selected"
-                                );
-
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-
-
-    // ==========================================
-    // 最初はブラックサンダー
-    // ==========================================
-
-    changeType("index");
-
+changeType("index");
 
 </script>
 
-
 </body>
-
 </html>
