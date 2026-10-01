@@ -563,12 +563,19 @@
                             items[i][6] || "";
 
 
-                        // [7] 季節イベント
+                    // [7] シリーズ区分
+                    // 複数指定可能
 
-                        tr.dataset.event =
-                            items[i][7] || "";
+                    let seriesList = items[i][7] || [];
 
+                    // 古いJSONのように文字列で書かれていても対応
+                    if (!Array.isArray(seriesList)) {
+                         seriesList = [seriesList];
                     }
+
+                    // datasetにはJSON文字列として保存
+                    tr.dataset.event =
+                    JSON.stringify(seriesList);
 
 
 
@@ -1317,44 +1324,51 @@
 
 
             rows.forEach(
-                row => {
+            row => {
+
+                const size =
+                    row.dataset.filter;
+
+                const flavor =
+                    row.dataset.flavor;
 
 
-                    const size =
-                        row.dataset.filter;
+                // シリーズ区分を配列として取得
+                const eventList =
+                    JSON.parse(
+                        row.dataset.event || "[]"
+                    );
 
 
-                    const flavor =
-                        row.dataset.flavor;
+                if (size) {
 
-
-                    const event =
-                        row.dataset.event;
-
-
-
-                    if (size) {
-
-                        sizes.add(size);
-
-                    }
-
-
-                    if (flavor) {
-
-                        flavors.add(flavor);
-
-                    }
-
-
-                    if (event) {
-
-                        events.add(event);
-
-                    }
+                    sizes.add(size);
 
                 }
-            );
+
+
+                if (flavor) {
+
+                    flavors.add(flavor);
+
+                }
+
+
+                // シリーズ区分を1つずつ追加
+                eventList.forEach(
+                    event => {
+
+                        if (event) {
+
+                            events.add(event);
+
+                        }
+
+                    }
+                );
+
+            }
+        );
 
 
 
@@ -1422,14 +1436,14 @@
 
 
             // ----------------------------------
-            // 季節イベント
+            // シリーズ区分
             // ----------------------------------
 
             createButtonGroup(
 
                 filterArea,
 
-                "季節イベント",
+                "シリーズ区分",
 
                 events,
 
@@ -1697,9 +1711,10 @@
                                 || "";
 
 
-                            const event =
-                                row.dataset.event
-                                || "";
+                            const eventList =
+                                JSON.parse(
+                                    row.dataset.event || "[]"
+                                );
 
 
 
@@ -1737,20 +1752,18 @@
 
 
 
-                            if (
+                        if (
 
-                                selectedEvent !== "" &&
+                            selectedEvent !== "" &&
 
-                                event !==
+                            !eventList.includes(
                                 selectedEvent
+                            )
 
-                            ) {
+                        ) {
 
-
-                                show =
-                                    false;
-
-                            }
+                            show =
+                                false;
 
                         }
 
