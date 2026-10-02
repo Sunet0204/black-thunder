@@ -86,12 +86,22 @@
     <p>種類</p>
 
     <div class="menu">
-        <button onclick="changeType('index')">ブラックサンダー</button>
-        <button onclick="changeType('thun2')">ユーラク他商品</button>
-        <button onclick="changeType('thun3')">コラボメニュー</button>
+        <button onclick="changeType('index')">
+            ブラックサンダー
+        </button>
+
+        <button onclick="changeType('thun2')">
+            ユーラク他商品
+        </button>
+
+        <button onclick="changeType('thun3')">
+            コラボメニュー
+        </button>
     </div>
 
-    <button id="showAllBtn">全表示</button>
+    <button id="showAllBtn">
+        全表示
+    </button>
 
     <input
         type="text"
@@ -125,6 +135,7 @@ let selectedCollab = "";
 const dataTypes = {
 
     index: {
+
         title: "ブラックサンダー",
 
         years: [
@@ -141,6 +152,7 @@ const dataTypes = {
 
 
     thun2: {
+
         title: "ユーラク他商品",
 
         years: [
@@ -157,6 +169,7 @@ const dataTypes = {
 
 
     thun3: {
+
         title: "コラボメニュー",
 
         years: [
@@ -175,15 +188,18 @@ const dataTypes = {
 
 
 // ==========================================
-// 年代見出し
+// 年代見出し更新
 // ==========================================
 
 function updateYearHeading(h2, table) {
 
-    const year = h2.dataset.year;
+    const year =
+        h2.dataset.year;
 
     const count =
-        table.querySelectorAll("tbody tr").length;
+        table.querySelectorAll(
+            "tbody tr"
+        ).length;
 
     const mark =
         table.classList.contains("hidden")
@@ -202,14 +218,19 @@ function updateYearHeading(h2, table) {
 function updateAllYearHeadings() {
 
     document
-        .querySelectorAll("#tableArea table")
+        .querySelectorAll(
+            "#tableArea table"
+        )
         .forEach(table => {
 
             const h2 =
                 table.previousElementSibling;
 
             if (h2) {
-                updateYearHeading(h2, table);
+                updateYearHeading(
+                    h2,
+                    table
+                );
             }
 
         });
@@ -225,7 +246,9 @@ function updateCounts() {
     let total = 0;
 
     document
-        .querySelectorAll("#tableArea table")
+        .querySelectorAll(
+            "#tableArea table"
+        )
         .forEach(table => {
 
             const count =
@@ -239,7 +262,10 @@ function updateCounts() {
                 table.previousElementSibling;
 
             if (h2) {
-                updateYearHeading(h2, table);
+                updateYearHeading(
+                    h2,
+                    table
+                );
             }
 
         });
@@ -267,9 +293,11 @@ function makeTable(
         .then(res => {
 
             if (!res.ok) {
+
                 throw new Error(
                     `${jsonFile} を読み込めません`
                 );
+
             }
 
             return res.json();
@@ -277,7 +305,8 @@ function makeTable(
 
         .then(items => {
 
-            // 表示種類が途中で変わった場合
+            // 種類切り替え後に
+            // 古いfetchが返ってきた場合
             if (type !== currentType) {
                 return;
             }
@@ -289,36 +318,85 @@ function makeTable(
                     document.createElement("tr");
 
 
+                // ==================================
                 // 個別商品ページ
+                // ==================================
+
                 const productUrl =
                     `product.html?type=${encodeURIComponent(type)}&year=${encodeURIComponent(year)}&id=${encodeURIComponent(i)}`;
 
 
+                // ==================================
                 // [3]
-                // index / thun2 = サイズ
-                // thun3 = コラボ先
+                //
+                // index / thun2
+                // → サイズ
+                //
+                // thun3
+                // → コラボ先
+                // ==================================
 
                 tr.dataset.filter =
                     item[3] || "";
 
 
+                // ==================================
                 // ブラックサンダー専用
+                // ==================================
+
                 if (type === "index") {
 
+
+                    // ==================================
                     // [6] 味
+                    //
+                    // 文字列
+                    // "チョコ"
+                    //
+                    // 配列
+                    // ["チョコ", "いちご"]
+                    //
+                    // 両方対応
+                    // ==================================
+
+                    let flavorList =
+                        item[6] || [];
+
+                    if (
+                        !Array.isArray(
+                            flavorList
+                        )
+                    ) {
+
+                        flavorList =
+                            [flavorList];
+
+                    }
+
                     tr.dataset.flavor =
-                        item[6] || "";
+                        JSON.stringify(
+                            flavorList
+                        );
 
 
+                    // ==================================
                     // [7] シリーズ区分
+                    //
+                    // 複数指定可能
+                    // ==================================
+
                     let seriesList =
                         item[7] || [];
 
                     if (
-                        !Array.isArray(seriesList)
+                        !Array.isArray(
+                            seriesList
+                        )
                     ) {
+
                         seriesList =
                             [seriesList];
+
                     }
 
                     tr.dataset.event =
@@ -328,21 +406,32 @@ function makeTable(
                 }
 
 
-                // ----------------------------------
-                // 表示列
-                // ----------------------------------
+                // ==================================
+                // 表示する列
+                // ==================================
 
-                for (let j = 0; j <= 4; j++) {
+                for (
+                    let j = 0;
+                    j <= 4;
+                    j++
+                ) {
 
                     const td =
-                        document.createElement("td");
+                        document.createElement(
+                            "td"
+                        );
 
 
+                    // ----------------------------------
                     // 商品名
+                    // ----------------------------------
+
                     if (j === 0) {
 
                         const a =
-                            document.createElement("a");
+                            document.createElement(
+                                "a"
+                            );
 
                         a.textContent =
                             item[0] || "";
@@ -354,18 +443,25 @@ function makeTable(
                     }
 
 
+                    // ----------------------------------
                     // 画像
+                    // ----------------------------------
+
                     else if (j === 4) {
 
                         const a =
-                            document.createElement("a");
+                            document.createElement(
+                                "a"
+                            );
 
                         a.href =
                             productUrl;
 
 
                         const img =
-                            document.createElement("img");
+                            document.createElement(
+                                "img"
+                            );
 
                         img.src =
                             item[4] || "";
@@ -376,7 +472,6 @@ function makeTable(
                         img.width =
                             100;
 
-                        // 画面外画像を遅延読み込み
                         img.loading =
                             "lazy";
 
@@ -387,11 +482,15 @@ function makeTable(
                     }
 
 
+                    // ----------------------------------
                     // その他
+                    // ----------------------------------
+
                     else {
 
                         td.textContent =
                             item[j] || "";
+
                     }
 
 
@@ -403,11 +502,15 @@ function makeTable(
             });
 
 
+            // 絞り込みボタン更新
             createFilterButtons(type);
 
+
+            // 件数更新
             updateCounts();
 
 
+            // 検索・絞り込み再適用
             if (isFiltering()) {
                 applyFilters();
             }
@@ -426,10 +529,13 @@ function makeTable(
 
 
 // ==========================================
-// 表見出し
+// 表の見出し
 // ==========================================
 
-function makeList(tr, type) {
+function makeList(
+    tr,
+    type
+) {
 
     const fourthColumn =
         type === "thun3"
@@ -444,15 +550,19 @@ function makeList(tr, type) {
         "画像"
     ];
 
+
     list.forEach(text => {
 
         const th =
-            document.createElement("th");
+            document.createElement(
+                "th"
+            );
 
         th.textContent =
             text;
 
         tr.appendChild(th);
+
     });
 }
 
@@ -470,7 +580,10 @@ function changeType(type) {
         dataTypes[type];
 
 
+    // ==================================
     // タイトル
+    // ==================================
+
     document.getElementById(
         "mainTitle"
     ).textContent =
@@ -480,14 +593,20 @@ function changeType(type) {
         setting.title;
 
 
+    // ==================================
     // 件数
+    // ==================================
+
     document.getElementById(
         "totalCount"
     ).textContent =
         "収録商品数：0件";
 
 
+    // ==================================
     // 絞り込み条件リセット
+    // ==================================
+
     selectedSize = "";
     selectedFlavor = "";
     selectedEvent = "";
@@ -515,15 +634,21 @@ function changeType(type) {
     searchBox.value = "";
 
 
-    // --------------------------------------
+    // ==================================
     // 年代ごとに作成
-    // --------------------------------------
+    // ==================================
 
     setting.years.forEach(year => {
 
+
+        // ----------------------------------
         // 年代見出し
+        // ----------------------------------
+
         const h2 =
-            document.createElement("h2");
+            document.createElement(
+                "h2"
+            );
 
         h2.dataset.year =
             year;
@@ -532,21 +657,33 @@ function changeType(type) {
             `▶ ${year}（0件）`;
 
 
+        // ----------------------------------
         // table
+        // ----------------------------------
+
         const table =
-            document.createElement("table");
+            document.createElement(
+                "table"
+            );
 
         table.classList.add(
             "hidden"
         );
 
 
+        // ----------------------------------
         // thead
+        // ----------------------------------
+
         const thead =
-            document.createElement("thead");
+            document.createElement(
+                "thead"
+            );
 
         const headerRow =
-            document.createElement("tr");
+            document.createElement(
+                "tr"
+            );
 
         makeList(
             headerRow,
@@ -558,9 +695,14 @@ function changeType(type) {
         );
 
 
+        // ----------------------------------
         // tbody
+        // ----------------------------------
+
         const tbody =
-            document.createElement("tbody");
+            document.createElement(
+                "tbody"
+            );
 
 
         table.append(
@@ -569,7 +711,10 @@ function changeType(type) {
         );
 
 
+        // ==================================
         // 年代クリック
+        // ==================================
+
         h2.addEventListener(
             "click",
             () => {
@@ -582,6 +727,7 @@ function changeType(type) {
                     h2,
                     table
                 );
+
             }
         );
 
@@ -592,7 +738,10 @@ function changeType(type) {
         );
 
 
+        // ==================================
         // JSON読み込み
+        // ==================================
+
         const jsonPath =
             setting.getPath(year);
 
@@ -620,7 +769,9 @@ function createButtonGroup(
 ) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     div.classList.add(
         "filter-group"
@@ -628,7 +779,9 @@ function createButtonGroup(
 
 
     const title =
-        document.createElement("strong");
+        document.createElement(
+            "strong"
+        );
 
     title.textContent =
         `${titleText}：`;
@@ -636,9 +789,9 @@ function createButtonGroup(
     div.appendChild(title);
 
 
-    // --------------------------------------
-    // ボタン作成共通処理
-    // --------------------------------------
+    // ==================================
+    // ボタン作成
+    // ==================================
 
     function addButton(
         text,
@@ -646,7 +799,9 @@ function createButtonGroup(
     ) {
 
         const button =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
 
         button.textContent =
             text;
@@ -655,9 +810,11 @@ function createButtonGroup(
         if (
             selectedValue === value
         ) {
+
             button.classList.add(
                 "selected"
             );
+
         }
 
 
@@ -666,43 +823,58 @@ function createButtonGroup(
             () => {
 
                 div
-                    .querySelectorAll("button")
-                    .forEach(btn =>
+                    .querySelectorAll(
+                        "button"
+                    )
+                    .forEach(btn => {
+
                         btn.classList.remove(
                             "selected"
-                        )
-                    );
+                        );
+
+                    });
+
 
                 button.classList.add(
                     "selected"
                 );
 
-                clickFunction(value);
+
+                clickFunction(
+                    value
+                );
+
             }
         );
 
 
-        div.appendChild(button);
+        div.appendChild(
+            button
+        );
     }
 
 
-    // すべて
+    // 「すべて」
     addButton(
         "すべて",
         ""
     );
 
 
-    // 各値
+    // 各項目
     values.forEach(value => {
+
         addButton(
             value,
             value
         );
+
     });
 
 
-    filterArea.appendChild(div);
+    filterArea.appendChild(
+        div
+    );
 }
 
 
@@ -712,7 +884,9 @@ function createButtonGroup(
 
 function createFilterButtons(type) {
 
-    if (type !== currentType) {
+    if (
+        type !== currentType
+    ) {
         return;
     }
 
@@ -728,9 +902,9 @@ function createFilterButtons(type) {
         );
 
 
-    // --------------------------------------
+    // ==================================
     // ブラックサンダー
-    // --------------------------------------
+    // ==================================
 
     if (type === "index") {
 
@@ -746,99 +920,201 @@ function createFilterButtons(type) {
 
         rows.forEach(row => {
 
+
+            // ----------------------------------
+            // サイズ
+            // ----------------------------------
+
             const size =
                 row.dataset.filter;
 
-            const flavor =
-                row.dataset.flavor;
+
+            // ----------------------------------
+            // 味
+            // ----------------------------------
+
+            let flavorList = [];
+
+            try {
+
+                flavorList =
+                    JSON.parse(
+                        row.dataset.flavor ||
+                        "[]"
+                    );
+
+            }
+
+            catch {
+
+                flavorList = [];
+
+            }
+
+
+            // ----------------------------------
+            // シリーズ区分
+            // ----------------------------------
 
             let eventList = [];
 
             try {
+
                 eventList =
                     JSON.parse(
                         row.dataset.event ||
                         "[]"
                     );
+
             }
 
             catch {
+
                 eventList = [];
+
             }
 
 
+            // サイズ追加
             if (size) {
-                sizes.add(size);
+
+                sizes.add(
+                    size
+                );
+
             }
 
-            if (flavor) {
-                flavors.add(flavor);
-            }
 
-            eventList.forEach(event => {
+            // ==================================
+            // 味を1つずつ追加
+            // ==================================
 
-                if (event) {
-                    events.add(event);
+            flavorList.forEach(
+                flavor => {
+
+                    if (flavor) {
+
+                        flavors.add(
+                            flavor
+                        );
+
+                    }
+
                 }
+            );
 
-            });
+
+            // ==================================
+            // シリーズ区分を1つずつ追加
+            // ==================================
+
+            eventList.forEach(
+                event => {
+
+                    if (event) {
+
+                        events.add(
+                            event
+                        );
+
+                    }
+
+                }
+            );
+
         });
 
 
         filterArea.innerHTML = "";
 
 
+        // ==================================
+        // サイズ
+        // ==================================
+
         createButtonGroup(
+
             filterArea,
+
             "サイズ",
+
             sizes,
+
             selectedSize,
+
             value => {
 
                 selectedSize =
                     value;
 
                 applyFilters();
+
             }
+
         );
 
 
+        // ==================================
+        // 味
+        // ==================================
+
         createButtonGroup(
+
             filterArea,
+
             "味",
+
             flavors,
+
             selectedFlavor,
+
             value => {
 
                 selectedFlavor =
                     value;
 
                 applyFilters();
+
             }
+
         );
 
 
+        // ==================================
+        // シリーズ区分
+        // ==================================
+
         createButtonGroup(
+
             filterArea,
+
             "シリーズ区分",
+
             events,
+
             selectedEvent,
+
             value => {
 
                 selectedEvent =
                     value;
 
                 applyFilters();
+
             }
+
         );
+
     }
 
 
-    // --------------------------------------
+    // ==================================
     // コラボメニュー
-    // --------------------------------------
+    // ==================================
 
-    else if (type === "thun3") {
+    else if (
+        type === "thun3"
+    ) {
 
         const collabs =
             new Set();
@@ -850,9 +1126,11 @@ function createFilterButtons(type) {
                 row.dataset.filter;
 
             if (collab) {
+
                 collabs.add(
                     collab
                 );
+
             }
 
         });
@@ -862,29 +1140,40 @@ function createFilterButtons(type) {
 
 
         createButtonGroup(
+
             filterArea,
+
             "コラボ先",
+
             collabs,
+
             selectedCollab,
+
             value => {
 
                 selectedCollab =
                     value;
 
                 applyFilters();
+
             }
+
         );
+
     }
 
 
-    // --------------------------------------
+    // ==================================
     // ユーラク他商品
-    // --------------------------------------
+    // ==================================
 
     else {
 
-        filterArea.innerHTML = "";
+        filterArea.innerHTML =
+            "";
+
     }
+
 }
 
 
@@ -902,12 +1191,19 @@ function isFiltering() {
             .value
             .toLowerCase();
 
+
     return Boolean(
+
         keyword ||
+
         selectedSize ||
+
         selectedFlavor ||
+
         selectedEvent ||
+
         selectedCollab
+
     );
 }
 
@@ -926,13 +1222,20 @@ function applyFilters() {
             .value
             .toLowerCase();
 
+
     const filtering =
         Boolean(
+
             keyword ||
+
             selectedSize ||
+
             selectedFlavor ||
+
             selectedEvent ||
+
             selectedCollab
+
         );
 
 
@@ -942,81 +1245,157 @@ function applyFilters() {
         )
         .forEach(table => {
 
+
             const rows =
                 table.querySelectorAll(
                     "tbody tr"
                 );
 
-            let visibleCount = 0;
+
+            let visibleCount =
+                0;
 
 
             rows.forEach(row => {
 
-                let show = true;
+
+                let show =
+                    true;
 
 
-                // ----------------------------------
-                // 商品名
-                // ----------------------------------
+                // ==================================
+                // 商品名検索
+                // ==================================
 
                 const name =
                     row.children[0]
                         ?.textContent
-                        .toLowerCase() || "";
+                        .toLowerCase()
+                    || "";
 
 
                 if (
                     keyword &&
-                    !name.includes(keyword)
+                    !name.includes(
+                        keyword
+                    )
                 ) {
-                    show = false;
+
+                    show =
+                        false;
+
                 }
 
 
-                // ----------------------------------
+                // ==================================
                 // ブラックサンダー
-                // ----------------------------------
+                // ==================================
 
                 if (
-                    currentType === "index"
+                    currentType ===
+                    "index"
                 ) {
 
-                    const size =
-                        row.dataset.filter || "";
 
-                    const flavor =
-                        row.dataset.flavor || "";
+                    // ----------------------------------
+                    // サイズ
+                    // ----------------------------------
+
+                    const size =
+                        row.dataset.filter
+                        || "";
+
+
+                    // ----------------------------------
+                    // 味
+                    // ----------------------------------
+
+                    let flavorList = [];
+
+                    try {
+
+                        flavorList =
+                            JSON.parse(
+                                row.dataset.flavor ||
+                                "[]"
+                            );
+
+                    }
+
+                    catch {
+
+                        flavorList =
+                            [];
+
+                    }
+
+
+                    // ----------------------------------
+                    // シリーズ区分
+                    // ----------------------------------
 
                     let eventList = [];
 
                     try {
+
                         eventList =
                             JSON.parse(
                                 row.dataset.event ||
                                 "[]"
                             );
+
                     }
 
                     catch {
-                        eventList = [];
+
+                        eventList =
+                            [];
+
                     }
 
+
+                    // ==================================
+                    // サイズ判定
+                    // ==================================
 
                     if (
                         selectedSize &&
-                        size !== selectedSize
+                        size !==
+                        selectedSize
                     ) {
-                        show = false;
+
+                        show =
+                            false;
+
                     }
 
+
+                    // ==================================
+                    // 味判定
+                    //
+                    // 例：
+                    // ["チョコ", "いちご"]
+                    //
+                    // 「いちご」で絞り込んでも
+                    // 表示される
+                    // ==================================
 
                     if (
                         selectedFlavor &&
-                        flavor !== selectedFlavor
+                        !flavorList.includes(
+                            selectedFlavor
+                        )
                     ) {
-                        show = false;
+
+                        show =
+                            false;
+
                     }
 
+
+                    // ==================================
+                    // シリーズ区分判定
+                    // ==================================
 
                     if (
                         selectedEvent &&
@@ -1024,30 +1403,46 @@ function applyFilters() {
                             selectedEvent
                         )
                     ) {
-                        show = false;
+
+                        show =
+                            false;
+
                     }
+
                 }
 
 
-                // ----------------------------------
+                // ==================================
                 // コラボメニュー
-                // ----------------------------------
+                // ==================================
 
                 else if (
-                    currentType === "thun3"
+                    currentType ===
+                    "thun3"
                 ) {
 
                     const collab =
-                        row.dataset.filter || "";
+                        row.dataset.filter
+                        || "";
+
 
                     if (
                         selectedCollab &&
-                        collab !== selectedCollab
+                        collab !==
+                        selectedCollab
                     ) {
-                        show = false;
+
+                        show =
+                            false;
+
                     }
+
                 }
 
+
+                // ==================================
+                // 商品表示 / 非表示
+                // ==================================
 
                 row.style.display =
                     show
@@ -1056,7 +1451,9 @@ function applyFilters() {
 
 
                 if (show) {
+
                     visibleCount++;
+
                 }
 
             });
@@ -1066,64 +1463,94 @@ function applyFilters() {
                 table.previousElementSibling;
 
 
-            // ----------------------------------
+            // ==================================
             // 絞り込み中
-            // ----------------------------------
+            // ==================================
 
             if (filtering) {
 
-                if (visibleCount > 0) {
+
+                // ----------------------------------
+                // 該当商品あり
+                // ----------------------------------
+
+                if (
+                    visibleCount > 0
+                ) {
 
                     if (h2) {
 
-                        h2.style.display = "";
+                        h2.style.display =
+                            "";
 
                         h2.textContent =
                             `▼ ${h2.dataset.year}（${visibleCount}件）`;
+
                     }
+
 
                     table.classList.remove(
                         "hidden"
                     );
+
                 }
+
+
+                // ----------------------------------
+                // 該当商品なし
+                // ----------------------------------
 
                 else {
 
                     if (h2) {
+
                         h2.style.display =
                             "none";
+
                     }
+
 
                     table.classList.add(
                         "hidden"
                     );
+
                 }
+
             }
 
 
-            // ----------------------------------
-            // 絞り込みなし
-            // ----------------------------------
+            // ==================================
+            // 絞り込みしていない
+            // ==================================
 
             else {
 
                 if (h2) {
-                    h2.style.display = "";
+
+                    h2.style.display =
+                        "";
+
                 }
+
 
                 table.classList.add(
                     "hidden"
                 );
 
+
                 if (h2) {
+
                     updateYearHeading(
                         h2,
                         table
                     );
+
                 }
+
             }
 
         });
+
 }
 
 
@@ -1132,7 +1559,9 @@ function applyFilters() {
 // ==========================================
 
 document
-    .getElementById("searchBox")
+    .getElementById(
+        "searchBox"
+    )
     .addEventListener(
         "input",
         applyFilters
@@ -1144,59 +1573,95 @@ document
 // ==========================================
 
 document
-    .getElementById("showAllBtn")
+    .getElementById(
+        "showAllBtn"
+    )
     .addEventListener(
         "click",
         () => {
 
+
+            // ==================================
             // 条件リセット
-            selectedSize = "";
-            selectedFlavor = "";
-            selectedEvent = "";
-            selectedCollab = "";
+            // ==================================
+
+            selectedSize =
+                "";
+
+            selectedFlavor =
+                "";
+
+            selectedEvent =
+                "";
+
+            selectedCollab =
+                "";
+
 
             document.getElementById(
                 "searchBox"
-            ).value = "";
+            ).value =
+                "";
 
 
+            // ==================================
             // 全商品表示
+            // ==================================
+
             document
                 .querySelectorAll(
                     "#tableArea tbody tr"
                 )
                 .forEach(row => {
-                    row.style.display = "";
+
+                    row.style.display =
+                        "";
+
                 });
 
 
+            // ==================================
             // 全年代見出し表示
+            // ==================================
+
             document
                 .querySelectorAll(
                     "#tableArea h2"
                 )
                 .forEach(h2 => {
-                    h2.style.display = "";
+
+                    h2.style.display =
+                        "";
+
                 });
 
 
-            // 全年代を開く
+            // ==================================
+            // 全テーブルを開く
+            // ==================================
+
             document
                 .querySelectorAll(
                     "#tableArea table"
                 )
                 .forEach(table => {
+
                     table.classList.remove(
                         "hidden"
                     );
+
                 });
 
 
+            // 年代の▼と件数更新
             updateAllYearHeadings();
 
 
+            // ==================================
             // 絞り込みボタンを
             // 「すべて」に戻す
+            // ==================================
+
             document
                 .querySelectorAll(
                     ".filter-group"
@@ -1208,17 +1673,32 @@ document
                             "button"
                         );
 
+
                     buttons.forEach(
-                        button =>
+                        button => {
+
                             button.classList.remove(
                                 "selected"
-                            )
+                            );
+
+                        }
                     );
 
-                    buttons[0]
-                        ?.classList
-                        .add("selected");
+
+                    if (
+                        buttons[0]
+                    ) {
+
+                        buttons[0]
+                            .classList
+                            .add(
+                                "selected"
+                            );
+
+                    }
+
                 });
+
         }
     );
 
@@ -1232,4 +1712,5 @@ changeType("index");
 </script>
 
 </body>
+
 </html>
