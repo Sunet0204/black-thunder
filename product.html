@@ -44,8 +44,18 @@ body{
     line-height:1.8;
 }
 
+#officialArea,
 #referenceArea{
     margin-top:30px;
+}
+
+.linkList{
+    margin:0;
+    padding-left:25px;
+}
+
+.linkList li{
+    margin-bottom:8px;
 }
 
 #error{
@@ -128,9 +138,7 @@ body{
     </div>
 
 
-    <!-- =========================
-         商品紹介
-    ========================== -->
+    <!-- 商品紹介 -->
 
     <section id="descriptionArea">
 
@@ -141,22 +149,32 @@ body{
     </section>
 
 
-    <!-- =========================
-         公式・参考ページ
-    ========================== -->
+    <!-- 公式記事 -->
 
-    <div id="referenceArea">
+    <section id="officialArea">
 
-        <a
-            id="referenceLink"
-            href=""
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            公式・参考ページを見る
-        </a>
+        <h2>公式記事</h2>
 
-    </div>
+        <ul
+            id="officialLinks"
+            class="linkList"
+        ></ul>
+
+    </section>
+
+
+    <!-- 参考リンク -->
+
+    <section id="referenceArea">
+
+        <h2>参考リンク</h2>
+
+        <ul
+            id="referenceLinks"
+            class="linkList"
+        ></ul>
+
+    </section>
 
 </main>
 
@@ -176,12 +194,7 @@ const $ =
 
 
 // ==========================================
-// URLから情報取得
-//
-// product.html
-// ?type=index
-// &year=2026
-// &id=0
+// URLから商品情報取得
 // ==========================================
 
 const params =
@@ -193,8 +206,10 @@ const params =
 const type =
     params.get("type");
 
+
 const year =
     params.get("year");
+
 
 const id =
     Number(
@@ -211,21 +226,27 @@ function getJsonPath(
     year
 ) {
 
-    if (type === "index") {
+    if (
+        type === "index"
+    ) {
 
         return `json/${year}.json`;
 
     }
 
 
-    if (type === "thun2") {
+    if (
+        type === "thun2"
+    ) {
 
         return `json2/${year}-2.json`;
 
     }
 
 
-    if (type === "thun3") {
+    if (
+        type === "thun3"
+    ) {
 
         return `json3/${year}-3.json`;
 
@@ -237,11 +258,13 @@ function getJsonPath(
 
 
 // ==========================================
-// 単一・複数データを
-// 配列に統一
+// 単一データ・複数データを
+// 必ず配列にする
 // ==========================================
 
-function toArray(value) {
+function toArray(
+    value
+) {
 
     if (
         value == null ||
@@ -272,6 +295,7 @@ function setText(
     const area =
         $(areaId);
 
+
     const element =
         $(textId);
 
@@ -292,6 +316,106 @@ function setText(
     element.textContent =
         value;
 
+
+    area.hidden =
+        false;
+}
+
+
+// ==========================================
+// リンク一覧を作成
+// ==========================================
+
+function createLinks(
+    areaId,
+    listId,
+    links,
+    text
+) {
+
+    const area =
+        $(areaId);
+
+
+    const list =
+        $(listId);
+
+
+    list.replaceChildren();
+
+
+    const urls =
+        toArray(
+            links
+        ).filter(
+            url =>
+                url &&
+                url !== "abc.html"
+        );
+
+
+    // URLが1個もない場合
+    if (
+        urls.length === 0
+    ) {
+
+        area.hidden =
+            true;
+
+        return;
+
+    }
+
+
+    // URLごとにリンクを作成
+    urls.forEach(
+        (url,index) => {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+
+            const a =
+                document.createElement(
+                    "a"
+                );
+
+
+            a.href =
+                url;
+
+
+            a.target =
+                "_blank";
+
+
+            a.rel =
+                "noopener noreferrer";
+
+
+            // 1件なら普通の名前
+            // 複数なら番号を付ける
+            a.textContent =
+                urls.length === 1
+                    ? text
+                    : `${text} ${index + 1}`;
+
+
+            li.append(
+                a
+            );
+
+
+            list.append(
+                li
+            );
+
+        }
+    );
+
+
     area.hidden =
         false;
 }
@@ -308,6 +432,7 @@ function showError(
     $("productArea").hidden =
         true;
 
+
     $("error").textContent =
         message;
 }
@@ -319,16 +444,16 @@ function showError(
 
 async function loadProduct() {
 
-    // --------------------------------------
-    // URL確認
-    // --------------------------------------
-
     const jsonPath =
         getJsonPath(
             type,
             year
         );
 
+
+    // ======================================
+    // URLチェック
+    // ======================================
 
     if (
         !jsonPath ||
@@ -342,14 +467,15 @@ async function loadProduct() {
         );
 
         return;
+
     }
 
 
     try {
 
-        // ----------------------------------
+        // ==================================
         // JSON読み込み
-        // ----------------------------------
+        // ==================================
 
         const response =
             await fetch(
@@ -372,9 +498,9 @@ async function loadProduct() {
             await response.json();
 
 
-        // ----------------------------------
+        // ==================================
         // 商品取得
-        // ----------------------------------
+        // ==================================
 
         const item =
             items[id];
@@ -389,6 +515,7 @@ async function loadProduct() {
             );
 
             return;
+
         }
 
 
@@ -397,11 +524,13 @@ async function loadProduct() {
         // ==================================
 
         const name =
-            item[0] || "商品詳細";
+            item[0] ||
+            "商品詳細";
 
 
         $("productName").textContent =
             name;
+
 
         document.title =
             `${name} | ブラックサンダー`;
@@ -415,13 +544,17 @@ async function loadProduct() {
             item[4] || "";
 
 
-        if (image) {
+        if (
+            image
+        ) {
 
             $("productImage").src =
                 image;
 
+
             $("productImage").alt =
                 name;
+
 
             $("productImage").hidden =
                 false;
@@ -441,7 +574,8 @@ async function loadProduct() {
         // ==================================
 
         $("releaseDate").textContent =
-            item[1] || "不明";
+            item[1] ||
+            "不明";
 
 
         // ==================================
@@ -456,13 +590,7 @@ async function loadProduct() {
 
 
         // ==================================
-        // [3]
-        //
-        // index / thun2
-        // → サイズ
-        //
-        // thun3
-        // → コラボ先
+        // [3] サイズ / コラボ先
         // ==================================
 
         if (
@@ -490,7 +618,7 @@ async function loadProduct() {
 
 
         // ==================================
-        // ブラックサンダー専用
+        // ブラックサンダー専用情報
         // ==================================
 
         if (
@@ -499,7 +627,6 @@ async function loadProduct() {
 
             // ------------------------------
             // [6] 味
-            // 複数対応
             // ------------------------------
 
             const flavors =
@@ -514,6 +641,7 @@ async function loadProduct() {
 
                 $("flavor").textContent =
                     flavors.join("・");
+
 
                 $("flavorArea").hidden =
                     false;
@@ -530,7 +658,6 @@ async function loadProduct() {
 
             // ------------------------------
             // [7] シリーズ区分
-            // 複数対応
             // ------------------------------
 
             const series =
@@ -545,6 +672,7 @@ async function loadProduct() {
 
                 $("series").textContent =
                     series.join("・");
+
 
                 $("seriesArea").hidden =
                     false;
@@ -564,6 +692,7 @@ async function loadProduct() {
 
             $("flavorArea").hidden =
                 true;
+
 
             $("seriesArea").hidden =
                 true;
@@ -586,15 +715,13 @@ async function loadProduct() {
             $("description").textContent =
                 description;
 
+
             $("descriptionArea").hidden =
                 false;
 
         }
 
         else {
-
-            // 紹介文がない古い商品は
-            // 「商品紹介」自体を表示しない
 
             $("descriptionArea").hidden =
                 true;
@@ -603,41 +730,38 @@ async function loadProduct() {
 
 
         // ==================================
-        // [5] 公式・参考URL
+        // [5] 公式記事
+        // 複数URL対応
         // ==================================
 
-        const referenceUrl =
-            item[5] || "";
-
-
-        // abc.html は以前の仮URLなので非表示
-        if (
-            referenceUrl &&
-            referenceUrl !== "abc.html"
-        ) {
-
-            $("referenceLink").href =
-                referenceUrl;
-
-            $("referenceArea").hidden =
-                false;
-
-        }
-
-        else {
-
-            $("referenceArea").hidden =
-                true;
-
-        }
+        createLinks(
+            "officialArea",
+            "officialLinks",
+            item[5],
+            "公式記事を見る"
+        );
 
 
         // ==================================
-        // 商品全体を表示
+        // [9] 参考リンク
+        // 複数URL対応
+        // ==================================
+
+        createLinks(
+            "referenceArea",
+            "referenceLinks",
+            item[9],
+            "参考ページを見る"
+        );
+
+
+        // ==================================
+        // 商品ページ表示
         // ==================================
 
         $("productArea").hidden =
             false;
+
 
         $("error").textContent =
             "";
