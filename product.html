@@ -440,17 +440,6 @@ async function loadProduct() {
         // [1] 発売日
         // ==================================
 
-        setText(
-            "releaseDate"
-                ? "releaseDate"
-                : "",
-            "releaseDate",
-            item[1]
-        );
-
-
-        // 発売日はareaを作っていないので
-        // 個別に処理
         $("releaseDate").textContent =
             item[1] || "不明";
 
