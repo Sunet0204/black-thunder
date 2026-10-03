@@ -1,5 +1,5 @@
 [
-    ["ブラックサンダープチハニトー2021", "2021/02/10", "", "カラオケパセラ","imag3/03-2021-02-10(a).png","abc.html"],
-    ["ブラックサンダー×タピオカミルクティー", "2021/02/10", "", "カラオケパセラ","imag3/03-2021-02-10(b).png","abc.html"],
-    ["ブラックサンダー✕タピオカいちごミルク", "2021/02/10", "", "カラオケパセラ","imag3/03-2021-02-10(c).png","abc.html"]
+  {"id":"3-2021-02-10-a","name":"ブラックサンダープチハニトー2021","releaseDate":"2021/02/10","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2021-02-10(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2021-02-10-b","name":"ブラックサンダー×タピオカミルクティー","releaseDate":"2021/02/10","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2021-02-10(b).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2021-02-10-c","name":"ブラックサンダー✕タピオカいちごミルク","releaseDate":"2021/02/10","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2021-02-10(c).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

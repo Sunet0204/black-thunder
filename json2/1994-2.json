@@ -1,5 +1,5 @@
 [
-  ["チョコナッツスリー", "????/??/??", "", "レギュラー","imag2/02.png","abc.html"],
-  ["とんこつチョコ", "????/??/??", "", "レギュラー","imag2/02(b).png","abc.html"],
-  ["やわらかクランチ", "????/??/??", "", "レギュラー","imag2/02(a).png","abc.html"]
+  {"id":"2-unknown-a","name":"チョコナッツスリー","releaseDate":"????/??/??","nickname":"","size":"レギュラー","image":"imag2/02.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-unknown-b","name":"とんこつチョコ","releaseDate":"????/??/??","nickname":"","size":"レギュラー","image":"imag2/02(b).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-unknown-c","name":"やわらかクランチ","releaseDate":"????/??/??","nickname":"","size":"レギュラー","image":"imag2/02(a).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

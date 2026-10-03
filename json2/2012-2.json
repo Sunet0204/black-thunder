@@ -1,5 +1,5 @@
 [
-    ["ブラックなんダー", "2012/??/??", "", "レギュラー","imag2/02-2012.png","abc.html"],
-    ["ブラウニーブラウニー", "2012/??/??", "", "","imag2/02-2012(a).png","abc.html"],
-    ["ふんわりバウムクーヘン", "2012/??/??", "", "","imag2/02-2012(b).png","abc.html"]
+  {"id":"2-2012-a","name":"ブラックなんダー","releaseDate":"2012/??/??","nickname":"","size":"レギュラー","image":"imag2/02-2012.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2012-b","name":"ブラウニーブラウニー","releaseDate":"2012/??/??","nickname":"","size":"","image":"imag2/02-2012(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2012-c","name":"ふんわりバウムクーヘン","releaseDate":"2012/??/??","nickname":"","size":"","image":"imag2/02-2012(b).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

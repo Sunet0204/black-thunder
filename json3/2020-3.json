@@ -1,9 +1,9 @@
 [
-    ["ブラックサンダーハニトー2020～白黒つける時がきた～", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01.png","abc.html"],
-    ["ブラックサンダーＤＥカレーライス", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01(a).png","abc.html"],
-    ["甘じょっぱいが癖になる！フライドポテト onブラックサンダー", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01(b).png","abc.html"],
-    ["パフェの王道 ブラックサンダーのブラックサンデー", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01(c).png","abc.html"],
-    ["アイスチョコミントドリンク", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01(d).png","abc.html"],
-    ["ホットマシュマロミルクティー", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01(e).png","abc.html"],
-    ["コラボハニトープリティスタイル", "2020/02/01", "", "カラオケパセラ","imag3/03-2020-02-01(f).png","abc.html"]
+  {"id":"3-2020-02-01-a","name":"ブラックサンダーハニトー2020～白黒つける時がきた～","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2020-02-01-b","name":"ブラックサンダーＤＥカレーライス","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2020-02-01-c","name":"甘じょっぱいが癖になる！フライドポテト onブラックサンダー","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01(b).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2020-02-01-d","name":"パフェの王道 ブラックサンダーのブラックサンデー","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01(c).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2020-02-01-e","name":"アイスチョコミントドリンク","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01(d).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2020-02-01-f","name":"ホットマシュマロミルクティー","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01(e).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2020-02-01-g","name":"コラボハニトープリティスタイル","releaseDate":"2020/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2020-02-01(f).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

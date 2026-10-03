@@ -1,6 +1,6 @@
 [
-    ["ブラックサンダーミルキーフランス", "2018/01/05", "", "ベルブレット","imag3/03-2018-01-05.png","abc.html"],
-    ["ブラックサンダーダミエ", "2018/02/??", "", "マッターホーン","imag3/03-2018-02.png","abc.html"],
-    ["ブラックサンダーコッペ", "2018/02/??", "", "ショパン","imag3/03-2018-02(a).png","abc.html"],
-    ["ブラックサンダーピレーネ", "2018/02/11", "", "mikawa bonTora","imag3/03-2018-02-11.png","abc.html"]
+  {"id":"3-2018-01-05","name":"ブラックサンダーミルキーフランス","releaseDate":"2018/01/05","nickname":"","collab":"ベルブレット","image":"imag3/03-2018-01-05.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2018-02-a","name":"ブラックサンダーダミエ","releaseDate":"2018/02/??","nickname":"","collab":"マッターホーン","image":"imag3/03-2018-02.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2018-02-b","name":"ブラックサンダーコッペ","releaseDate":"2018/02/??","nickname":"","collab":"ショパン","image":"imag3/03-2018-02(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2018-02-11","name":"ブラックサンダーピレーネ","releaseDate":"2018/02/11","nickname":"","collab":"mikawa bonTora","image":"imag3/03-2018-02-11.png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

@@ -1,7 +1,7 @@
 [
-    ["揚げたてポテトチップスチョコアンドチョコブラックサンダー", "2022/01/14", "", "callbe","imag3/03-2022-01-14.png","abc.html"],
-    ["ブラックサンダーアップルパイ", "2022/02/01", "", "グラニースミス","imag3/03-2022-02-01.png","abc.html"],
-    ["ブラックサンダーいちごチョコハニトー", "2022/02/08", "", "カラオケパセラ","imag3/03-2022-02-08.png","abc.html"],
-    ["ブラックサンターバナナチョコハニトー", "2022/02/08", "", "カラオケパセラ","imag3/03-2022-02-08(a).png","abc.html"],
-    ["追いソースブラックサンダーショコラ", "2022/02/08", "", "カラオケパセラ","imag3/03-2022-02-08(b).png","abc.html"]
+  {"id":"3-2022-01-14","name":"揚げたてポテトチップスチョコアンドチョコブラックサンダー","releaseDate":"2022/01/14","nickname":"","collab":"callbe","image":"imag3/03-2022-01-14.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2022-02-01","name":"ブラックサンダーアップルパイ","releaseDate":"2022/02/01","nickname":"","collab":"グラニースミス","image":"imag3/03-2022-02-01.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2022-02-08-a","name":"ブラックサンダーいちごチョコハニトー","releaseDate":"2022/02/08","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2022-02-08.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2022-02-08-b","name":"ブラックサンターバナナチョコハニトー","releaseDate":"2022/02/08","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2022-02-08(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2022-02-08-c","name":"追いソースブラックサンダーショコラ","releaseDate":"2022/02/08","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2022-02-08(b).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

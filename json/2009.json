@@ -1,5 +1,5 @@
 [
-  ["ちびサンダーホワイトチョコ味", "2009/??/??", "", "ちび","imag/2009.png","abc.html","ホワイト",""],
-  ["ちびサンダーナッツ&クッキーチョコ味", "2009/??/??", "", "ちび","imag/2009(a).png","abc.html","ナッツ",""],
-  ["ちびサンダーバナナチョコ味", "2009/??/??", "", "ちび","imag/2009(b).png","abc.html","バナナ",""]
+  {"id":"2009-a","name":"ちびサンダーホワイトチョコ味","releaseDate":"2009/??/??","nickname":"","size":"ちび","image":"imag/2009.png","officialLinks":[],"flavors":["ホワイト"],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2009-b","name":"ちびサンダーナッツ&クッキーチョコ味","releaseDate":"2009/??/??","nickname":"","size":"ちび","image":"imag/2009(a).png","officialLinks":[],"flavors":["ナッツ"],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2009-c","name":"ちびサンダーバナナチョコ味","releaseDate":"2009/??/??","nickname":"","size":"ちび","image":"imag/2009(b).png","officialLinks":[],"flavors":["バナナ"],"series":[],"description":"","referenceLinks":[]}
 ]

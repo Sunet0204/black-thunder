@@ -1,4 +1,4 @@
 [
-  ["白いブラックサンダー(一代目パッケージ)", "2010/??/??", "", "レギュラー","imag/2010/2010-s.jpg","abc.html","ホワイト","北海道"],
-  ["モーニングサンダー(一代目パッケージ)", "2010/10/??", "", "レギュラー","imag/2010/2010-10.png","abc.html","モーニング",""]
+  {"id":"2010","name":"白いブラックサンダー(一代目パッケージ)","releaseDate":"2010/??/??","nickname":"","size":"レギュラー","image":"imag/2010/2010-s.jpg","officialLinks":[],"flavors":["ホワイト"],"series":["北海道"],"description":"","referenceLinks":[]},
+  {"id":"2010-10","name":"モーニングサンダー(一代目パッケージ)","releaseDate":"2010/10/??","nickname":"","size":"レギュラー","image":"imag/2010/2010-10.png","officialLinks":[],"flavors":["モーニング"],"series":[],"description":"","referenceLinks":[]}
 ]

@@ -1,4 +1,4 @@
 [
-    ["ブラックサンダーココア", "2022/02/01", "", "カラオケパセラ","imag3/03-2023-02-01.png","abc.html"],
-    ["フラックサンダーチョコミント", "2022/02/01", "", "カラオケパセラ","imag3/03-2023-02-01(a).png","abc.html"]
+  {"id":"3-2022-02-01-a","name":"ブラックサンダーココア","releaseDate":"2022/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2023-02-01.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"3-2022-02-01-b","name":"フラックサンダーチョコミント","releaseDate":"2022/02/01","nickname":"","collab":"カラオケパセラ","image":"imag3/03-2023-02-01(a).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

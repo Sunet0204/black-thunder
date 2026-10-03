@@ -1,5 +1,5 @@
 [
-    ["爽快なカカオ", "2021/06/15", "", "","imag2/02-2021-06-15.png","abc.html"],
-    ["衝撃のレモン", "2021/06/15", "", "","imag2/02-2021-06-15(a).png","abc.html"],
-    ["ホワイトサンダー", "2021/09/10", "", "ミニ","imag2/02-2021-09-10.png","abc.html"]
+  {"id":"2-2021-06-15-a","name":"爽快なカカオ","releaseDate":"2021/06/15","nickname":"","size":"","image":"imag2/02-2021-06-15.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2021-06-15-b","name":"衝撃のレモン","releaseDate":"2021/06/15","nickname":"","size":"","image":"imag2/02-2021-06-15(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2021-09-10","name":"ホワイトサンダー","releaseDate":"2021/09/10","nickname":"","size":"ミニ","image":"imag2/02-2021-09-10.png","officialLinks":[],"description":"","referenceLinks":[]}
 ]

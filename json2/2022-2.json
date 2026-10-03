@@ -1,7 +1,7 @@
 [
-    ["PICKSふわっ", "2022/01/11", "", "","imag2/02-2022-01-11.png","abc.html"],
-    ["PICKSとろっ", "2022/01/11", "", "","imag2/02-2022-01-11(a).png","abc.html"],
-    ["PICKSさくっ", "2022/01/11", "", "","imag2/02-2022-01-11(b).png","abc.html"],
-    ["Maico アーモンド&ベリー", "2022/01/18", "", "","imag2/02-2022-01-18.png","abc.html"],
-    ["Maicoくるみ&オレンジ", "2022/01/18", "", "","imag2/02-2022-01-18(a).png","abc.html"]
+  {"id":"2-2022-01-11-a","name":"PICKSふわっ","releaseDate":"2022/01/11","nickname":"","size":"","image":"imag2/02-2022-01-11.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2022-01-11-b","name":"PICKSとろっ","releaseDate":"2022/01/11","nickname":"","size":"","image":"imag2/02-2022-01-11(a).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2022-01-11-c","name":"PICKSさくっ","releaseDate":"2022/01/11","nickname":"","size":"","image":"imag2/02-2022-01-11(b).png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2022-01-18-a","name":"Maico アーモンド&ベリー","releaseDate":"2022/01/18","nickname":"","size":"","image":"imag2/02-2022-01-18.png","officialLinks":[],"description":"","referenceLinks":[]},
+  {"id":"2-2022-01-18-b","name":"Maicoくるみ&オレンジ","releaseDate":"2022/01/18","nickname":"","size":"","image":"imag2/02-2022-01-18(a).png","officialLinks":[],"description":"","referenceLinks":[]}
 ]
