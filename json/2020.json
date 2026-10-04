@@ -24,7 +24,7 @@
   {"id":"2020-08-24-e","name":"ブラックサンダーミニバーハロウィン","releaseDate":"2020/08/24","nickname":"","size":"ミニ","image":"imag/2020-08-24(d).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2020-08-24-f","name":"ブラックサンダーミニバーハロウィン","releaseDate":"2020/08/24","nickname":"","size":"ミニ","image":"imag/2020-08-24(e).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2020-09-07-a","name":"コーンポタージュサンダー","releaseDate":"2020/09/07","nickname":"サクサク雷神","size":"レギュラー","image":"imag/2020-09-07.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2020-09-07-b","name":"ビッグサンダー(六代目パッケージ)","releaseDate":"2020/09/07","nickname":"黒い巨雷神","size":"ビッグ","image":"imag/2020.jpg","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2020-09-07-b","name":"ビッグサンダー(六代目パッケージ)","releaseDate":"2020/09/07","nickname":"黒い巨雷神","size":"ビッグ","image":"imag/2020.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2019-09-07","name":"ブラックサンダーミニバー カカオ72%","releaseDate":"2019/09/07","nickname":"漆黒の雷神","size":"ミニ","image":"imag/2019-09-07(a).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2020-09-14","name":"ブラックサンダーALMOND","releaseDate":"2020/09/14","nickname":"","size":"","image":"imag/2020-09-14.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2020-09-21-a","name":"ブラックサンダーミニバーアーモンドアンドヘーゼルナッツ","releaseDate":"2020/09/21","nickname":"Wナッツ雷神","size":"ミニ","image":"imag/2020-09-21.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
@@ -43,5 +43,5 @@
   {"id":"2020-12-28-d","name":"ブラックサンダーミニバーバレンタインBOX","releaseDate":"2020/12/28","nickname":"","size":"ミニ","image":"imag/2020-12-28(c).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2020-12-28-e","name":"ブラックサンダーミニバーバレンタインBOX","releaseDate":"2020/12/28","nickname":"","size":"ミニ","image":"imag/2020-12-28(d).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2020-12-28-f","name":"ブラックサンダーミニバーバレンタインBOX","releaseDate":"2020/12/28","nickname":"","size":"ミニ","image":"imag/2020-12-28(e).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2020-b","name":"ブラックサンダー(六代目パッケージ)","releaseDate":"2020/??/??","nickname":"黒い雷神","size":"レギュラー","image":"imag/2020b.jpg","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
+  {"id":"2020-b","name":"ブラックサンダー(六代目パッケージ)","releaseDate":"2020/??/??","nickname":"黒い雷神","size":"レギュラー","image":"imag/2020b.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
 ]

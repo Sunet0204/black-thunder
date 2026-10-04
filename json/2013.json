@@ -1,5 +1,5 @@
 [
-  {"id":"2013-a","name":"ブラックサンダーミニバー(二代目パッケージ)","releaseDate":"2013/??/??","nickname":"黒い雷神","size":"ミニ","image":"imag/2013mini2.jpeg","officialLinks":[],"flavors":["基本"],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2013-a","name":"ブラックサンダーミニバー(二代目パッケージ)","releaseDate":"2013/??/??","nickname":"黒い雷神","size":"ミニ","image":"imag/2013mini2.webp","officialLinks":[],"flavors":["基本"],"series":[],"description":"","referenceLinks":[]},
   {"id":"2013-b","name":"ブラックサンターミニバー(二代目)","releaseDate":"2013/??/??","nickname":"","size":"ミニ","image":"imag/2013(a).webp","officialLinks":[],"flavors":["基本"],"series":["クリスマス"],"description":"","referenceLinks":[]},
   {"id":"2013-01-25-a","name":"ラ♡ブラックサンダーミニ(100%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","image":"imag/2013-01-25-100.webp","officialLinks":[],"flavors":["基本"],"series":["バレンタイン"],"description":"","referenceLinks":[]},
   {"id":"2013-01-25-b","name":"ラ♡ブラックサンダーミニ(90%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","image":"imag/2013-01-25-90.webp","officialLinks":[],"flavors":["基本"],"series":["バレンタイン"],"description":"","referenceLinks":[]},
@@ -13,7 +13,7 @@
   {"id":"2013-10-07-d","name":"ブラックサンダー(20周年パッケージ)","releaseDate":"2013/10/07","nickname":"黒い雷神","size":"レギュラー","image":"imag/2013-10-07(c).webp","officialLinks":[],"flavors":["基本"],"series":["周年"],"description":"","referenceLinks":[]},
   {"id":"2013-10-07-e","name":"ブラックサンダー(20周年パッケージ)","releaseDate":"2013/10/07","nickname":"黒い雷神","size":"レギュラー","image":"imag/2013-10-07(d).webp","officialLinks":[],"flavors":["基本"],"series":["周年"],"description":"","referenceLinks":[]},
   {"id":"2013-10-07-f","name":"ブラックサンダー(20周年パッケージ)","releaseDate":"2013/10/07","nickname":"黒い雷神","size":"レギュラー","image":"imag/2013-10-07(e).webp","officialLinks":[],"flavors":["基本"],"series":["周年"],"description":"","referenceLinks":[]},
-  {"id":"2013-10-07-g","name":"ブラックサンダー ミニバー(20周年パッケージ)","releaseDate":"2013/10/07","nickname":"黒い雷神","size":"ミニ","image":"imag/2013-10-07-20th.jpeg","officialLinks":[],"flavors":["基本"],"series":["周年"],"description":"","referenceLinks":[]},
+  {"id":"2013-10-07-g","name":"ブラックサンダー ミニバー(20周年パッケージ)","releaseDate":"2013/10/07","nickname":"黒い雷神","size":"ミニ","image":"imag/2013-10-07-20th.webp","officialLinks":[],"flavors":["基本"],"series":["周年"],"description":"","referenceLinks":[]},
   {"id":"2013-10-15","name":"ブラックサンダー(ワン・ダイレクションコラボパッケージ)","releaseDate":"2013/10/15","nickname":"黒い雷神","size":"レギュラー","image":"imag/2013-10-15.webp","officialLinks":[],"flavors":["基本"],"series":["コラボ"],"description":"","referenceLinks":[]},
   {"id":"2013-10-26","name":"東京ブラックサンダーミニ","releaseDate":"2013/10/26","nickname":"","size":"ミニ","image":"imag/2013-10-26.webp","officialLinks":[],"flavors":["雷おこし"],"series":["東京"],"description":"","referenceLinks":[]}
 ]
