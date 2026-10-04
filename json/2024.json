@@ -1,15 +1,15 @@
 [
-  {"id":"2024-07-17","name":"アリガトサンダー","releaseDate":"2024/07/17","nickname":"黒い雷神","size":"レギュラー","image":"imag/2024-07-17.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-09-02-a","name":"ブラック30周年ダー","releaseDate":"2024/09/02","nickname":"黒い雷神","size":"レギュラー","image":"imag/2024(a).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-09-02-b","name":"ブラック30周年ダー","releaseDate":"2024/09/02","nickname":"黒い雷神","size":"レギュラー","image":"imag/2024(b).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-10-21-a","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-10-21-b","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(a).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-10-21-c","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(b).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-10-21-d","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(c).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-10-21-e","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(d).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-10-21-f","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(e).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-11-26-a","name":"ブラックサンダーひとくちサイズ甘MAX(エクストリーム)","releaseDate":"2024/11/26","nickname":"","size":"一口サイズ","image":"imag/2024-11-26(a).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-11-26-b","name":"ブラックサンダーひとくちサイズ甘MAX(エクセレント)","releaseDate":"2024/11/26","nickname":"","size":"一口サイズ","image":"imag/2024-11-26(b).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-12-31-a","name":"ブラックサンダーひとくちサイズ神やわ","releaseDate":"2024/12/31","nickname":"やわ雷神","size":"一口サイズ","image":"imag/2024-12-31(a).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2024-12-31-b","name":"ブラックサンダーひとくちサイズ鬼力タ","releaseDate":"2024/12/31","nickname":"カタ雷神","size":"一口サイズ","image":"imag/2024-12-31(b).png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
+  {"id":"2024-07-17","name":"アリガトサンダー","releaseDate":"2024/07/17","nickname":"黒い雷神","size":"レギュラー","image":"imag/2024-07-17.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-09-02-a","name":"ブラック30周年ダー","releaseDate":"2024/09/02","nickname":"黒い雷神","size":"レギュラー","image":"imag/2024(a).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-09-02-b","name":"ブラック30周年ダー","releaseDate":"2024/09/02","nickname":"黒い雷神","size":"レギュラー","image":"imag/2024(b).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-10-21-a","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-10-21-b","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(a).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-10-21-c","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(b).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-10-21-d","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(c).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-10-21-e","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(d).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-10-21-f","name":"ブラックサンダーミニバークリスマス","releaseDate":"2024/10/21","nickname":"","size":"ミニ","image":"imag/2024-10-21(e).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-11-26-a","name":"ブラックサンダーひとくちサイズ甘MAX(エクストリーム)","releaseDate":"2024/11/26","nickname":"","size":"一口サイズ","image":"imag/2024-11-26(a).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-11-26-b","name":"ブラックサンダーひとくちサイズ甘MAX(エクセレント)","releaseDate":"2024/11/26","nickname":"","size":"一口サイズ","image":"imag/2024-11-26(b).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-12-31-a","name":"ブラックサンダーひとくちサイズ神やわ","releaseDate":"2024/12/31","nickname":"やわ雷神","size":"一口サイズ","image":"imag/2024-12-31(a).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2024-12-31-b","name":"ブラックサンダーひとくちサイズ鬼力タ","releaseDate":"2024/12/31","nickname":"カタ雷神","size":"一口サイズ","image":"imag/2024-12-31(b).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
 ]

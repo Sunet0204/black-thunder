@@ -1,13 +1,13 @@
 [
-  {"id":"2025-01-14","name":"ベリーのサンダーひとくちサイズWベリー","releaseDate":"2025/01/14","nickname":"","size":"一口サイズ","image":"imag/2025-01-14.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-03-18","name":"ブラックサンダー抹茶の真髄","releaseDate":"2025/03/18","nickname":"","size":"レギュラー","image":"imag/2025-03-18.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-04-22","name":"ブラックサンダーエクセレント","releaseDate":"2025/04/22","nickname":"","size":"レギュラー","image":"imag/2025-04-22.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-05","name":"プリンのサンダー","releaseDate":"2025/05/??","nickname":"雷神ぷるん","size":"レギュラー","image":"imag/2025-05.png","officialLinks":[],"flavors":["プリン"],"series":[],"description":"公式からの告知がなく発売されたが後日トークルームにて「大人の事情によりステルス販売になった」とされた","referenceLinks":["https://blackthunder.yurakuseika.co.jp/chats/oh7mibi65ghnqgcn"]},
-  {"id":"2025-05-02","name":"白桃タルトのサンダー","releaseDate":"2025/05/02","nickname":"桃雷神","size":"レギュラー","image":"imag/2025-05-02.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-05-13","name":"濃苺サンダー","releaseDate":"2025/05/13","nickname":"","size":"レギュラー","image":"imag/2025-05-13.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-05-20","name":"マンゴーのサンダー","releaseDate":"2025/05/20","nickname":"トロピカ雷神","size":"レギュラー","image":"imag/2025-05-20.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-07-08","name":"ブラックサンダーひとくちサイズココナッツ","releaseDate":"2025/07/08","nickname":"","size":"一口サイズ","image":"imag/2025-07-08.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-08-26","name":"モンブランのサンダー","releaseDate":"2025/08/26","nickname":"モンブ雷神","size":"レギュラー","image":"imag/2025-08-26.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-09-15","name":"ブラックサンダー至福のバター","releaseDate":"2025/09/15","nickname":"","size":"レギュラー","image":"imag/2025-09-15.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2025-11-11","name":"ミルクないちごのサンダー","releaseDate":"2025/11/11","nickname":"あま〜い雷神","size":"レギュラー","image":"imag/2025-11-11.png","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
+  {"id":"2025-01-14","name":"ベリーのサンダーひとくちサイズWベリー","releaseDate":"2025/01/14","nickname":"","size":"一口サイズ","image":"imag/2025-01-14.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-03-18","name":"ブラックサンダー抹茶の真髄","releaseDate":"2025/03/18","nickname":"","size":"レギュラー","image":"imag/2025-03-18.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-04-22","name":"ブラックサンダーエクセレント","releaseDate":"2025/04/22","nickname":"","size":"レギュラー","image":"imag/2025-04-22.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-05","name":"プリンのサンダー","releaseDate":"2025/05/??","nickname":"雷神ぷるん","size":"レギュラー","image":"imag/2025-05.webp","officialLinks":[],"flavors":["プリン"],"series":[],"description":"公式からの告知がなく発売されたが後日トークルームにて「大人の事情によりステルス販売になった」とされた","referenceLinks":["https://blackthunder.yurakuseika.co.jp/chats/oh7mibi65ghnqgcn"]},
+  {"id":"2025-05-02","name":"白桃タルトのサンダー","releaseDate":"2025/05/02","nickname":"桃雷神","size":"レギュラー","image":"imag/2025-05-02.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-05-13","name":"濃苺サンダー","releaseDate":"2025/05/13","nickname":"","size":"レギュラー","image":"imag/2025-05-13.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-05-20","name":"マンゴーのサンダー","releaseDate":"2025/05/20","nickname":"トロピカ雷神","size":"レギュラー","image":"imag/2025-05-20.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-07-08","name":"ブラックサンダーひとくちサイズココナッツ","releaseDate":"2025/07/08","nickname":"","size":"一口サイズ","image":"imag/2025-07-08.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-08-26","name":"モンブランのサンダー","releaseDate":"2025/08/26","nickname":"モンブ雷神","size":"レギュラー","image":"imag/2025-08-26.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-09-15","name":"ブラックサンダー至福のバター","releaseDate":"2025/09/15","nickname":"","size":"レギュラー","image":"imag/2025-09-15.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"2025-11-11","name":"ミルクないちごのサンダー","releaseDate":"2025/11/11","nickname":"あま〜い雷神","size":"レギュラー","image":"imag/2025-11-11.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
 ]
