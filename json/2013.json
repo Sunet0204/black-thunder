@@ -1,7 +1,7 @@
 [
   {"id":"2013-a","name":"ブラックサンダーミニバー(二代目パッケージ)","releaseDate":"2013/??/??","nickname":"黒い雷神","size":"ミニ","image":"imag/2013mini2.webp","officialLinks":[],"flavors":["基本"],"series":[],"description":"","referenceLinks":[]},
   {"id":"2013-b","name":"ブラックサンターミニバー(二代目)","releaseDate":"2013/??/??","nickname":"","size":"ミニ","image":"imag/2013(a).webp","officialLinks":[],"flavors":["基本"],"series":["クリスマス"],"description":"","referenceLinks":[]},
-  {"id":"2013-01-25-a","name":"ラ♡ブラックサンダーミニ(100%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","image":"imag/2013-01-25-100.webp","officialLinks":[],"flavors":["基本"],"series":["バレンタイン"],"description":"","referenceLinks":[]},
+  {"id":"2013-01-25-a","name":"ラ♡ブラックサンダーミニ(100%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","flavors":["基本"],"series":["バレンタイン"],"description":"","image":["imag/2013-01-25-100.webp","imag/2013-01-25-90.webp"],"officialLinks":[],"referenceLinks":[]},
   {"id":"2013-01-25-b","name":"ラ♡ブラックサンダーミニ(90%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","image":"imag/2013-01-25-90.webp","officialLinks":[],"flavors":["基本"],"series":["バレンタイン"],"description":"","referenceLinks":[]},
   {"id":"2013-01-25-c","name":"ラ♡ブラックサンダーミニ(70%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","image":"imag/2013-01-25-70.webp","officialLinks":[],"flavors":["基本"],"series":["バレンタイン"],"description":"","referenceLinks":[]},
   {"id":"2013-01-25-d","name":"ラ♡ブラックサンダーミニ(50%義理チョコパッケージ)","releaseDate":"2013/01/25","nickname":"","size":"ミニ","image":"imag/2013-01-25-50.webp","officialLinks":[],"flavors":["基本"],"series":["バレンタイン"],"description":"","referenceLinks":[]},
