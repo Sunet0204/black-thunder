@@ -3,14 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>ブラックサンダー</title>
-
-<meta
-  name="description"
-  content="ブラックサンダーの商品を年代別にまとめた非公式データベースです。"
->
-
+<meta name="description" content="ブラックサンダーの商品を年代別にまとめた非公式データベースです。">
 <style>
 body{
   max-width:1200px;
@@ -18,11 +12,15 @@ body{
   padding:20px;
 }
 
-table,
-th,
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:20px;
+}
+
 td{
   border:1px solid #000;
-  border-collapse:collapse;
+  padding:8px;
 }
 
 .hidden{
@@ -61,11 +59,6 @@ h2{
   font-weight:bold;
 }
 
-img{
-  max-width:100%;
-  height:auto;
-}
-
 input,
 button{
   font-size:16px;
@@ -75,36 +68,82 @@ button{
 button{
   padding-inline:10px;
 }
+
+/* 1商品を4行で表示 */
+.product-name-row td{
+  font-size:18px;
+  font-weight:bold;
+  padding:10px;
+  background:#f3f3f3;
+}
+
+.product-image-cell{
+  width:180px;
+  min-width:140px;
+  text-align:center;
+  vertical-align:middle;
+  padding:10px;
+}
+
+.product-image-cell img{
+  display:block;
+  width:auto;
+  max-width:160px;
+  max-height:180px;
+  height:auto;
+  margin:auto;
+}
+
+.product-detail-cell{
+  vertical-align:middle;
+}
+
+.product-detail-label{
+  font-weight:bold;
+}
+
+/* 商品同士の境界を少し強調 */
+.product-name-row td{
+  border-top-width:2px;
+}
+
+@media (max-width:600px){
+  body{
+    padding:10px;
+  }
+
+  .product-image-cell{
+    width:42%;
+    min-width:110px;
+    padding:6px;
+  }
+
+  .product-image-cell img{
+    max-width:130px;
+    max-height:160px;
+  }
+
+  .product-name-row td{
+    font-size:16px;
+  }
+}
 </style>
 </head>
-
 <body>
 
 <h1 id="mainTitle">ブラックサンダー</h1>
 
-<p id="totalCount">
-  収録商品数：0件
-</p>
+<p id="totalCount">収録商品数：0件</p>
 
 <p>種類</p>
 
 <div class="menu">
-  <button data-type="index">
-    ブラックサンダー
-  </button>
-
-  <button data-type="thun2">
-    ユーラク他商品
-  </button>
-
-  <button data-type="thun3">
-    コラボメニュー
-  </button>
+  <button data-type="index">ブラックサンダー</button>
+  <button data-type="thun2">ユーラク他商品</button>
+  <button data-type="thun3">コラボメニュー</button>
 </div>
 
-<button id="showAllBtn">
-  全表示
-</button>
+<button id="showAllBtn">全表示</button>
 
 <input
   id="searchBox"
@@ -113,69 +152,33 @@ button{
 >
 
 <div id="filterArea"></div>
-
 <div id="tableArea"></div>
 
-
 <script>
-
 /* ========================================
    DOM
 ======================================== */
 
-const $ =
-  id => document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 const els = {
-
-  title:
-    $("mainTitle"),
-
-  count:
-    $("totalCount"),
-
-  search:
-    $("searchBox"),
-
-  filters:
-    $("filterArea"),
-
-  tables:
-    $("tableArea")
+  title: $("mainTitle"),
+  count: $("totalCount"),
+  search: $("searchBox"),
+  filters: $("filterArea"),
+  tables: $("tableArea")
 };
-
 
 /* ========================================
    年
 ======================================== */
 
 const years = [
-  1994,
-  2000,
-  2003,
-  2005,
-  2006,
-  2008,
-  2009,
-  2010,
-  2011,
-  2012,
-  2013,
-  2014,
-  2015,
-  2016,
-  2017,
-  2018,
-  2019,
-  2020,
-  2021,
-  2022,
-  2023,
-  2024,
-  2025,
-  2026
+  1994, 2000, 2003, 2005, 2006, 2008, 2009,
+  2010, 2011, 2012, 2013, 2014, 2015, 2016,
+  2017, 2018, 2019, 2020, 2021, 2022, 2023,
+  2024, 2025, 2026
 ];
-
 
 const years2 = [
   1994,
@@ -183,83 +186,61 @@ const years2 = [
   ...years.slice(2)
 ];
 
-
 /* ========================================
    JSON設定
 ======================================== */
 
 const types = {
-
   index:{
     title:"ブラックサンダー",
     years:years,
-    path:
-      year =>
-        `json/${year}.json`
+    path:year => `json/${year}.json`
   },
 
   thun2:{
     title:"ユーラク他商品",
     years:years2,
-    path:
-      year =>
-        `json2/${year}-2.json`
+    path:year => `json2/${year}-2.json`
   },
 
   thun3:{
     title:"コラボメニュー",
     years:years2,
-    path:
-      year =>
-        `json3/${year}-3.json`
+    path:year => `json3/${year}-3.json`
   }
-
 };
-
 
 /* ========================================
    状態
 ======================================== */
 
-let currentType =
-  "index";
-
-let loadToken =
-  0;
-
+let currentType = "index";
+let loadToken = 0;
 
 const state = {
-
   size:"",
   flavor:"",
   event:"",
   collab:""
-
 };
 
-
-const meta =
-  new WeakMap();
-
+/*
+  meta は商品グループ単位で保持する。
+  1商品 = 4行なので、行単位では数えない。
+*/
+const meta = new WeakMap();
 
 function resetState(){
-
-  Object
-    .keys(state)
-    .forEach(
-      key =>
-        state[key] = ""
-    );
-
+  Object.keys(state).forEach(
+    key => state[key] = ""
+  );
 }
-
 
 /* ========================================
    値を必ず配列にする
 ======================================== */
 
 function array(value){
-
   if(
     value == null ||
     value === ""
@@ -270,25 +251,32 @@ function array(value){
   return Array.isArray(value)
     ? value
     : [value];
-
 }
-
 
 /* ========================================
    年見出し
 ======================================== */
 
+function productGroups(table){
+  return [
+    ...table.tBodies
+  ].filter(
+    tbody =>
+      tbody.classList.contains(
+        "product-group"
+      )
+  );
+}
+
 function heading(
   table,
   visible = null
 ){
-
   const h2 =
     table.previousElementSibling;
 
   const count =
-    visible ??
-    table.tBodies[0].rows.length;
+    visible ?? productGroups(table).length;
 
   h2.textContent =
     `${
@@ -296,61 +284,69 @@ function heading(
         ? "▶"
         : "▼"
     } ${h2.dataset.year}（${count}件）`;
-
 }
-
 
 /* ========================================
    商品数
 ======================================== */
 
 function updateCount(){
-
   let total = 0;
 
   document
-    .querySelectorAll(
-      "#tableArea table"
-    )
+    .querySelectorAll("#tableArea table")
     .forEach(table => {
-
-      total +=
-        table.tBodies[0].rows.length;
-
+      total += productGroups(table).length;
       heading(table);
-
     });
 
   els.count.textContent =
     `収録商品数：${total}件`;
-
 }
 
-
 /* ========================================
-   td作成
+   詳細セル作成
 ======================================== */
 
-function cell(
-  text = ""
+function detailCell(
+  label,
+  value
 ){
-
   const td =
     document.createElement("td");
 
-  td.textContent =
-    text ?? "";
+  td.className =
+    "product-detail-cell";
+
+  const strong =
+    document.createElement("strong");
+
+  strong.className =
+    "product-detail-label";
+
+  strong.textContent =
+    `${label}：`;
+
+  td.append(
+    strong,
+    document.createTextNode(
+      value ?? ""
+    )
+  );
 
   return td;
-
 }
 
-
 /* ========================================
-   商品行作成
+   商品作成
 
-   ★ 配列番号ではなく
-     item.id を使用
+   1商品 = tbody 1個
+   その中に4行を作る
+
+   1行目：商品名
+   2行目：画像 + 発売日
+   3行目：画像 + 二つ名
+   4行目：画像 + サイズ / コラボ先
 ======================================== */
 
 function rowFor(
@@ -358,23 +354,17 @@ function rowFor(
   type,
   year
 ){
+  const group =
+    document.createElement("tbody");
 
-  const tr =
-    document.createElement("tr");
+  group.className =
+    "product-group";
 
-
-  /* -------------------------------
-     商品ID
-  ------------------------------- */
-
+  /* 商品ID */
   const productId =
     String(item.id ?? "");
 
-
-  /* -------------------------------
-     商品ページURL
-  ------------------------------- */
-
+  /* 商品ページURL */
   const url =
     `product.html?type=${
       encodeURIComponent(type)
@@ -384,13 +374,8 @@ function rowFor(
       encodeURIComponent(productId)
     }`;
 
-
-  /* -------------------------------
-     フィルター情報
-  ------------------------------- */
-
+  /* フィルター情報 */
   const info = {
-
     name:
       String(
         item.name ?? ""
@@ -402,146 +387,139 @@ function rowFor(
         : item.size ?? "",
 
     flavors:[],
-
     events:[]
-
   };
 
-
-  if(
-    type === "index"
-  ){
-
+  if(type === "index"){
     info.flavors =
-      array(
-        item.flavors
-      );
+      array(item.flavors);
 
     info.events =
-      array(
-        item.series
-      );
-
+      array(item.series);
   }
 
+  meta.set(group, info);
 
-  meta.set(
-    tr,
-    info
-  );
+  /* ======================================
+     1行目：商品名
+  ====================================== */
 
+  const nameRow =
+    document.createElement("tr");
 
-  /* -------------------------------
-     商品名
-  ------------------------------- */
+  nameRow.className =
+    "product-name-row";
 
-  const name =
-    cell();
+  const nameCell =
+    document.createElement("td");
 
-  const link =
+  nameCell.colSpan = 2;
+
+  const nameLink =
     document.createElement("a");
 
-  link.href =
-    url;
-
-  link.textContent =
+  nameLink.href = url;
+  nameLink.textContent =
     item.name ?? "";
 
-  name.append(
-    link
+  nameCell.append(nameLink);
+  nameRow.append(nameCell);
+
+  /* ======================================
+     画像セル
+     発売日・二つ名・サイズの3行を結合
+  ====================================== */
+
+  const imageCell =
+    document.createElement("td");
+
+  imageCell.rowSpan = 3;
+  imageCell.className =
+    "product-image-cell";
+
+  const imageLink =
+    document.createElement("a");
+
+  imageLink.href = url;
+
+  const images =
+    array(
+      item.images ?? item.image
+    ).filter(
+      image =>
+        typeof image === "string" &&
+        image.trim() !== ""
+    );
+
+  if(images.length){
+    const img =
+      document.createElement("img");
+
+    img.src = images[0];
+    img.alt = item.name ?? "";
+    img.loading = "lazy";
+
+    imageLink.append(img);
+  }
+
+  imageCell.append(imageLink);
+
+  /* ======================================
+     2行目：画像 + 発売日
+  ====================================== */
+
+  const releaseRow =
+    document.createElement("tr");
+
+  releaseRow.append(
+    imageCell,
+    detailCell(
+      "発売日",
+      item.releaseDate
+    )
   );
 
+  /* ======================================
+     3行目：二つ名
+  ====================================== */
 
-  /* -------------------------------
-     基本情報
-  ------------------------------- */
+  const nicknameRow =
+    document.createElement("tr");
 
-  tr.append(
-
-    name,
-
-    cell(
-      item.releaseDate
-    ),
-
-    cell(
+  nicknameRow.append(
+    detailCell(
+      "二つ名",
       item.nickname
-    ),
+    )
+  );
 
-    cell(
+  /* ======================================
+     4行目：サイズ / コラボ先
+  ====================================== */
+
+  const sizeRow =
+    document.createElement("tr");
+
+  sizeRow.append(
+    detailCell(
+      type === "thun3"
+        ? "コラボ先"
+        : "サイズ",
       type === "thun3"
         ? item.collab
         : item.size
     )
-
   );
 
-
-/* -------------------------------
-   商品画像
-
-   image  = 通常の1画像
-   images = 複数画像
-
-   一覧では最初の1枚だけ表示
-------------------------------- */
-
-const image =
-  cell();
-
-const imageLink =
-  document.createElement("a");
-
-imageLink.href =
-  url;
-
-
-/* image / images の両方に対応 */
-
-const images =
-  array(
-    item.images ?? item.image
+  group.append(
+    nameRow,
+    releaseRow,
+    nicknameRow,
+    sizeRow
   );
 
-
-if(
-  images.length
-){
-
-  const img =
-    document.createElement("img");
-
-  img.src =
-    images[0];
-
-  img.alt =
-    item.name ?? "";
-
-  img.width =
-    100;
-
-  img.loading =
-    "lazy";
-
-  imageLink.append(
-    img
-  );
+  return group;
 }
-
-
-image.append(
-  imageLink
-);
-
-tr.append(
-  image
-);
-
-
-  return tr;
-
-}
-
 
 /* ========================================
    年ごとのテーブル
@@ -551,94 +529,35 @@ function section(
   year,
   type
 ){
-
   const h2 =
     document.createElement("h2");
 
-  h2.dataset.year =
-    year;
-
+  h2.dataset.year = year;
   h2.textContent =
     `▶ ${year}（0件）`;
-
 
   const table =
     document.createElement("table");
 
-  table.className =
-    "hidden";
+  table.className = "hidden";
 
+  /*
+    tbodyを商品単位で追加するため、
+    最初は空のtableだけ作る。
+  */
 
-  const head =
-    document.createElement("tr");
-
-
-  [
-    "名前",
-    "発売日",
-    "二つ名",
-    type === "thun3"
-      ? "コラボ先"
-      : "サイズ",
-    "画像"
-
-  ].forEach(text => {
-
-    const th =
-      document.createElement("th");
-
-    th.textContent =
-      text;
-
-    head.append(
-      th
-    );
-
-  });
-
-
-  const thead =
-    document.createElement("thead");
-
-  thead.append(
-    head
-  );
-
-
-  const tbody =
-    document.createElement("tbody");
-
-
-  table.append(
-    thead,
-    tbody
-  );
-
-
-  h2.onclick =
-    () => {
-
-      table.classList.toggle(
-        "hidden"
-      );
-
-      heading(
-        table
-      );
-
-    };
-
+  h2.onclick = () => {
+    table.classList.toggle("hidden");
+    heading(table);
+  };
 
   els.tables.append(
     h2,
     table
   );
 
-
-  return tbody;
-
+  return table;
 }
-
 
 /* ========================================
    JSON読み込み
@@ -646,32 +565,23 @@ function section(
 
 async function loadYear(
   path,
-  tbody,
+  table,
   type,
   year,
   token
 ){
-
   try{
-
     const response =
       await fetch(path);
 
-
-    if(
-      !response.ok
-    ){
-
+    if(!response.ok){
       throw new Error(
         `${path} を読み込めません`
       );
-
     }
-
 
     const items =
       await response.json();
-
 
     if(
       token !== loadToken ||
@@ -680,195 +590,115 @@ async function loadYear(
       return;
     }
 
-
     const fragment =
       document.createDocumentFragment();
 
-
-    items.forEach(
-      item => {
-
-        /* IDがない商品を検出 */
-
-        if(
-          item.id == null ||
-          item.id === ""
-        ){
-
-          console.warn(
-            "商品IDがありません",
-            item
-          );
-
-          return;
-
-        }
-
-
-        fragment.append(
-
-          rowFor(
-            item,
-            type,
-            year
-          )
-
+    items.forEach(item => {
+      /* IDがない商品を検出 */
+      if(
+        item.id == null ||
+        item.id === ""
+      ){
+        console.warn(
+          "商品IDがありません",
+          item
         );
-
+        return;
       }
-    );
 
+      fragment.append(
+        rowFor(
+          item,
+          type,
+          year
+        )
+      );
+    });
 
-    tbody.append(
-      fragment
-    );
-
+    table.append(fragment);
   }
-
   catch(error){
-
     console.error(
       `${path} の読み込みに失敗しました`,
       error
     );
-
   }
-
 }
-
 
 /* ========================================
    種類変更
 ======================================== */
 
-async function changeType(
-  type
-){
+async function changeType(type){
+  currentType = type;
 
-  currentType =
-    type;
+  const token = ++loadToken;
+  const config = types[type];
 
-
-  const token =
-    ++loadToken;
-
-
-  const config =
-    types[type];
-
-
-  els.title.textContent =
-    config.title;
-
-  document.title =
-    config.title;
-
-
-  els.count.textContent =
-    "収録商品数：0件";
-
+  els.title.textContent = config.title;
+  document.title = config.title;
+  els.count.textContent = "収録商品数：0件";
 
   resetState();
-
-
-  els.search.value =
-    "";
-
-
+  els.search.value = "";
   els.filters.replaceChildren();
-
   els.tables.replaceChildren();
-
 
   const jobs =
     config.years.map(
       year =>
-
         loadYear(
-
           config.path(year),
-
-          section(
-            year,
-            type
-          ),
-
+          section(year, type),
           type,
-
           year,
-
           token
-
         )
     );
 
+  await Promise.all(jobs);
 
-  await Promise.all(
-    jobs
-  );
-
-
-  if(
-    token !== loadToken
-  ){
+  if(token !== loadToken){
     return;
   }
 
-
   updateCount();
-
   createFilters();
-
 }
-
 
 /* ========================================
    フィルター値取得
 ======================================== */
 
-function values(
-  key
-){
-
-  const out =
-    new Set();
-
+function values(key){
+  const out = new Set();
 
   document
     .querySelectorAll(
-      "#tableArea tbody tr"
+      "#tableArea .product-group"
     )
-    .forEach(row => {
+    .forEach(group => {
+      const data = meta.get(group);
 
-      const data =
-        meta.get(row);
+      if(!data){
+        return;
+      }
 
-      const value =
-        data[key];
-
+      const value = data[key];
 
       (
         Array.isArray(value)
           ? value
           : [value]
-      )
-        .forEach(value => {
-
-          if(value){
-            out.add(value);
-          }
-
-        });
-
+      ).forEach(value => {
+        if(value){
+          out.add(value);
+        }
+      });
     });
 
-
-  return [
-    ...out
-  ];
-
+  return [...out];
 }
-
 
 /* ========================================
    フィルターボタン
@@ -879,13 +709,10 @@ function group(
   key,
   list
 ){
-
   const div =
     document.createElement("div");
 
-  div.className =
-    "filter-group";
-
+  div.className = "filter-group";
 
   const strong =
     document.createElement("strong");
@@ -893,93 +720,53 @@ function group(
   strong.textContent =
     `${title}：`;
 
-  div.append(
-    strong
-  );
-
+  div.append(strong);
 
   [
     ["すべて",""],
     ...list.map(
-      value => [
-        value,
-        value
-      ]
+      value => [value,value]
     )
+  ].forEach(([text,value]) => {
+    const button =
+      document.createElement("button");
 
-  ].forEach(
-    ([text,value]) => {
+    button.textContent = text;
 
-      const button =
-        document.createElement("button");
+    button.classList.toggle(
+      "selected",
+      state[key] === value
+    );
 
+    button.onclick = () => {
+      state[key] = value;
 
-      button.textContent =
-        text;
-
-
-      button.classList.toggle(
-        "selected",
-        state[key] === value
+      [
+        ...div.querySelectorAll("button")
+      ].forEach(item =>
+        item.classList.toggle(
+          "selected",
+          item === button
+        )
       );
 
+      applyFilters();
+    };
 
-      button.onclick =
-        () => {
+    div.append(button);
+  });
 
-          state[key] =
-            value;
-
-
-          [
-            ...div.querySelectorAll(
-              "button"
-            )
-
-          ].forEach(
-            item =>
-
-              item.classList.toggle(
-                "selected",
-                item === button
-              )
-
-          );
-
-
-          applyFilters();
-
-        };
-
-
-      div.append(
-        button
-      );
-
-    }
-  );
-
-
-  els.filters.append(
-    div
-  );
-
+  els.filters.append(div);
 }
-
 
 /* ========================================
    フィルター作成
 ======================================== */
 
 function createFilters(){
-
   els.filters.replaceChildren();
 
-
-  if(
-    currentType === "index"
-  ){
-
+  if(currentType === "index"){
     group(
       "サイズ",
       "size",
@@ -997,241 +784,150 @@ function createFilters(){
       "event",
       values("events")
     );
-
   }
-
-
-  else if(
-    currentType === "thun3"
-  ){
-
+  else if(currentType === "thun3"){
     group(
       "コラボ先",
       "collab",
       values("filter")
     );
-
   }
-
 }
-
 
 /* ========================================
    フィルター中か
 ======================================== */
 
 function filtering(){
-
   return !!(
-
     els.search.value.trim() ||
-
     Object
       .values(state)
       .some(Boolean)
-
   );
-
 }
-
 
 /* ========================================
    フィルター適用
 ======================================== */
 
 function applyFilters(){
-
   const keyword =
     els.search.value
       .trim()
       .toLowerCase();
 
-
-  const active =
-    filtering();
-
+  const active = filtering();
 
   document
-    .querySelectorAll(
-      "#tableArea table"
-    )
+    .querySelectorAll("#tableArea table")
     .forEach(table => {
+      let count = 0;
 
-      let count =
-        0;
+      productGroups(table)
+        .forEach(groupElement => {
+          const data =
+            meta.get(groupElement);
 
+          if(!data){
+            return;
+          }
 
-      [
-        ...table.tBodies[0].rows
+          let show =
+            !keyword ||
+            data.name.includes(keyword);
 
-      ].forEach(row => {
+          if(currentType === "index"){
+            show =
+              show &&
+              (
+                !state.size ||
+                data.filter === state.size
+              ) &&
+              (
+                !state.flavor ||
+                data.flavors.includes(
+                  state.flavor
+                )
+              ) &&
+              (
+                !state.event ||
+                data.events.includes(
+                  state.event
+                )
+              );
+          }
+          else if(currentType === "thun3"){
+            show =
+              show &&
+              (
+                !state.collab ||
+                data.filter === state.collab
+              );
+          }
 
-        const data =
-          meta.get(row);
+          groupElement.hidden = !show;
 
-
-        let show =
-          !keyword ||
-          data.name.includes(
-            keyword
-          );
-
-
-        if(
-          currentType === "index"
-        ){
-
-          show =
-            show &&
-
-            (
-              !state.size ||
-              data.filter === state.size
-            ) &&
-
-            (
-              !state.flavor ||
-              data.flavors.includes(
-                state.flavor
-              )
-            ) &&
-
-            (
-              !state.event ||
-              data.events.includes(
-                state.event
-              )
-            );
-
-        }
-
-
-        else if(
-          currentType === "thun3"
-        ){
-
-          show =
-            show &&
-
-            (
-              !state.collab ||
-              data.filter === state.collab
-            );
-
-        }
-
-
-        row.hidden =
-          !show;
-
-
-        if(show){
-          count++;
-        }
-
-      });
-
+          if(show){
+            count++;
+          }
+        });
 
       const h2 =
         table.previousElementSibling;
 
-
       if(active){
-
-        h2.hidden =
-          !count;
-
+        h2.hidden = !count;
 
         table.classList.toggle(
           "hidden",
           !count
         );
 
-
         if(count){
-
           h2.textContent =
             `▼ ${h2.dataset.year}（${count}件）`;
-
         }
-
       }
-
       else{
-
-        h2.hidden =
-          false;
-
-
-        table.classList.add(
-          "hidden"
-        );
-
-
-        heading(
-          table
-        );
-
+        h2.hidden = false;
+        table.classList.add("hidden");
+        heading(table);
       }
-
     });
-
 }
-
 
 /* ========================================
    全表示
 ======================================== */
 
 function showAll(){
-
   resetState();
-
-  els.search.value =
-    "";
-
+  els.search.value = "";
 
   document
     .querySelectorAll(
-      "#tableArea tbody tr"
+      "#tableArea .product-group"
     )
-    .forEach(
-      row =>
-        row.hidden = false
+    .forEach(groupElement =>
+      groupElement.hidden = false
     );
 
-
   document
-    .querySelectorAll(
-      "#tableArea h2"
-    )
-    .forEach(
-      h2 =>
-        h2.hidden = false
+    .querySelectorAll("#tableArea h2")
+    .forEach(h2 =>
+      h2.hidden = false
     );
 
-
   document
-    .querySelectorAll(
-      "#tableArea table"
-    )
+    .querySelectorAll("#tableArea table")
     .forEach(table => {
-
-      table.classList.remove(
-        "hidden"
-      );
-
-      heading(
-        table
-      );
-
+      table.classList.remove("hidden");
+      heading(table);
     });
 
-
   createFilters();
-
 }
-
 
 /* ========================================
    イベント
@@ -1239,24 +935,19 @@ function showAll(){
 
 document
   .querySelector(".menu")
-  .onclick =
-    event => {
+  .onclick = event => {
+    const type =
+      event.target.dataset.type;
 
-      const type =
-        event.target.dataset.type;
-
-      if(type){
-        changeType(type);
-      }
-
-    };
-
+    if(type){
+      changeType(type);
+    }
+  };
 
 els.search.addEventListener(
   "input",
   applyFilters
 );
-
 
 $("showAllBtn")
   .addEventListener(
@@ -1264,15 +955,11 @@ $("showAllBtn")
     showAll
   );
 
-
 /* ========================================
    初期表示
 ======================================== */
 
-changeType(
-  "index"
-);
-
+changeType("index");
 </script>
 
 </body>
