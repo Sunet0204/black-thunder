@@ -10,7 +10,5 @@
   {"id":"2014-09-15","name":"ちびサンダー ホワイトチョコ味","releaseDate":"2014/09/15","nickname":"","size":"ちび","image":"imag/2014-09-15.webp","officialLinks":[],"flavors":["ホワイト"],"series":[],"description":"","referenceLinks":[]},
   {"id":"2014-09-22-a","name":"ビッグサンダー","releaseDate":"2014/09/22","nickname":"","size":"ビッグ","image":"imag/2014-09-22.webp","officialLinks":[],"flavors":["基本"],"series":[],"description":"","referenceLinks":[]},
   {"id":"2014-09-22-b","name":"ビッグサンダーミニ","releaseDate":"2014/09/22","nickname":"","size":"ビッグミニ","image":"imag/2014-09-22(a).webp","officialLinks":[],"flavors":["基本"],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2014-11-08-a","name":"ブラックサンダーミニバークリスマス","releaseDate":"2014/11/08","nickname":"","size":"ミニ","image":"imag/2014-11-08.webp","officialLinks":[],"flavors":["基本"],"series":["クリスマス"],"description":"","referenceLinks":[]},
-  {"id":"2014-11-08-b","name":"ブラックサンダーミニバークリスマス","releaseDate":"2014/11/08","nickname":"","size":"ミニ","image":"imag/2014-11-08(a).webp","officialLinks":[],"flavors":["基本"],"series":["クリスマス"],"description":"","referenceLinks":[]},
-  {"id":"2014-11-08-c","name":"ブラックサンダーミニバークリスマス","releaseDate":"2014/11/08","nickname":"","size":"ミニ","image":"imag/2014-11-08(b).webp","officialLinks":[],"flavors":["基本"],"series":["クリスマス"],"description":"","referenceLinks":[]}
-]
+  {"id":"2014-11-08-a","name":"ブラックサンダーミニバークリスマス(全3種)","releaseDate":"2014/11/08","nickname":"","size":"ミニ","flavors":["基本"],"series":["クリスマス"],"description":"","image":["imag/2014-11-08.webp","imag/2014-11-08(a).webp","imag/2014-11-08(b).webp"],"officialLinks":[],"referenceLinks":[]}
+  ]
