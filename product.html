@@ -19,12 +19,18 @@ body{
     margin-bottom:20px;
 }
 
-#productImage{
+#productImages{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    margin:20px 0;
+}
+
+#productImages img{
     display:block;
     max-width:400px;
     width:100%;
     height:auto;
-    margin:20px 0;
 }
 
 .info{
@@ -75,11 +81,7 @@ body{
 
     <h1 id="productName"></h1>
 
-    <img
-        id="productImage"
-        src=""
-        alt=""
-    >
+    <div id="productImages"></div>
 
     <div class="info">
         <span class="label">発売日：</span>
@@ -500,38 +502,60 @@ async function loadProduct() {
             `${name} | ブラックサンダー`;
 
 
-        // ==================================
+        // ==========================================
         // 商品画像
-        // ==================================
+        //
+        // image  = 通常の1画像
+        // images = 複数画像
+        // ==========================================
 
-        const image =
-            item.image || "";
+        const imageArea =
+            $("productImages");
 
-        if (
-            image
-        ) {
+        imageArea.replaceChildren();
 
-            $("productImage").src =
-                image;
 
-            $("productImage").alt =
-                name;
-
-            $("productImage").hidden =
-                false;
-
-        }
-
-        else {
-
-            $("productImage").removeAttribute(
-                "src"
+        const images =
+            toArray(
+                item.images ?? item.image
+            ).filter(
+                image =>
+                    typeof image === "string" &&
+                    image.trim() !== ""
             );
 
-            $("productImage").hidden =
-                true;
 
-        }
+        images.forEach(
+            (image,index) => {
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.src =
+                    image;
+
+                img.alt =
+                    images.length === 1
+                        ? name
+                        : `${name} ${index + 1}`;
+
+                img.loading =
+                    index === 0
+                        ? "eager"
+                        : "lazy";
+
+                imageArea.append(
+                    img
+                );
+
+            }
+        );
+
+
+        imageArea.hidden =
+            images.length === 0;
 
 
         // ==================================

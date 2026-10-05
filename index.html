@@ -477,53 +477,65 @@ function rowFor(
   );
 
 
-  /* -------------------------------
-     商品画像
-  ------------------------------- */
+/* -------------------------------
+   商品画像
 
-  const image =
-    cell();
+   image  = 通常の1画像
+   images = 複数画像
 
-  const imageLink =
-    document.createElement("a");
+   一覧では最初の1枚だけ表示
+------------------------------- */
 
-  imageLink.href =
-    url;
+const image =
+  cell();
 
+const imageLink =
+  document.createElement("a");
 
-  if(
-    item.image
-  ){
-
-    const img =
-      document.createElement("img");
-
-    img.src =
-      item.image;
-
-    img.alt =
-      item.name ?? "";
-
-    img.width =
-      100;
-
-    img.loading =
-      "lazy";
-
-    imageLink.append(
-      img
-    );
-
-  }
+imageLink.href =
+  url;
 
 
-  image.append(
-    imageLink
+/* image / images の両方に対応 */
+
+const images =
+  array(
+    item.images ?? item.image
   );
 
-  tr.append(
-    image
+
+if(
+  images.length
+){
+
+  const img =
+    document.createElement("img");
+
+  img.src =
+    images[0];
+
+  img.alt =
+    item.name ?? "";
+
+  img.width =
+    100;
+
+  img.loading =
+    "lazy";
+
+  imageLink.append(
+    img
   );
+}
+
+
+image.append(
+  imageLink
+);
+
+tr.append(
+  image
+);
 
 
   return tr;
