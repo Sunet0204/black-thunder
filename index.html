@@ -153,6 +153,7 @@ button{
   <button data-type="index">ブラックサンダー</button>
   <button data-type="thun2">ユーラク他商品</button>
   <button data-type="thun3">コラボメニュー</button>
+  <button data-type="thun4">パチモン</button>
 </div>
 
 <button id="showAllBtn">全表示</button>
@@ -219,8 +220,16 @@ const types = {
     title:"コラボメニュー",
     years:years2,
     path:year => `json3/${year}-3.json`
+  },
+
+  thun4:{
+    title: "パチモン",
+    years:years2,
+    path:year => `json4/${year}-4.json`
   }
 };
+
+
 
 /* ========================================
    状態
