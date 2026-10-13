@@ -89,12 +89,30 @@ def generate_doc(kind, year, item, filename):
 </html>
 '''
 
+STATIC_START = '<!-- STATIC_PRODUCT_LINKS_START -->'
+STATIC_END = '<!-- STATIC_PRODUCT_LINKS_END -->'
+
+def update_index(index_path, products):
+    original = index_path.read_text(encoding='utf-8')
+    if original.count(STATIC_START) != 1 or original.count(STATIC_END) != 1:
+        raise ValueError('index.html must contain exactly one pair of static link markers')
+    lines = ['<nav id="staticProductLinks" aria-label="全商品へのリンク">', '<h2>全商品のリンク</h2>', '<ul>']
+    for name, filename in products:
+        lines.append(f'<li><a href="products/{esc(quote(filename))}">{esc(name)}</a></li>')
+    lines.extend(['</ul>', '</nav>'])
+    start = original.index(STATIC_START) + len(STATIC_START)
+    end = original.index(STATIC_END)
+    if start > end:
+        raise ValueError('Invalid marker order in index.html')
+    return original[:start] + "\n" + "\n".join(lines) + "\n" + original[end:]
+
 def main():
     out = ROOT / 'products'
     out.mkdir(exist_ok=True)
     urls = [BASE]
     seen = set()
     pending = {}
+    product_links = []
     errors = []
     for kind, (folder, suffix) in FOLDERS.items():
         directory = ROOT / folder
@@ -125,6 +143,7 @@ def main():
                     continue
                 seen.add(filename)
                 pending[filename] = generate_doc(kind, year, item, filename)
+                product_links.append((str(item.get("name") or "商品詳細"), filename))
                 urls.append(BASE + 'products/' + quote(filename))
 
     if errors:
@@ -134,6 +153,13 @@ def main():
         raise SystemExit(1)
     if not pending:
         print('ERROR: No product pages found; existing HTML and sitemap were not changed.')
+        raise SystemExit(1)
+
+    try:
+        updated_index = update_index(ROOT / 'index.html', product_links)
+    except (OSError, ValueError) as ex:
+        print(f'ERROR: {ex}')
+        print('Generation cancelled; existing files were not changed.')
         raise SystemExit(1)
 
     # Update current pages first, then remove only obsolete generated pages.
@@ -153,6 +179,7 @@ def main():
         entry = SubElement(root, '{http://www.sitemaps.org/schemas/sitemap/0.9}url')
         SubElement(entry, '{http://www.sitemaps.org/schemas/sitemap/0.9}loc').text = url
     ElementTree(root).write(ROOT / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
+    (ROOT / 'index.html').write_text(updated_index, encoding='utf-8')
     print(f'Generated {len(pending)} product pages, removed {removed} obsolete pages, sitemap.xml ({len(urls)} URLs)')
 
 if __name__ == '__main__':

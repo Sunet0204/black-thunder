@@ -1,1962 +1,1257 @@
 <!DOCTYPE html>
-
 <html lang="ja">
-
-
-
 <head>
-
-
-
+<script>document.documentElement.classList.add("js");</script>
 <!-- Google tag (gtag.js) -->
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-99P2MSR5QT"></script>
-
 <script>
-
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag(){dataLayer.push(arguments);}
-
-  gtag('js', new Date());
-
-
-
-  gtag('config', 'G-99P2MSR5QT');
-
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-99P2MSR5QT');
 </script>
-
-
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>ブラックサンダー</title>
-
 <meta name="description" content="ブラックサンダーの商品を年代別にまとめた非公式データベースです。">
-
 <style>
-
 body{
-
-  max-width:1200px;
-
-  margin:auto;
-
-  padding:20px;
-
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
-
-
-
 table{
-
-  width:100%;
-
-  border-collapse:collapse;
-
-  margin-bottom:20px;
-
+width:100%;
+border-collapse:collapse;
+margin-bottom:20px;
 }
-
-
-
 td{
-
-  border:1px solid #000;
-
-  padding:8px;
-
+border:1px solid #000;
+padding:8px;
 }
-
-
-
 .hidden{
-
-  display:none;
-
+display:none;
 }
-
-
-
 .menu{
-
-  margin-bottom:20px;
-
+margin-bottom:20px;
 }
-
-
-
 .menu button,
-
 #filterArea button{
-
-  margin:0 5px 5px 0;
-
+margin:0 5px 5px 0;
 }
-
-
-
 h2{
-
-  cursor:pointer;
-
+cursor:pointer;
 }
-
-
-
 #totalCount{
-
-  font-weight:bold;
-
-  margin-bottom:20px;
-
+font-weight:bold;
+margin-bottom:20px;
 }
-
-
-
 #filterArea{
-
-  margin:15px 0;
-
+margin:15px 0;
 }
-
-
-
 .filter-group{
-
-  margin-bottom:8px;
-
+margin-bottom:8px;
 }
-
-
-
 .filter-group button.selected{
-
-  background:#333;
-
-  color:#fff;
-
-  font-weight:bold;
-
+background:#333;
+color:#fff;
+font-weight:bold;
 }
-
-
-
 input,
-
 button{
-
-  font-size:16px;
-
-  padding:6px;
-
+font-size:16px;
+padding:6px;
 }
-
-
-
 button{
-
-  padding-inline:10px;
-
+padding-inline:10px;
 }
-
-
-
 /* 1商品を4行で表示 */
-
 .product-name-row td{
-
-  font-size:18px;
-
-  font-weight:bold;
-
-  padding:10px;
-
-  background:#f3f3f3;
-
+font-size:18px;
+font-weight:bold;
+padding:10px;
+background:#f3f3f3;
 }
-
-
-
 .product-image-cell{
-
-  width:180px;
-
-  min-width:140px;
-
-  text-align:center;
-
-  vertical-align:middle;
-
-  padding:10px;
-
+width:180px;
+min-width:140px;
+text-align:center;
+vertical-align:middle;
+padding:10px;
 }
-
-
-
 .product-image-cell img{
-
-  display:block;
-
-  width:auto;
-
-  max-width:160px;
-
-  max-height:180px;
-
-  height:auto;
-
-  margin:auto;
-
+display:block;
+width:auto;
+max-width:160px;
+max-height:180px;
+height:auto;
+margin:auto;
 }
-
-
-
 .product-detail-cell{
-
-  vertical-align:middle;
-
+vertical-align:middle;
 }
-
-
-
 .product-detail-label{
-
-  font-weight:bold;
-
+font-weight:bold;
 }
-
-
-
 /* 商品同士の境界を少し強調 */
-
 .product-name-row td{
-
-  border-top-width:2px;
-
+border-top-width:2px;
 }
-
-
-
 @media (max-width:600px){
-
-  body{
-
-    padding:10px;
-
-  }
-
-
-
-  .product-image-cell{
-
-    width:42%;
-
-    min-width:110px;
-
-    padding:6px;
-
-  }
-
-
-
-  .product-image-cell img{
-
-    max-width:130px;
-
-    max-height:160px;
-
-  }
-
-
-
-  .product-name-row td{
-
-    font-size:16px;
-
-  }
-
+body{
+padding:10px;
 }
-
+.product-image-cell{
+width:42%;
+min-width:110px;
+padding:6px;
+}
+.product-image-cell img{
+max-width:130px;
+max-height:160px;
+}
+.product-name-row td{
+font-size:16px;
+}
+}
+/* JS有効時は通常の商品一覧を表示し、静的リンク一覧を隠す */
+.js #staticProductLinks { display:none; }
+#staticProductLinks { margin-top:28px; }
+#staticProductLinks ul { columns:2; padding-left:24px; }
+#staticProductLinks li { break-inside:avoid; margin-bottom:5px; }
+@media(max-width:600px) { #staticProductLinks ul { columns:1; } }
 </style>
-
 </head>
-
 <body>
-
-
-
 <h1 id="mainTitle">ブラックサンダー</h1>
-
-
-
 <p id="totalCount">収録商品数：0件</p>
-
-
-
 <p>種類</p>
-
-
-
 <div class="menu">
-
-  <button data-type="index">ブラックサンダー</button>
-
-  <button data-type="thun2">ユーラク他商品</button>
-
-  <button data-type="thun3">コラボメニュー</button>
-
-  <button data-type="thun4">パチモン</button>
-
+<button data-type="index">ブラックサンダー</button>
+<button data-type="thun2">ユーラク他商品</button>
+<button data-type="thun3">コラボメニュー</button>
+<button data-type="thun4">パチモン</button>
 </div>
-
-
-
 <button id="showAllBtn">全表示</button>
-
-
-
 <input
-
-  id="searchBox"
-
-  type="text"
-
-  placeholder="商品名を検索"
-
+id="searchBox"
+type="text"
+placeholder="商品名を検索"
 >
-
-
-
 <div id="filterArea"></div>
-
 <div id="tableArea"></div>
-
-
-
+<!-- STATIC_PRODUCT_LINKS_START -->
+<nav id="staticProductLinks" aria-label="全商品へのリンク">
+<h2>全商品のリンク</h2>
+<ul>
+<li><a href="products/index-1994-01-1994-09-00-00.html">ブラックサンダー(一代目パッケージ)</a></li>
+<li><a href="products/index-2000-2000.html">ブラックサンダー(二代目パッケージ)</a></li>
+<li><a href="products/index-2003-2003-08.html">ブラックサンダー(三代目パッケージ)</a></li>
+<li><a href="products/index-2005-2005.html">ブラックサンダーミニバー(一代目パッケージ)</a></li>
+<li><a href="products/index-2006-2006.html">ビッグサンダー(一代目パッケージ)</a></li>
+<li><a href="products/index-2008-2008-09-30.html">柿の種サンダー</a></li>
+<li><a href="products/index-2009-2009-06-22-a.html">ちびサンダーホワイトチョコ味</a></li>
+<li><a href="products/index-2009-2009-06-22.html">ちびサンダーバナナチョコ味</a></li>
+<li><a href="products/index-2010-2010-02-08.html">ちびサンダーナッツ&amp;クッキーチョコ味</a></li>
+<li><a href="products/index-2010-2010-03-08.html">DearGirlサンダー</a></li>
+<li><a href="products/index-2010-2010-10-18.html">モーニングサンダー(一代目パッケージ)</a></li>
+<li><a href="products/index-2010-2010-10-28.html">白いブラックサンダー(楽天限定)</a></li>
+<li><a href="products/index-2011-2011-a.html">ビッグサンダー(二代目パッケージ)</a></li>
+<li><a href="products/index-2011-2010-02-01.html">白いブラックサンダー</a></li>
+<li><a href="products/index-2011-2011-10-11.html">ビッグサンダー猪木</a></li>
+<li><a href="products/index-2011-2011-c.html">ブラックサンダー(3.5代目パッケージ)</a></li>
+<li><a href="products/index-2011-2011-10-24.html">ちびサンダーブラックベリー</a></li>
+<li><a href="products/index-2011-2011-10-10.html">ブラックサンダーキョロちゃんピーナッツ味</a></li>
+<li><a href="products/index-2011-2011-10-10-a.html">ブラックサンダーチロルコーヒー味</a></li>
+<li><a href="products/index-2011-2011-12-a.html">ブラックサンターミニバー</a></li>
+<li><a href="products/index-2011-2011-12-b.html">ビッグサンター</a></li>
+<li><a href="products/index-2012-2012-01.html">ビッグサンダーミニ(一代目パッケージ)</a></li>
+<li><a href="products/index-2012-2012-01-15.html">ラ☆ブラックサンダーミニ</a></li>
+<li><a href="products/index-2012-2012-01-19.html">ビッグサンキュー</a></li>
+<li><a href="products/index-2012-2012-03.html">ビッグサンダー</a></li>
+<li><a href="products/index-2012-2012-05-21.html">ちびサンダー朝食ヨーグルト味</a></li>
+<li><a href="products/index-2012-2012-06-26.html">ブラックサンダーX</a></li>
+<li><a href="products/index-2012-2012-09-24-a.html">モーニングサンダー(二代目パッケージ)</a></li>
+<li><a href="products/index-2012-2012-09-24-b.html">ちびサンダーホワイトチョコ味</a></li>
+<li><a href="products/index-2012-2012-10-01.html">ブラックサンダー(雷神祭り)</a></li>
+<li><a href="products/index-2012-2012-11-19.html">ブラックサンダーHB</a></li>
+<li><a href="products/index-2013-2013-a.html">ブラックサンダーミニバー(二代目パッケージ)</a></li>
+<li><a href="products/index-2013-2013-b.html">ブラックサンターミニバー(二代目)</a></li>
+<li><a href="products/index-2013-2013-01-25-a.html">ラ♡ブラックサンダーミニ(全6種)</a></li>
+<li><a href="products/index-2013-2013-10-07-a.html">ブラックサンダー(四代目パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-07-b.html">ブラックサンダー(20周年パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-07-c.html">ブラックサンダー(20周年パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-07-d.html">ブラックサンダー(20周年パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-07-e.html">ブラックサンダー(20周年パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-07-f.html">ブラックサンダー(20周年パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-07-g.html">ブラックサンダー ミニバー(20周年パッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-15.html">ブラックサンダー(ワン・ダイレクションコラボパッケージ)</a></li>
+<li><a href="products/index-2013-2013-10-26.html">東京ブラックサンダーミニ</a></li>
+<li><a href="products/index-2014-2014-01-29.html">ピンクなブラックサンダー</a></li>
+<li><a href="products/index-2014-2014-02.html">ちびサンダー ミルクチョコ味</a></li>
+<li><a href="products/index-2014-2014-03-18.html">金のブラックサンダー</a></li>
+<li><a href="products/index-2014-2014-03-05.html">ブラックサンダー(20周年キャンペーン)</a></li>
+<li><a href="products/index-2014-2014-07-07-a.html">ちびサンダー バニラ&amp;アーモンド</a></li>
+<li><a href="products/index-2014-2014-07-07-b.html">ブラックサンダーピーナッツ</a></li>
+<li><a href="products/index-2014-2014-09-08.html">クリスプサンダー</a></li>
+<li><a href="products/index-2014-2014-09-01-a.html">ブラックサンダーミニバーハロウィン(全3種)</a></li>
+<li><a href="products/index-2014-2014-09-15.html">ちびサンダー ホワイトチョコ味</a></li>
+<li><a href="products/index-2014-2014-09-22-a.html">ビッグサンダー</a></li>
+<li><a href="products/index-2014-2014-09-22-b.html">ビッグサンダーミニ</a></li>
+<li><a href="products/index-2014-2014-11-08-a.html">ブラックサンダーミニバークリスマス(全3種)</a></li>
+<li><a href="products/index-2015-2015.html">金ブラックサンダーミニバー</a></li>
+<li><a href="products/index-2015-2015-01-a.html">ブラックサンダープレミアムビター</a></li>
+<li><a href="products/index-2015-2015-01-b.html">ブラックサンダープレミアムミルク</a></li>
+<li><a href="products/index-2015-2015-01-15-a.html">ラ♡ブラックサンダーミニ(全6種)</a></li>
+<li><a href="products/index-2015-2015-01-15-g.html">ブラックサンダー(義理)</a></li>
+<li><a href="products/index-2015-2015-02-04-a.html">ブラックサンダーミニバー義理チョコアソート</a></li>
+<li><a href="products/index-2015-2015-02-04-b.html">ブラックサンダーミニバー義理チョコアソート</a></li>
+<li><a href="products/index-2015-2015-02-04-c.html">ブラックサンダーミニバー義理チョコアソート</a></li>
+<li><a href="products/index-2015-2015-03-23.html">ブラックサンダーゴールド</a></li>
+<li><a href="products/index-2015-2015-06-08-a.html">ブラック焼きサンダー</a></li>
+<li><a href="products/index-2015-2015-06-08-b.html">ビッグサンダーココナッツ</a></li>
+<li><a href="products/index-2015-2015-06-25.html">ピンクなブラックサンダー</a></li>
+<li><a href="products/index-2015-2015-09-07.html">クリスプサンダーWナッツカーニバル</a></li>
+<li><a href="products/index-2015-2015-09-14.html">ビッグサンダー(三代目パッケージ)</a></li>
+<li><a href="products/index-2015-2015-10-13.html">ブラックサンダーのグレーゾーン</a></li>
+<li><a href="products/index-2016-2016-01-09-a.html">和のブラックサンダーきなこ</a></li>
+<li><a href="products/index-2016-2016-01-09-b.html">和のビッグサンダー</a></li>
+<li><a href="products/index-2016-2016-01-09-c.html">ブラックサンダーミニバーアメリカン</a></li>
+<li><a href="products/index-2016-2016-01-14-a.html">幸せの黄色いブラックサンダー</a></li>
+<li><a href="products/index-2016-2016-01-14-b.html">ブラックサンダー(義理)</a></li>
+<li><a href="products/index-2016-2016-02-15.html">ブラックサンダーゴールド</a></li>
+<li><a href="products/index-2016-2016-03.html">ブラックサンダーブラック</a></li>
+<li><a href="products/index-2016-2016-04-04.html">ビッグサンダーⅡ</a></li>
+<li><a href="products/index-2016-2016-04-26-a.html">柿の種サンダー</a></li>
+<li><a href="products/index-2016-2016-04-26-b.html">柿の種サンダー</a></li>
+<li><a href="products/index-2016-2016-04-26-c.html">柿の種サンダー</a></li>
+<li><a href="products/index-2016-2016-06-06.html">ブラックサンダー爽快オレンジ味</a></li>
+<li><a href="products/index-2016-2016-09-05.html">ブラックサンダーきなこ</a></li>
+<li><a href="products/index-2016-2016-09-12.html">ビッグサンダーⅢ</a></li>
+<li><a href="products/index-2016-2016-09-19.html">ブラックサンダーダークマター</a></li>
+<li><a href="products/index-2016-2016-09-17.html">ブラックサンダーきなこ</a></li>
+<li><a href="products/index-2016-2016-10-18.html">ブラックサンダーのピンクなグレーゾーン</a></li>
+<li><a href="products/index-2016-2016-10-29-a.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2016-2016-10-29-b.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2016-2016-10-29-c.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2016-2016-10-29-d.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2016-2016-10-29-e.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2016-2016-10-29-f.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2016-2016-11-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2016-2016-11-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2016-2016-11-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2016-2016-11-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2016-2016-11-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2016-2016-11-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2016-2016-12-10.html">ピンクなブラックサンダー</a></li>
+<li><a href="products/index-2017-2017.html">ブラックサンダーミニバーゴールド</a></li>
+<li><a href="products/index-2017-2017-01-07-a.html">もちもちブラックサンダー抹茶</a></li>
+<li><a href="products/index-2017-2017-01-07-b.html">もちもちブラックサンダーあずき</a></li>
+<li><a href="products/index-2017-2017-01-07-c.html">ブラックサンダーゴールドカフェ</a></li>
+<li><a href="products/index-2017-2017-03-06.html">柿の種サンダー</a></li>
+<li><a href="products/index-2017-2017-03-29.html">ビッグサンダーココナッツ</a></li>
+<li><a href="products/index-2017-2017-04-25-a.html">イケ麺サンダー</a></li>
+<li><a href="products/index-2017-2017-04-25-b.html">イケ麺サンダー</a></li>
+<li><a href="products/index-2017-2017-04-25-c.html">イケ麺サンダー</a></li>
+<li><a href="products/index-2017-2017-05-15.html">ブラック焼きサンダー</a></li>
+<li><a href="products/index-2017-2017-06-05.html">グラノーラサンダー</a></li>
+<li><a href="products/index-2017-2017-07-14.html">ブラックサンダー ナムコーラ味</a></li>
+<li><a href="products/index-2017-2017-08-28-a.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2017-2017-08-28-b.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2017-2017-08-28-c.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2017-2017-08-28-d.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2017-2017-08-28-e.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2017-2017-08-28-f.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2017-2017-09-11-a.html">ビッグサンダー(四代目パッケージ)</a></li>
+<li><a href="products/index-2017-2017-09-11-b.html">もちもちブラックサンダーきなこ</a></li>
+<li><a href="products/index-2017-2017-09-11-c.html">ブラックサンダー(五代目パッケージ)</a></li>
+<li><a href="products/index-2017-2017-09-18-a.html">ブラックサンダー香ばしきなこ</a></li>
+<li><a href="products/index-2017-2017-09-18-b.html">ブラックサンダーVOLT</a></li>
+<li><a href="products/index-2017-2017-09-18-c.html">ブラックサンダーミニバーゴールド</a></li>
+<li><a href="products/index-2017-2017-09-28.html">東京ブラックサンダーミニ</a></li>
+<li><a href="products/index-2017-2017-10-31.html">ブラックサンダーティラミス</a></li>
+<li><a href="products/index-2017-2017-11-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2017-2017-11-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2017-2017-11-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2017-2017-11-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2017-2017-11-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2017-2017-11-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2017-2017-11-g.html">パチパチ！ブラックサンダーコーラ</a></li>
+<li><a href="products/index-2017-2017-11-13.html">ブラックサンダープリティスタイル</a></li>
+<li><a href="products/index-2017-2017-12-04.html">ブラックサンダーゴールド</a></li>
+<li><a href="products/index-2017-2017-12-06.html">ピンクなブラックサンダー</a></li>
+<li><a href="products/index-2018-2018-01-06-a.html">ブラックサンダープリティスタイルラムレーズン</a></li>
+<li><a href="products/index-2018-2018-01-06-b.html">ブラックサンダープリティスタイルサングリア</a></li>
+<li><a href="products/index-2018-2018-01-12.html">黄金なブラックサンダー</a></li>
+<li><a href="products/index-2018-2018-01-22.html">ブラックサンダー大人のプレミアム</a></li>
+<li><a href="products/index-2018-2018-02-26-a.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2018-2018-02-26-b.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2018-2018-02-26-c.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2018-2018-02-26-d.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2018-2018-02-26-e.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2018-2018-02-26-f.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2018-2018-03-12.html">フルグラサンダー</a></li>
+<li><a href="products/index-2018-2018-03-13.html">ブラックサンダーVOLT</a></li>
+<li><a href="products/index-2018-2018-03-26-a.html">ブラックサンダービター</a></li>
+<li><a href="products/index-2018-2018-03-26-b.html">フルグラサンダーミニバー</a></li>
+<li><a href="products/index-2018-2018-04-24.html">ブラックサンダープリティスタイルチョコミント</a></li>
+<li><a href="products/index-2018-2018-06-04.html">柿の種サンダー</a></li>
+<li><a href="products/index-2018-2018-06-18.html">ビッグサンダークッキー&amp;塩バニラ</a></li>
+<li><a href="products/index-2018-2018-07-03.html">白いブラックサンダー</a></li>
+<li><a href="products/index-2018-2018-08-27-a.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2018-2018-08-27-b.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2018-2018-08-27-c.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2018-2018-08-27-d.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2018-2018-08-27-e.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2018-2018-08-27-f.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2018-2018-09-a.html">ライトサンダー ココア味</a></li>
+<li><a href="products/index-2018-2018-09-b.html">ライトサンダー キャラメル味</a></li>
+<li><a href="products/index-2018-2018-09-10.html">フルグラ®サンダープリティスタイル</a></li>
+<li><a href="products/index-2018-2018-09-17.html">ブラックサンダーWきなこ</a></li>
+<li><a href="products/index-2018-2018-10-01-a.html">海老蔵サンダーフランス産ミルクで候</a></li>
+<li><a href="products/index-2018-2018-10-01-b.html">海老蔵サンダーチョコがリッチで候</a></li>
+<li><a href="products/index-2018-2018-10-29-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2018-2018-10-29-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2018-2018-10-29-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2018-2018-10-29-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2018-2018-10-29-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2018-2018-10-29-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2018-2018-11-01.html">京都ブラックサンダー</a></li>
+<li><a href="products/index-2018-2018-11-13.html">ブラックサンダープリティスタイル紫いも</a></li>
+<li><a href="products/index-2018-2018-12-03.html">ブラックサンダー大人のプレミアム</a></li>
+<li><a href="products/index-2018-2018-12-14.html">ピンクなブラックサンダー</a></li>
+<li><a href="products/index-2019-2019-a.html">黒い砂漠サンダー</a></li>
+<li><a href="products/index-2019-2019-b.html">黒い砂漠サンダー</a></li>
+<li><a href="products/index-2019-2019-c.html">黒い砂漠サンダー</a></li>
+<li><a href="products/index-2019-2019-d.html">黒い砂漠サンダー</a></li>
+<li><a href="products/index-2019-2019-e.html">ブラックサンダーゴールドミニバー</a></li>
+<li><a href="products/index-2019-2019-01-05-a.html">ブラックサンダープリティスタイルマジカタ</a></li>
+<li><a href="products/index-2019-2019-01-05-b.html">ブラックサンダープリティスタイルマジやわ</a></li>
+<li><a href="products/index-2019-2019-01-21.html">ブラックサンダープリティスタイルラムレーズン</a></li>
+<li><a href="products/index-2019-2019-03-04-a.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2019-2019-03-04-b.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2019-2019-03-04-c.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2019-2019-03-04-d.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2019-2019-03-04-e.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2019-2019-03-04-f.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2019-2019-03-11.html">ブラックサンダー抹茶あずき</a></li>
+<li><a href="products/index-2019-2019-03-25-a.html">黒のブラックサンダー</a></li>
+<li><a href="products/index-2019-2019-03-25-b.html">柿の種サンダーミニバー</a></li>
+<li><a href="products/index-2019-2019-04-15.html">ブラックサンダープリティスタイルチョコミント</a></li>
+<li><a href="products/index-2019-2019-05-21.html">ブラックサンダープリティスタイル黒くま</a></li>
+<li><a href="products/index-2019-2019-06-03-a.html">焼とうもろこしサンダー</a></li>
+<li><a href="products/index-2019-2019-06-03-b.html">ビッグサンダークッキー＆塩バニラ</a></li>
+<li><a href="products/index-2019-2019-08-26-a.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2019-2019-08-26-b.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2019-2019-08-26-c.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2019-2019-08-26-d.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2019-2019-08-26-e.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2019-2019-08-26-f.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2019-2019-09.html">ブラックサンダー(25周年パッケージ)</a></li>
+<li><a href="products/index-2019-2019-09-07.html">ビッグサンダー(五代目パッケージ)</a></li>
+<li><a href="products/index-2019-2019-09-09-a.html">ブラックサンダーほうじ茶ラテ</a></li>
+<li><a href="products/index-2019-2019-09-09-b.html">ブラックサンダーほうじ茶ラテ</a></li>
+<li><a href="products/index-2019-2019-09-09-c.html">ブラックサンダーほうじ茶ラテ</a></li>
+<li><a href="products/index-2019-2019-09-16.html">ブラックサンダー ネクストギア</a></li>
+<li><a href="products/index-2019-2019-09-23.html">ブラックサンダーミニバー カカオ72%</a></li>
+<li><a href="products/index-2019-2019-09-24.html">朝専用ブラックサンダー</a></li>
+<li><a href="products/index-2019-2019-09-30.html">ブラックサンダープリティスタイルティラミス</a></li>
+<li><a href="products/index-2019-2019-10-28-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2019-2019-10-28-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2019-2019-10-28-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2019-2019-10-28-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2019-2019-10-28-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2019-2019-10-28-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2019-2019-11-05.html">スイートサンダープリティスタイルいちごショートケーキ味</a></li>
+<li><a href="products/index-2019-2019-12-06.html">黄金なブラックサンダー北海道ミルクキャラメル味</a></li>
+<li><a href="products/index-2019-2019-12-09-a.html">ゴリゴリゴリラサンダー</a></li>
+<li><a href="products/index-2019-2019-12-09-b.html">ゴリゴリゴリラサンダー</a></li>
+<li><a href="products/index-2019-2019-12-09-c.html">ゴリゴリゴリラサンダー</a></li>
+<li><a href="products/index-2019-2019-12-09-d.html">ブラックサンダーミニバー 受験応援パッケージ</a></li>
+<li><a href="products/index-2019-2019-12-09-e.html">ブラックサンダーミニバー 受験応援パッケージ</a></li>
+<li><a href="products/index-2019-2019-12-09-f.html">ブラックサンダーミニバー 受験応援パッケージ</a></li>
+<li><a href="products/index-2019-2019-12-09-g.html">ブラックサンダーミニバー 受験応援パッケージ</a></li>
+<li><a href="products/index-2019-2019-12-09-h.html">ブラックサンダーミニバー 受験応援パッケージ</a></li>
+<li><a href="products/index-2019-2019-12-09-i.html">ブラックサンダーミニバー 受験応援パッケージ</a></li>
+<li><a href="products/index-2019-2019-12-16.html">ブラックサンダーしっとりプレミアム</a></li>
+<li><a href="products/index-2020-2020-a.html">ブラックサンダー(スマイルカカオ)</a></li>
+<li><a href="products/index-2020-2020-01-04-a.html">腹黒いブラックサンダープリティスタイル</a></li>
+<li><a href="products/index-2020-2020-01-04-b.html">腹白いブラックサンダープリティスタイル</a></li>
+<li><a href="products/index-2020-2020-01-20.html">ブラックサンダープリティスタイルガトーショコラ</a></li>
+<li><a href="products/index-2020-2020-03-09.html">ハニーバターサンダー</a></li>
+<li><a href="products/index-2020-2020-03-23.html">ブラックサンダーミニバー 抹茶ラテ</a></li>
+<li><a href="products/index-2020-2020-03-30.html">フルグラ®サンダーミニバー</a></li>
+<li><a href="products/index-2020-2020-04-a.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2020-2020-04-b.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2020-2020-04-c.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2020-2020-04-d.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2020-2020-04-e.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2020-2020-04-f.html">ブラックサンダーミニバーイースター</a></li>
+<li><a href="products/index-2020-2020-04-14.html">ブラックサンダープリティスタイル苺ミルフィーユ</a></li>
+<li><a href="products/index-2020-2020-05-15.html">沖縄ブラックサンダー</a></li>
+<li><a href="products/index-2020-2020-06-02-a.html">ブラックサンダーフレーフレーク味</a></li>
+<li><a href="products/index-2020-2020-06-02-b.html">ビッグサンダー金ごま</a></li>
+<li><a href="products/index-2020-2020-07-13.html">ブラックサンダープリティスタイルパブロチーズタルト</a></li>
+<li><a href="products/index-2020-2020-08-24-a.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2020-2020-08-24-b.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2020-2020-08-24-c.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2020-2020-08-24-d.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2020-2020-08-24-e.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2020-2020-08-24-f.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2020-2020-09-07-a.html">コーンポタージュサンダー</a></li>
+<li><a href="products/index-2020-2020-09-07-b.html">ビッグサンダー(六代目パッケージ)</a></li>
+<li><a href="products/index-2020-2019-09-07.html">ブラックサンダーミニバー カカオ72%</a></li>
+<li><a href="products/index-2020-2020-09-14.html">ブラックサンダーALMOND</a></li>
+<li><a href="products/index-2020-2020-09-21-a.html">ブラックサンダーミニバーアーモンドアンドヘーゼルナッツ</a></li>
+<li><a href="products/index-2020-2020-09-21-b.html">ブラックサンダーミニバーガトーショコラ</a></li>
+<li><a href="products/index-2020-2020-10-05.html">ブラックサンダープリティスタイルカスタードアップルパイ味</a></li>
+<li><a href="products/index-2020-2020-10-26-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2020-2020-10-26-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2020-2020-10-26-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2020-2020-10-26-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2020-2020-10-26-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2020-2020-10-26-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2020-2020-11-07.html">芋けんぴサンダー</a></li>
+<li><a href="products/index-2020-2020-12-28-a.html">ブラックサンダーミニバーバレンタインBOX</a></li>
+<li><a href="products/index-2020-2020-12-28-b.html">ブラックサンダーミニバーバレンタインBOX</a></li>
+<li><a href="products/index-2020-2020-12-28-c.html">ブラックサンダーミニバーバレンタインBOX</a></li>
+<li><a href="products/index-2020-2020-12-28-d.html">ブラックサンダーミニバーバレンタインBOX</a></li>
+<li><a href="products/index-2020-2020-12-28-e.html">ブラックサンダーミニバーバレンタインBOX</a></li>
+<li><a href="products/index-2020-2020-12-28-f.html">ブラックサンダーミニバーバレンタインBOX</a></li>
+<li><a href="products/index-2020-2020-b.html">ブラックサンダー(六代目パッケージ)</a></li>
+<li><a href="products/index-2021-2021-01-09-a.html">ブラックサンダー史上最も高級なビターチョコ</a></li>
+<li><a href="products/index-2021-2021-01-09-b.html">ブラックサンダー史上最も高級なミルクチョコ</a></li>
+<li><a href="products/index-2021-2021-01-18.html">ブラックサンダーひとくちサイズ濃密くるみのガトーショコラ</a></li>
+<li><a href="products/index-2021-2021-01-19.html">ブラックサンダーひとくちサイズピスタチオ</a></li>
+<li><a href="products/index-2021-2021-03-01.html">ブラックサンダーカカオ72パーセント</a></li>
+<li><a href="products/index-2021-2021-03-22-a.html">ブラックサンダーミニバー香る発酵バター</a></li>
+<li><a href="products/index-2021-2021-03-22-b.html">ブラックサンダーミニバーアーモンドアンドヘーゼルナッツ</a></li>
+<li><a href="products/index-2021-2021-04-05.html">ブラックサンダー優雅な余韻ジャンドゥーヤ</a></li>
+<li><a href="products/index-2021-2021-04-12.html">ブラックサンダーひとくちサイズストロング</a></li>
+<li><a href="products/index-2021-2021-06-21.html">ブラックサンデー </a></li>
+<li><a href="products/index-2021-2021-07-12.html">ブラックサンダーひとくちサイズ糖質50パーセントOFF</a></li>
+<li><a href="products/index-2021-2021-08-23-a.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2021-2021-08-23-b.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2021-2021-08-23-c.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2021-2021-08-23-d.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2021-2021-08-23-e.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2021-2021-08-23-f.html">ブラックサンダーミニバーハロウィン</a></li>
+<li><a href="products/index-2021-2021-08-30.html">4種のナッツのサンダー</a></li>
+<li><a href="products/index-2021-2021-09.html">ブラックサンダー(コーヒーと一緒に)</a></li>
+<li><a href="products/index-2021-2021-09-20-a.html">ブラックサンダーミニバーカカオ72パーセント</a></li>
+<li><a href="products/index-2021-2021-09-20-b.html">ブラックサンダーミニバーガトーショコラ</a></li>
+<li><a href="products/index-2021-2021-10-11.html">ブラックサンダーひとくちサイズピスタチオ</a></li>
+<li><a href="products/index-2021-2021-10-25-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2021-2021-10-25-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2021-2021-10-25-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2021-2021-10-25-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2021-2021-10-25-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2021-2021-10-25-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2021-2021-11-15.html">いちごのサンダー</a></li>
+<li><a href="products/index-2021-2021-11-30-a.html">ブラックサンダーひとくちサイズ ラムレーズン発酵バター仕立て</a></li>
+<li><a href="products/index-2021-2021-11-30-b.html">ブラックサンダーひとくちサイズ ラムレーズン発酵バター仕立て</a></li>
+<li><a href="products/index-2022-2022-01-09-a.html">ブラックサンダー史上最も高級なビターチョコ</a></li>
+<li><a href="products/index-2022-2022-01-09-b.html">ブラックサンダー史上最も高級なミルクチョコ</a></li>
+<li><a href="products/index-2022-2022-02-21.html">抹茶のサンダー</a></li>
+<li><a href="products/index-2022-2022-03-21-a.html">ブラックサンダーミニバー香る発酵バター</a></li>
+<li><a href="products/index-2022-2022-03-21-b.html">ブラックサンダー優雅なヘーゼルナッツ</a></li>
+<li><a href="products/index-2022-2022-04-11.html">ブラックサンダーひとくちサイズ ナッツ仕立ての発酵バター</a></li>
+<li><a href="products/index-2022-2022-04-22.html">沖縄ブラックサンダー</a></li>
+<li><a href="products/index-2022-2022-06-20.html">バナナのサンダー</a></li>
+<li><a href="products/index-2022-2022-07-11.html">ブラックサンダーひとくちサイズ塩とミルク</a></li>
+<li><a href="products/index-2022-2022-09-01-a.html">ブラックサンダーミニバー</a></li>
+<li><a href="products/index-2022-2022-09-01-b.html">ブラックサンダーミニバー アーモンド＆ヘーゼルナッツ</a></li>
+<li><a href="products/index-2022-2022-09-01-c.html">ブラックサンダーミニバー カカオ72%</a></li>
+<li><a href="products/index-2022-2022-10-24-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2022-2022-10-24-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2022-2022-10-24-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2022-2022-10-24-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2022-2022-10-24-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2022-2022-10-24-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2022-2022-12-13.html">ブラックサンダーしっとり深みガトーショコラ</a></li>
+<li><a href="products/index-2023-2023.html">ブラックサンダー(七代目パッケージ)</a></li>
+<li><a href="products/index-2023-2023-02-03-a.html">アサヒクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-b.html">ワタリクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-c.html">クラッブカマサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-d.html">フタホシイシクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-e.html">モンツキクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-f.html">エゾイバラクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-g.html">スノークラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-h.html">モクズクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-i.html">マツバクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-j.html">ヒラツメクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-k.html">ジャノメガザミクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-l.html">ハナサキクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-m.html">上海クラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-n.html">チチュウカイミドリクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-o.html">タラバクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-p.html">タスマニアオオクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-q.html">ソフトシェルクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-r.html">タカアシクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-s.html">アフリカオオエンコウクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-t.html">オオクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-u.html">紅ズワイクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-v.html">オオズワイクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-w.html">ズワイクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-x.html">ショウジンクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-y.html">サワクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-z.html">トゲクリクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-aa.html">クリクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-bb.html">毛クラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-cc.html">イワクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-dd.html">アメリカイチョウクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-ee.html">ヨーロッパイチョウクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-ff.html">イバラクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-gg.html">イガグリクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-hh.html">イチョウクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-ii.html">イソクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-jj.html">セコクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-kk.html">アカイシクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-ll.html">シマイシクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-mm.html">イシクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-02-03-nn.html">アブラクラッブサンダー</a></li>
+<li><a href="products/index-2023-2023-10-23-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2023-2023-10-23-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2023-2023-10-23-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2023-2023-10-23-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2023-2023-10-23-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2023-2023-10-23-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-07-17.html">アリガトサンダー</a></li>
+<li><a href="products/index-2024-2024-09-02-a.html">ブラック30周年ダー</a></li>
+<li><a href="products/index-2024-2024-09-02-b.html">ブラック30周年ダー</a></li>
+<li><a href="products/index-2024-2024-10-21-a.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-10-21-b.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-10-21-c.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-10-21-d.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-10-21-e.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-10-21-f.html">ブラックサンダーミニバークリスマス</a></li>
+<li><a href="products/index-2024-2024-11-26-a.html">ブラックサンダーひとくちサイズ甘MAX(エクストリーム)</a></li>
+<li><a href="products/index-2024-2024-11-26-b.html">ブラックサンダーひとくちサイズ甘MAX(エクセレント)</a></li>
+<li><a href="products/index-2024-2024-12-31-a.html">ブラックサンダーひとくちサイズ神やわ</a></li>
+<li><a href="products/index-2024-2024-12-31-b.html">ブラックサンダーひとくちサイズ鬼力タ</a></li>
+<li><a href="products/index-2025-2025-01-14.html">ベリーのサンダーひとくちサイズWベリー</a></li>
+<li><a href="products/index-2025-2025-03-18.html">ブラックサンダー抹茶の真髄</a></li>
+<li><a href="products/index-2025-2025-04-22.html">ブラックサンダーエクセレント</a></li>
+<li><a href="products/index-2025-2025-05.html">プリンのサンダー</a></li>
+<li><a href="products/index-2025-2025-05-02.html">白桃タルトのサンダー</a></li>
+<li><a href="products/index-2025-2025-05-13.html">濃苺サンダー</a></li>
+<li><a href="products/index-2025-2025-05-20.html">マンゴーのサンダー</a></li>
+<li><a href="products/index-2025-2025-07-08.html">ブラックサンダーひとくちサイズココナッツ</a></li>
+<li><a href="products/index-2025-2025-08-26.html">モンブランのサンダー</a></li>
+<li><a href="products/index-2025-2025-09-15.html">ブラックサンダー至福のバター</a></li>
+<li><a href="products/index-2025-2025-11-11.html">ミルクないちごのサンダー</a></li>
+<li><a href="products/index-2026-2026-09-14-a.html">ブラックサンダーミニバーCacao72%</a></li>
+<li><a href="products/index-2026-2026-09-14-b.html">ミルクのサンダーミニバー</a></li>
+<li><a href="products/thun2-1994-2-unknown-a.html">チョコナッツスリー</a></li>
+<li><a href="products/thun2-1994-2-unknown-b.html">とんこつチョコ</a></li>
+<li><a href="products/thun2-1994-2-unknown-c.html">やわらかクランチ</a></li>
+<li><a href="products/thun2-1997-2-1997-10-25.html">チョコケーキ</a></li>
+<li><a href="products/thun2-2006-2-2006-05-15.html">ショコラコスタ</a></li>
+<li><a href="products/thun2-2007-2-2007-10-a.html">Ba7</a></li>
+<li><a href="products/thun2-2007-2-2007-10-b.html">チョコムーア</a></li>
+<li><a href="products/thun2-2008-2-2008-01.html">アーモンドラテ</a></li>
+<li><a href="products/thun2-2008-2-2008-09.html">チャイチョコバー</a></li>
+<li><a href="products/thun2-2011-2-2011-04-12.html">抹茶チョコケーキ</a></li>
+<li><a href="products/thun2-2011-2-2011-08-29.html">ナチョ・チーズ</a></li>
+<li><a href="products/thun2-2011-2-2011-10-03.html">チョコケーキカフェラテ</a></li>
+<li><a href="products/thun2-2012-2-2012-a.html">ブラックなんダー</a></li>
+<li><a href="products/thun2-2012-2-2012-b.html">ブラウニーブラウニー</a></li>
+<li><a href="products/thun2-2012-2-2012-c.html">ふんわりバウムクーヘン</a></li>
+<li><a href="products/thun2-2013-2-2013-09-02.html">チョコケーキ</a></li>
+<li><a href="products/thun2-2018-2-2018-01-29-a.html">こっそりデザートブラウニー</a></li>
+<li><a href="products/thun2-2018-2-2018-01-29-b.html">こっそりデザートチーズケーキ</a></li>
+<li><a href="products/thun2-2021-2-2021-06-15-a.html">爽快なカカオ</a></li>
+<li><a href="products/thun2-2021-2-2021-06-15-b.html">衝撃のレモン</a></li>
+<li><a href="products/thun2-2021-2-2021-09-10.html">ホワイトサンダー</a></li>
+<li><a href="products/thun2-2022-2-2022-01-11-a.html">PICKSふわっ</a></li>
+<li><a href="products/thun2-2022-2-2022-01-11-b.html">PICKSとろっ</a></li>
+<li><a href="products/thun2-2022-2-2022-01-11-c.html">PICKSさくっ</a></li>
+<li><a href="products/thun2-2022-2-2022-01-18-a.html">Maico アーモンド&amp;ベリー</a></li>
+<li><a href="products/thun2-2022-2-2022-01-18-b.html">Maicoくるみ&amp;オレンジ</a></li>
+<li><a href="products/thun2-2023-2-2023-01-17.html">PICKSカリッ</a></li>
+<li><a href="products/thun2-2025-2-2025-06-17.html">ミルクマニア</a></li>
+<li><a href="products/thun2-2026-2-2026-03-31.html">ミルクマニアいちご</a></li>
+<li><a href="products/thun2-2026-2-2026-09-29.html">今日のカカオ72%</a></li>
+<li><a href="products/thun3-2017-3-2017-11-01.html">商品詳細</a></li>
+<li><a href="products/thun3-2017-3-2017-02-08.html">ブラックサンダーパフェ</a></li>
+<li><a href="products/thun3-2017-3-2017-08-16.html">マックフルーリー ブラックサンダー</a></li>
+<li><a href="products/thun3-2018-3-2018-01-05.html">ブラックサンダーミルキーフランス</a></li>
+<li><a href="products/thun3-2018-3-2018-08-01.html">マックフルーリー ブラックサンダー</a></li>
+<li><a href="products/thun3-2018-3-2018-02-a.html">ブラックサンダーダミエ</a></li>
+<li><a href="products/thun3-2018-3-2018-02-b.html">ブラックサンダーコッペ</a></li>
+<li><a href="products/thun3-2018-3-2018-08-29.html">マックフルーリー 白いブラックサンダー</a></li>
+<li><a href="products/thun3-2018-3-2018-02-11.html">ブラックサンダーピレーネ</a></li>
+<li><a href="products/thun3-2019-3-2019-02-01-a.html">ブラックサンダーハニトー</a></li>
+<li><a href="products/thun3-2019-3-2019-02-01-b.html">ブラックサンダーカフェモカ</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-a.html">ブラックサンダーハニトー2020～白黒つける時がきた～</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-b.html">ブラックサンダーＤＥカレーライス</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-c.html">甘じょっぱいが癖になる！フライドポテト onブラックサンダー</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-d.html">パフェの王道 ブラックサンダーのブラックサンデー</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-e.html">アイスチョコミントドリンク</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-f.html">ホットマシュマロミルクティー</a></li>
+<li><a href="products/thun3-2020-3-2020-02-01-g.html">コラボハニトープリティスタイル</a></li>
+<li><a href="products/thun3-2020-3-2020-06-10.html">マックフルーリー ブラックサンダー</a></li>
+<li><a href="products/thun3-2021-3-2021-02-10-a.html">ブラックサンダープチハニトー2021</a></li>
+<li><a href="products/thun3-2021-3-2021-02-10-b.html">ブラックサンダー×タピオカミルクティー</a></li>
+<li><a href="products/thun3-2021-3-2021-02-10-c.html">ブラックサンダー✕タピオカいちごミルク</a></li>
+<li><a href="products/thun3-2021-3-2021-11-04.html">マックフルーリー ブラックサンダー</a></li>
+<li><a href="products/thun3-2022-3-2022-01-14.html">揚げたてポテトチップスチョコアンドチョコブラックサンダー</a></li>
+<li><a href="products/thun3-2022-3-2022-02-01.html">ブラックサンダーアップルパイ</a></li>
+<li><a href="products/thun3-2022-3-2022-02-08-a.html">ブラックサンダーいちごチョコハニトー</a></li>
+<li><a href="products/thun3-2022-3-2022-02-08-b.html">ブラックサンターバナナチョコハニトー</a></li>
+<li><a href="products/thun3-2022-3-2022-02-08-c.html">追いソースブラックサンダーショコラ</a></li>
+<li><a href="products/thun3-2023-3-2022-02-01-a.html">ブラックサンダーココア</a></li>
+<li><a href="products/thun3-2023-3-2022-02-01-b.html">フラックサンダーチョコミント</a></li>
+</ul>
+</nav>
+<!-- STATIC_PRODUCT_LINKS_END -->
 <script>
-
 /* ========================================
-
-   DOM
-
+DOM
 ======================================== */
-
-
-
 const $ = id => document.getElementById(id);
-
-
-
 const els = {
-
-  title: $("mainTitle"),
-
-  count: $("totalCount"),
-
-  search: $("searchBox"),
-
-  filters: $("filterArea"),
-
-  tables: $("tableArea")
-
+title: $("mainTitle"),
+count: $("totalCount"),
+search: $("searchBox"),
+filters: $("filterArea"),
+tables: $("tableArea")
 };
-
-
-
 /* ========================================
-
-   年
-
+年
 ======================================== */
-
-
-
 const years = [
-
-  1994, 1997, 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-
-  2010, 2011, 2012, 2013, 2014, 2015, 2016,
-
-  2017, 2018, 2019, 2020, 2021, 2022, 2023,
-
-  2024, 2025, 2026
-
+1994, 1997, 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+2010, 2011, 2012, 2013, 2014, 2015, 2016,
+2017, 2018, 2019, 2020, 2021, 2022, 2023,
+2024, 2025, 2026
 ];
-
-
-
 const years2 = [
-
-  1994,
-
-  1997,
-
-  ...years.slice(2)
-
+1994,
+1997,
+...years.slice(2)
 ];
-
-
-
 /* ========================================
-
-   JSON設定
-
+JSON設定
 ======================================== */
-
-
-
 const types = {
-
-  index:{
-
-    title:"ブラックサンダー",
-
-    years:years,
-
-    path:year => `json/${year}.json`
-
-  },
-
-
-
-  thun2:{
-
-    title:"ユーラク他商品",
-
-    years:years2,
-
-    path:year => `json2/${year}-2.json`
-
-  },
-
-
-
-  thun3:{
-
-    title:"コラボメニュー",
-
-    years:years2,
-
-    path:year => `json3/${year}-3.json`
-
-  },
-
-
-
-  thun4:{
-
-    title: "パチモン",
-
-    years:years2,
-
-    path:year => `json4/${year}-4.json`
-
-  }
-
+index:{
+title:"ブラックサンダー",
+years:years,
+path:year => `json/${year}.json`
+},
+thun2:{
+title:"ユーラク他商品",
+years:years2,
+path:year => `json2/${year}-2.json`
+},
+thun3:{
+title:"コラボメニュー",
+years:years2,
+path:year => `json3/${year}-3.json`
+},
+thun4:{
+title: "パチモン",
+years:years2,
+path:year => `json4/${year}-4.json`
+}
 };
-
-
-
-
-
-
-
 /* ========================================
-
-   状態
-
+状態
 ======================================== */
-
-
-
 let currentType = "index";
-
 let loadToken = 0;
-
-
-
 const state = {
-
-  size:"",
-
-  flavor:"",
-
-  event:"",
-
-  collab:""
-
+size:"",
+flavor:"",
+event:"",
+collab:""
 };
-
-
-
 /*
-
-  meta は商品グループ単位で保持する。
-
-  1商品 = 4行なので、行単位では数えない。
-
+meta は商品グループ単位で保持する。
+1商品 = 4行なので、行単位では数えない。
 */
-
 const meta = new WeakMap();
-
-
-
 function resetState(){
-
-  Object.keys(state).forEach(
-
-    key => state[key] = ""
-
-  );
-
-}
-
-
-
-/* ========================================
-
-   値を必ず配列にする
-
-======================================== */
-
-
-
-function array(value){
-
-  if(
-
-    value == null ||
-
-    value === ""
-
-  ){
-
-    return [];
-
-  }
-
-
-
-  return Array.isArray(value)
-
-    ? value
-
-    : [value];
-
-}
-
-
-
-/* ========================================
-
-   年見出し
-
-======================================== */
-
-
-
-function productGroups(table){
-
-  return [
-
-    ...table.tBodies
-
-  ].filter(
-
-    tbody =>
-
-      tbody.classList.contains(
-
-        "product-group"
-
-      )
-
-  );
-
-}
-
-
-
-function heading(
-
-  table,
-
-  visible = null
-
-){
-
-  const h2 =
-
-    table.previousElementSibling;
-
-
-
-  const count =
-
-    visible ?? productGroups(table).length;
-
-
-
-  h2.textContent =
-
-    `${
-
-      table.classList.contains("hidden")
-
-        ? "▶"
-
-        : "▼"
-
-    } ${h2.dataset.year}（${count}件）`;
-
-}
-
-
-
-/* ========================================
-
-   商品数
-
-======================================== */
-
-
-
-function updateCount(){
-
-  let total = 0;
-
-
-
-  document
-
-    .querySelectorAll("#tableArea table")
-
-    .forEach(table => {
-
-      total += productGroups(table).length;
-
-      heading(table);
-
-    });
-
-
-
-  els.count.textContent =
-
-    `収録商品数：${total}件`;
-
-}
-
-
-
-/* ========================================
-
-   詳細セル作成
-
-======================================== */
-
-
-
-function detailCell(
-
-  label,
-
-  value
-
-){
-
-  const td =
-
-    document.createElement("td");
-
-
-
-  td.className =
-
-    "product-detail-cell";
-
-
-
-  const strong =
-
-    document.createElement("strong");
-
-
-
-  strong.className =
-
-    "product-detail-label";
-
-
-
-  strong.textContent =
-
-    `${label}：`;
-
-
-
-  td.append(
-
-    strong,
-
-    document.createTextNode(
-
-      value ?? ""
-
-    )
-
-  );
-
-
-
-  return td;
-
-}
-
-
-
-/* ========================================
-
-   商品作成
-
-
-
-   1商品 = tbody 1個
-
-   その中に4行を作る
-
-
-
-   1行目：商品名
-
-   2行目：画像 + 発売日
-
-   3行目：画像 + 二つ名
-
-   4行目：画像 + サイズ / コラボ先
-
-======================================== */
-
-
-
-function rowFor(
-
-  item,
-
-  type,
-
-  year
-
-){
-
-  const group =
-
-    document.createElement("tbody");
-
-
-
-  group.className =
-
-    "product-group";
-
-
-
-  /* 商品ID */
-
-  const productId =
-
-    String(item.id ?? "");
-
-
-
-  /* 商品ページURL */
-
-const url =
-    `products/${type}-${year}-${encodeURIComponent(productId)}.html`;
-
-
-
-  /* フィルター情報 */
-
-  const info = {
-
-    name:
-
-      String(
-
-        item.name ?? ""
-
-      ).toLowerCase(),
-
-
-
-    filter:
-
-      type === "thun3"
-
-        ? item.collab ?? ""
-
-        : item.size ?? "",
-
-
-
-    flavors:[],
-
-    events:[]
-
-  };
-
-
-
-  if(type === "index"){
-
-    info.flavors =
-
-      array(item.flavors);
-
-
-
-    info.events =
-
-      array(item.series);
-
-  }
-
-
-
-  meta.set(group, info);
-
-
-
-  /* ======================================
-
-     1行目：商品名
-
-  ====================================== */
-
-
-
-  const nameRow =
-
-    document.createElement("tr");
-
-
-
-  nameRow.className =
-
-    "product-name-row";
-
-
-
-  const nameCell =
-
-    document.createElement("td");
-
-
-
-  nameCell.colSpan = 2;
-
-
-
-  const nameLink =
-
-    document.createElement("a");
-
-
-
-  nameLink.href = url;
-
-  nameLink.textContent =
-
-    item.name ?? "";
-
-
-
-  nameCell.append(nameLink);
-
-  nameRow.append(nameCell);
-
-
-
-  /* ======================================
-
-     画像セル
-
-     発売日・二つ名・サイズの3行を結合
-
-  ====================================== */
-
-
-
-  const imageCell =
-
-    document.createElement("td");
-
-
-
-  imageCell.rowSpan = 3;
-
-  imageCell.className =
-
-    "product-image-cell";
-
-
-
-  const imageLink =
-
-    document.createElement("a");
-
-
-
-  imageLink.href = url;
-
-
-
-  const images =
-
-    array(
-
-      item.images ?? item.image
-
-    ).filter(
-
-      image =>
-
-        typeof image === "string" &&
-
-        image.trim() !== ""
-
-    );
-
-
-
-  if(images.length){
-
-    const img =
-
-      document.createElement("img");
-
-
-
-    img.src = images[0];
-
-    img.alt = item.name ?? "";
-
-    img.loading = "lazy";
-
-
-
-    imageLink.append(img);
-
-  }
-
-
-
-  imageCell.append(imageLink);
-
-
-
-  /* ======================================
-
-     2行目：画像 + 発売日
-
-  ====================================== */
-
-
-
-  const releaseRow =
-
-    document.createElement("tr");
-
-
-
-  releaseRow.append(
-
-    imageCell,
-
-    detailCell(
-
-      "発売日",
-
-      item.releaseDate
-
-    )
-
-  );
-
-
-
-  /* ======================================
-
-     3行目：二つ名
-
-  ====================================== */
-
-
-
-  const nicknameRow =
-
-    document.createElement("tr");
-
-
-
-  nicknameRow.append(
-
-    detailCell(
-
-      "二つ名",
-
-      item.nickname
-
-    )
-
-  );
-
-
-
-  /* ======================================
-
-     4行目：サイズ / コラボ先
-
-  ====================================== */
-
-
-
-  const sizeRow =
-
-    document.createElement("tr");
-
-
-
-  sizeRow.append(
-
-    detailCell(
-
-      type === "thun3"
-
-        ? "コラボ先"
-
-        : "サイズ",
-
-      type === "thun3"
-
-        ? item.collab
-
-        : item.size
-
-    )
-
-  );
-
-
-
-  group.append(
-
-    nameRow,
-
-    releaseRow,
-
-    nicknameRow,
-
-    sizeRow
-
-  );
-
-
-
-  return group;
-
-}
-
-
-
-/* ========================================
-
-   年ごとのテーブル
-
-======================================== */
-
-
-
-function section(
-
-  year,
-
-  type
-
-){
-
-  const h2 =
-
-    document.createElement("h2");
-
-
-
-  h2.dataset.year = year;
-
-  h2.textContent =
-
-    `▶ ${year}（0件）`;
-
-
-
-  const table =
-
-    document.createElement("table");
-
-
-
-  table.className = "hidden";
-
-
-
-  /*
-
-    tbodyを商品単位で追加するため、
-
-    最初は空のtableだけ作る。
-
-  */
-
-
-
-  h2.onclick = () => {
-
-    table.classList.toggle("hidden");
-
-    heading(table);
-
-  };
-
-
-
-  els.tables.append(
-
-    h2,
-
-    table
-
-  );
-
-
-
-  return table;
-
-}
-
-
-
-/* ========================================
-
-   JSON読み込み
-
-======================================== */
-
-
-
-async function loadYear(
-
-  path,
-
-  table,
-
-  type,
-
-  year,
-
-  token
-
-){
-
-  try{
-
-    const response =
-
-      await fetch(path);
-
-
-
-    if(!response.ok){
-
-      throw new Error(
-
-        `${path} を読み込めません`
-
-      );
-
-    }
-
-
-
-    const items =
-
-      await response.json();
-
-
-
-    if(
-
-      token !== loadToken ||
-
-      type !== currentType
-
-    ){
-
-      return;
-
-    }
-
-
-
-    const fragment =
-
-      document.createDocumentFragment();
-
-
-
-    items.forEach(item => {
-
-      /* IDがない商品を検出 */
-
-      if(
-
-        item.id == null ||
-
-        item.id === ""
-
-      ){
-
-        console.warn(
-
-          "商品IDがありません",
-
-          item
-
-        );
-
-        return;
-
-      }
-
-
-
-      fragment.append(
-
-        rowFor(
-
-          item,
-
-          type,
-
-          year
-
-        )
-
-      );
-
-    });
-
-
-
-    table.append(fragment);
-
-  }
-
-  catch(error){
-
-    console.error(
-
-      `${path} の読み込みに失敗しました`,
-
-      error
-
-    );
-
-  }
-
-}
-
-
-
-/* ========================================
-
-   種類変更
-
-======================================== */
-
-
-
-async function changeType(type){
-
-  currentType = type;
-
-
-
-  const token = ++loadToken;
-
-  const config = types[type];
-
-
-
-  els.title.textContent = config.title;
-
-  document.title = config.title;
-
-  els.count.textContent = "収録商品数：0件";
-
-
-
-  resetState();
-
-  els.search.value = "";
-
-  els.filters.replaceChildren();
-
-  els.tables.replaceChildren();
-
-
-
-  const jobs =
-
-    config.years.map(
-
-      year =>
-
-        loadYear(
-
-          config.path(year),
-
-          section(year, type),
-
-          type,
-
-          year,
-
-          token
-
-        )
-
-    );
-
-
-
-  await Promise.all(jobs);
-
-
-
-  if(token !== loadToken){
-
-    return;
-
-  }
-
-
-
-  updateCount();
-
-  createFilters();
-
-}
-
-
-
-/* ========================================
-
-   フィルター値取得
-
-======================================== */
-
-
-
-function values(key){
-
-  const out = new Set();
-
-
-
-  document
-
-    .querySelectorAll(
-
-      "#tableArea .product-group"
-
-    )
-
-    .forEach(group => {
-
-      const data = meta.get(group);
-
-
-
-      if(!data){
-
-        return;
-
-      }
-
-
-
-      const value = data[key];
-
-
-
-      (
-
-        Array.isArray(value)
-
-          ? value
-
-          : [value]
-
-      ).forEach(value => {
-
-        if(value){
-
-          out.add(value);
-
-        }
-
-      });
-
-    });
-
-
-
-  return [...out];
-
-}
-
-
-
-/* ========================================
-
-   フィルターボタン
-
-======================================== */
-
-
-
-function group(
-
-  title,
-
-  key,
-
-  list
-
-){
-
-  const div =
-
-    document.createElement("div");
-
-
-
-  div.className = "filter-group";
-
-
-
-  const strong =
-
-    document.createElement("strong");
-
-
-
-  strong.textContent =
-
-    `${title}：`;
-
-
-
-  div.append(strong);
-
-
-
-  [
-
-    ["すべて",""],
-
-    ...list.map(
-
-      value => [value,value]
-
-    )
-
-  ].forEach(([text,value]) => {
-
-    const button =
-
-      document.createElement("button");
-
-
-
-    button.textContent = text;
-
-
-
-    button.classList.toggle(
-
-      "selected",
-
-      state[key] === value
-
-    );
-
-
-
-    button.onclick = () => {
-
-      state[key] = value;
-
-
-
-      [
-
-        ...div.querySelectorAll("button")
-
-      ].forEach(item =>
-
-        item.classList.toggle(
-
-          "selected",
-
-          item === button
-
-        )
-
-      );
-
-
-
-      applyFilters();
-
-    };
-
-
-
-    div.append(button);
-
-  });
-
-
-
-  els.filters.append(div);
-
-}
-
-
-
-/* ========================================
-
-   フィルター作成
-
-======================================== */
-
-
-
-function createFilters(){
-
-  els.filters.replaceChildren();
-
-
-
-  if(currentType === "index"){
-
-    group(
-
-      "サイズ",
-
-      "size",
-
-      values("filter")
-
-    );
-
-
-
-    group(
-
-      "味",
-
-      "flavor",
-
-      values("flavors")
-
-    );
-
-
-
-    group(
-
-      "シリーズ区分",
-
-      "event",
-
-      values("events")
-
-    );
-
-  }
-
-  else if(currentType === "thun3"){
-
-    group(
-
-      "コラボ先",
-
-      "collab",
-
-      values("filter")
-
-    );
-
-  }
-
-}
-
-
-
-/* ========================================
-
-   フィルター中か
-
-======================================== */
-
-
-
-function filtering(){
-
-  return !!(
-
-    els.search.value.trim() ||
-
-    Object
-
-      .values(state)
-
-      .some(Boolean)
-
-  );
-
-}
-
-
-
-/* ========================================
-
-   フィルター適用
-
-======================================== */
-
-
-
-function applyFilters(){
-
-  const keyword =
-
-    els.search.value
-
-      .trim()
-
-      .toLowerCase();
-
-
-
-  const active = filtering();
-
-
-
-  document
-
-    .querySelectorAll("#tableArea table")
-
-    .forEach(table => {
-
-      let count = 0;
-
-
-
-      productGroups(table)
-
-        .forEach(groupElement => {
-
-          const data =
-
-            meta.get(groupElement);
-
-
-
-          if(!data){
-
-            return;
-
-          }
-
-
-
-          let show =
-
-            !keyword ||
-
-            data.name.includes(keyword);
-
-
-
-          if(currentType === "index"){
-
-            show =
-
-              show &&
-
-              (
-
-                !state.size ||
-
-                data.filter === state.size
-
-              ) &&
-
-              (
-
-                !state.flavor ||
-
-                data.flavors.includes(
-
-                  state.flavor
-
-                )
-
-              ) &&
-
-              (
-
-                !state.event ||
-
-                data.events.includes(
-
-                  state.event
-
-                )
-
-              );
-
-          }
-
-          else if(currentType === "thun3"){
-
-            show =
-
-              show &&
-
-              (
-
-                !state.collab ||
-
-                data.filter === state.collab
-
-              );
-
-          }
-
-
-
-          groupElement.hidden = !show;
-
-
-
-          if(show){
-
-            count++;
-
-          }
-
-        });
-
-
-
-      const h2 =
-
-        table.previousElementSibling;
-
-
-
-      if(active){
-
-        h2.hidden = !count;
-
-
-
-        table.classList.toggle(
-
-          "hidden",
-
-          !count
-
-        );
-
-
-
-        if(count){
-
-          h2.textContent =
-
-            `▼ ${h2.dataset.year}（${count}件）`;
-
-        }
-
-      }
-
-      else{
-
-        h2.hidden = false;
-
-        table.classList.add("hidden");
-
-        heading(table);
-
-      }
-
-    });
-
-}
-
-
-
-/* ========================================
-
-   全表示
-
-======================================== */
-
-
-
-function showAll(){
-
-  resetState();
-
-  els.search.value = "";
-
-
-
-  document
-
-    .querySelectorAll(
-
-      "#tableArea .product-group"
-
-    )
-
-    .forEach(groupElement =>
-
-      groupElement.hidden = false
-
-    );
-
-
-
-  document
-
-    .querySelectorAll("#tableArea h2")
-
-    .forEach(h2 =>
-
-      h2.hidden = false
-
-    );
-
-
-
-  document
-
-    .querySelectorAll("#tableArea table")
-
-    .forEach(table => {
-
-      table.classList.remove("hidden");
-
-      heading(table);
-
-    });
-
-
-
-  createFilters();
-
-}
-
-
-
-/* ========================================
-
-   イベント
-
-======================================== */
-
-
-
-document
-
-  .querySelector(".menu")
-
-  .onclick = event => {
-
-    const type =
-
-      event.target.dataset.type;
-
-
-
-    if(type){
-
-      changeType(type);
-
-    }
-
-  };
-
-
-
-els.search.addEventListener(
-
-  "input",
-
-  applyFilters
-
+Object.keys(state).forEach(
+key => state[key] = ""
 );
-
-
-
-$("showAllBtn")
-
-  .addEventListener(
-
-    "click",
-
-    showAll
-
-  );
-
-
-
+}
 /* ========================================
-
-   初期表示
-
+値を必ず配列にする
 ======================================== */
-
-
-
+function array(value){
+if(
+value == null ||
+value === ""
+){
+return [];
+}
+return Array.isArray(value)
+? value
+: [value];
+}
+/* ========================================
+年見出し
+======================================== */
+function productGroups(table){
+return [
+...table.tBodies
+].filter(
+tbody =>
+tbody.classList.contains(
+"product-group"
+)
+);
+}
+function heading(
+table,
+visible = null
+){
+const h2 =
+table.previousElementSibling;
+const count =
+visible ?? productGroups(table).length;
+h2.textContent =
+`${
+table.classList.contains("hidden")
+? "▶"
+: "▼"
+} ${h2.dataset.year}（${count}件）`;
+}
+/* ========================================
+商品数
+======================================== */
+function updateCount(){
+let total = 0;
+document
+.querySelectorAll("#tableArea table")
+.forEach(table => {
+total += productGroups(table).length;
+heading(table);
+});
+els.count.textContent =
+`収録商品数：${total}件`;
+}
+/* ========================================
+詳細セル作成
+======================================== */
+function detailCell(
+label,
+value
+){
+const td =
+document.createElement("td");
+td.className =
+"product-detail-cell";
+const strong =
+document.createElement("strong");
+strong.className =
+"product-detail-label";
+strong.textContent =
+`${label}：`;
+td.append(
+strong,
+document.createTextNode(
+value ?? ""
+)
+);
+return td;
+}
+/* ========================================
+商品作成
+1商品 = tbody 1個
+その中に4行を作る
+1行目：商品名
+2行目：画像 + 発売日
+3行目：画像 + 二つ名
+4行目：画像 + サイズ / コラボ先
+======================================== */
+function rowFor(
+item,
+type,
+year
+){
+const group =
+document.createElement("tbody");
+group.className =
+"product-group";
+/* 商品ID */
+const productId =
+String(item.id ?? "");
+/* 商品ページURL */
+const url =
+`products/${type}-${year}-${encodeURIComponent(productId)}.html`;
+/* フィルター情報 */
+const info = {
+name:
+String(
+item.name ?? ""
+).toLowerCase(),
+filter:
+type === "thun3"
+? item.collab ?? ""
+: item.size ?? "",
+flavors:[],
+events:[]
+};
+if(type === "index"){
+info.flavors =
+array(item.flavors);
+info.events =
+array(item.series);
+}
+meta.set(group, info);
+/* ======================================
+1行目：商品名
+====================================== */
+const nameRow =
+document.createElement("tr");
+nameRow.className =
+"product-name-row";
+const nameCell =
+document.createElement("td");
+nameCell.colSpan = 2;
+const nameLink =
+document.createElement("a");
+nameLink.href = url;
+nameLink.textContent =
+item.name ?? "";
+nameCell.append(nameLink);
+nameRow.append(nameCell);
+/* ======================================
+画像セル
+発売日・二つ名・サイズの3行を結合
+====================================== */
+const imageCell =
+document.createElement("td");
+imageCell.rowSpan = 3;
+imageCell.className =
+"product-image-cell";
+const imageLink =
+document.createElement("a");
+imageLink.href = url;
+const images =
+array(
+item.images ?? item.image
+).filter(
+image =>
+typeof image === "string" &&
+image.trim() !== ""
+);
+if(images.length){
+const img =
+document.createElement("img");
+img.src = images[0];
+img.alt = item.name ?? "";
+img.loading = "lazy";
+imageLink.append(img);
+}
+imageCell.append(imageLink);
+/* ======================================
+2行目：画像 + 発売日
+====================================== */
+const releaseRow =
+document.createElement("tr");
+releaseRow.append(
+imageCell,
+detailCell(
+"発売日",
+item.releaseDate
+)
+);
+/* ======================================
+3行目：二つ名
+====================================== */
+const nicknameRow =
+document.createElement("tr");
+nicknameRow.append(
+detailCell(
+"二つ名",
+item.nickname
+)
+);
+/* ======================================
+4行目：サイズ / コラボ先
+====================================== */
+const sizeRow =
+document.createElement("tr");
+sizeRow.append(
+detailCell(
+type === "thun3"
+? "コラボ先"
+: "サイズ",
+type === "thun3"
+? item.collab
+: item.size
+)
+);
+group.append(
+nameRow,
+releaseRow,
+nicknameRow,
+sizeRow
+);
+return group;
+}
+/* ========================================
+年ごとのテーブル
+======================================== */
+function section(
+year,
+type
+){
+const h2 =
+document.createElement("h2");
+h2.dataset.year = year;
+h2.textContent =
+`▶ ${year}（0件）`;
+const table =
+document.createElement("table");
+table.className = "hidden";
+/*
+tbodyを商品単位で追加するため、
+最初は空のtableだけ作る。
+*/
+h2.onclick = () => {
+table.classList.toggle("hidden");
+heading(table);
+};
+els.tables.append(
+h2,
+table
+);
+return table;
+}
+/* ========================================
+JSON読み込み
+======================================== */
+async function loadYear(
+path,
+table,
+type,
+year,
+token
+){
+try{
+const response =
+await fetch(path);
+if(!response.ok){
+throw new Error(
+`${path} を読み込めません`
+);
+}
+const items =
+await response.json();
+if(
+token !== loadToken ||
+type !== currentType
+){
+return;
+}
+const fragment =
+document.createDocumentFragment();
+items.forEach(item => {
+/* IDがない商品を検出 */
+if(
+item.id == null ||
+item.id === ""
+){
+console.warn(
+"商品IDがありません",
+item
+);
+return;
+}
+fragment.append(
+rowFor(
+item,
+type,
+year
+)
+);
+});
+table.append(fragment);
+}
+catch(error){
+console.error(
+`${path} の読み込みに失敗しました`,
+error
+);
+}
+}
+/* ========================================
+種類変更
+======================================== */
+async function changeType(type){
+currentType = type;
+const token = ++loadToken;
+const config = types[type];
+els.title.textContent = config.title;
+document.title = config.title;
+els.count.textContent = "収録商品数：0件";
+resetState();
+els.search.value = "";
+els.filters.replaceChildren();
+els.tables.replaceChildren();
+const jobs =
+config.years.map(
+year =>
+loadYear(
+config.path(year),
+section(year, type),
+type,
+year,
+token
+)
+);
+await Promise.all(jobs);
+if(token !== loadToken){
+return;
+}
+updateCount();
+createFilters();
+}
+/* ========================================
+フィルター値取得
+======================================== */
+function values(key){
+const out = new Set();
+document
+.querySelectorAll(
+"#tableArea .product-group"
+)
+.forEach(group => {
+const data = meta.get(group);
+if(!data){
+return;
+}
+const value = data[key];
+(
+Array.isArray(value)
+? value
+: [value]
+).forEach(value => {
+if(value){
+out.add(value);
+}
+});
+});
+return [...out];
+}
+/* ========================================
+フィルターボタン
+======================================== */
+function group(
+title,
+key,
+list
+){
+const div =
+document.createElement("div");
+div.className = "filter-group";
+const strong =
+document.createElement("strong");
+strong.textContent =
+`${title}：`;
+div.append(strong);
+[
+["すべて",""],
+...list.map(
+value => [value,value]
+)
+].forEach(([text,value]) => {
+const button =
+document.createElement("button");
+button.textContent = text;
+button.classList.toggle(
+"selected",
+state[key] === value
+);
+button.onclick = () => {
+state[key] = value;
+[
+...div.querySelectorAll("button")
+].forEach(item =>
+item.classList.toggle(
+"selected",
+item === button
+)
+);
+applyFilters();
+};
+div.append(button);
+});
+els.filters.append(div);
+}
+/* ========================================
+フィルター作成
+======================================== */
+function createFilters(){
+els.filters.replaceChildren();
+if(currentType === "index"){
+group(
+"サイズ",
+"size",
+values("filter")
+);
+group(
+"味",
+"flavor",
+values("flavors")
+);
+group(
+"シリーズ区分",
+"event",
+values("events")
+);
+}
+else if(currentType === "thun3"){
+group(
+"コラボ先",
+"collab",
+values("filter")
+);
+}
+}
+/* ========================================
+フィルター中か
+======================================== */
+function filtering(){
+return !!(
+els.search.value.trim() ||
+Object
+.values(state)
+.some(Boolean)
+);
+}
+/* ========================================
+フィルター適用
+======================================== */
+function applyFilters(){
+const keyword =
+els.search.value
+.trim()
+.toLowerCase();
+const active = filtering();
+document
+.querySelectorAll("#tableArea table")
+.forEach(table => {
+let count = 0;
+productGroups(table)
+.forEach(groupElement => {
+const data =
+meta.get(groupElement);
+if(!data){
+return;
+}
+let show =
+!keyword ||
+data.name.includes(keyword);
+if(currentType === "index"){
+show =
+show &&
+(
+!state.size ||
+data.filter === state.size
+) &&
+(
+!state.flavor ||
+data.flavors.includes(
+state.flavor
+)
+) &&
+(
+!state.event ||
+data.events.includes(
+state.event
+)
+);
+}
+else if(currentType === "thun3"){
+show =
+show &&
+(
+!state.collab ||
+data.filter === state.collab
+);
+}
+groupElement.hidden = !show;
+if(show){
+count++;
+}
+});
+const h2 =
+table.previousElementSibling;
+if(active){
+h2.hidden = !count;
+table.classList.toggle(
+"hidden",
+!count
+);
+if(count){
+h2.textContent =
+`▼ ${h2.dataset.year}（${count}件）`;
+}
+}
+else{
+h2.hidden = false;
+table.classList.add("hidden");
+heading(table);
+}
+});
+}
+/* ========================================
+全表示
+======================================== */
+function showAll(){
+resetState();
+els.search.value = "";
+document
+.querySelectorAll(
+"#tableArea .product-group"
+)
+.forEach(groupElement =>
+groupElement.hidden = false
+);
+document
+.querySelectorAll("#tableArea h2")
+.forEach(h2 =>
+h2.hidden = false
+);
+document
+.querySelectorAll("#tableArea table")
+.forEach(table => {
+table.classList.remove("hidden");
+heading(table);
+});
+createFilters();
+}
+/* ========================================
+イベント
+======================================== */
+document
+.querySelector(".menu")
+.onclick = event => {
+const type =
+event.target.dataset.type;
+if(type){
+changeType(type);
+}
+};
+els.search.addEventListener(
+"input",
+applyFilters
+);
+$("showAllBtn")
+.addEventListener(
+"click",
+showAll
+);
+/* ========================================
+初期表示
+======================================== */
 changeType("index");
-
 </script>
-
-
-
 </body>
-
 </html>
-
-
