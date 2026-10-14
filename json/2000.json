@@ -1,5 +1,5 @@
 [
-  {"id":"2000","name":"ブラックサンダー(二代目パッケージ)","releaseDate":"2000/??/??","nickname":"黒い雷神","size":"レギュラー","flavors":["基本"],"series":[],
-               "description":"",
-               "image":"imag/2000/2000.webp","officialLinks":[],"referenceLinks":[]}
+  {"id":"012000000000","name":"ブラックサンダー(二代目パッケージ)","nickname":"黒い雷神","size":"レギュラー","flavors":["基本"],"series":[],"image":"imag/01-2000/01200000000000.webp",
+                       "releaseDate":"2000/??/??","description":"どうしてパッケージ変更をしたのかなどの情報や詳しい発売日も不明",
+                       "officialLinks":[],"referenceLinks":[]}
 ]
