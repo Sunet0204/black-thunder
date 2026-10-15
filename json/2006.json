@@ -1,5 +1,5 @@
 [
-  {"id":"01-2006-00-00-00","name":"ビッグサンダー(一代目パッケージ)","releaseDate":"2006/??/??","nickname":"","size":"ビッグ","flavors":["基本"],"series":[],
-                           "description":"",
-                           "image":"imag/01-2006/01-2006-00-00-00.webp","officialLinks":[],"referenceLinks":[]}
+  {"id":"012006000000","name":"ビッグサンダー(一代目パッケージ)","nickname":"","size":"ビッグ","flavors":["基本"],"series":[],"image":"imag/01-2006/01200600000000.webp",
+                       "releaseDate":"2006/??/??","description":"",
+                       "officialLinks":[],"referenceLinks":[]}
 ]
