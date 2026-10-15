@@ -1,8 +1,8 @@
 [
-  {"id":"01-2009-06-22-00","name":"ちびサンダーホワイトチョコ味","releaseDate":"2009/06/22","nickname":"","size":"ちび","flavors":["ホワイト"],"series":[],
-                           "description":"リンクのサイトにて記載を確認",
-                           "image":"imag/01-2009/01-2009-06-22-00.webp","officialLinks":[],"referenceLinks":["https://おみやげ.コム/ブラックサンダーの全種類と新作/"]},
-  {"id":"01-2009-06-22-01","name":"ちびサンダーバナナチョコ味","releaseDate":"2009/06/22","nickname":"","size":"ちび","flavors":["バナナ"],"series":[],
-                           "description":"モグナビのサイトより発売日を確認",
-                           "image":"imag/01-2009/01-2009-06-22-01.webp","officialLinks":[],"referenceLinks":["https://mognavi.jp/product/9000000426860"]}
+  {"id":"012009062200","name":"ちびサンダーホワイトチョコ味","nickname":"","size":"ちび","flavors":["ホワイト"],"series":[],"image":"imag/01-2009/01200906220000.webp",
+                       "releaseDate":"2009/06/22","description":"リンクのサイトにて記載を確認",
+                       "officialLinks":[],"referenceLinks":["https://おみやげ.コム/ブラックサンダーの全種類と新作/"]},
+  {"id":"012009062201","name":"ちびサンダーバナナチョコ味","nickname":"","size":"ちび","flavors":["バナナ"],"series":[],"image":"imag/01-2009/01200906220100.webp",
+                       "releaseDate":"2009/06/22","description":"モグナビのサイトより発売日を確認",
+                       "officialLinks":[],"referenceLinks":["https://mognavi.jp/product/9000000426860"]}
 ]
