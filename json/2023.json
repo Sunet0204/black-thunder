@@ -1,6 +1,8 @@
 [
   {"id":"2023","name":"ブラックサンダー(七代目パッケージ)","releaseDate":"2023/??/??","nickname":"黒い雷神","size":"レギュラー","image":"imag/2023.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-02-03-a","name":"アサヒクラッブサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-00.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
+  {"id":"012023020300","name":"アサヒクラッブサンダー","nickname":"カニ雷神","size":"My","flavors":[],"series":[],"image":"imag/2023-02-03-00.webp",
+                       "releaseDate":"2023/02/03","description":"",
+                       "officialLinks":[],"referenceLinks":[]},
   {"id":"2023-02-03-b","name":"ワタリクラッブサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-01.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2023-02-03-c","name":"クラッブカマサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-02.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2023-02-03-d","name":"フタホシイシクラッブサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-03.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
@@ -40,10 +42,7 @@
   {"id":"2023-02-03-ll","name":"シマイシクラッブサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-37.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2023-02-03-mm","name":"イシクラッブサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-38.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
   {"id":"2023-02-03-nn","name":"アブラクラッブサンダー","releaseDate":"2023/02/03","nickname":"カニ雷神","size":"My","image":"imag/2023-02-03-39.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-10-23-a","name":"ブラックサンダーミニバークリスマス","releaseDate":"2023/10/23","nickname":"","size":"ミニ","image":"imag/2023-10-23.webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-10-23-b","name":"ブラックサンダーミニバークリスマス","releaseDate":"2023/10/23","nickname":"","size":"ミニ","image":"imag/2023-10-23(a).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-10-23-c","name":"ブラックサンダーミニバークリスマス","releaseDate":"2023/10/23","nickname":"","size":"ミニ","image":"imag/2023-10-23(b).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-10-23-d","name":"ブラックサンダーミニバークリスマス","releaseDate":"2023/10/23","nickname":"","size":"ミニ","image":"imag/2023-10-23(c).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-10-23-e","name":"ブラックサンダーミニバークリスマス","releaseDate":"2023/10/23","nickname":"","size":"ミニ","image":"imag/2023-10-23(d).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]},
-  {"id":"2023-10-23-f","name":"ブラックサンダーミニバークリスマス","releaseDate":"2023/10/23","nickname":"","size":"ミニ","image":"imag/2023-10-23(e).webp","officialLinks":[],"flavors":[],"series":[],"description":"","referenceLinks":[]}
-]
+  {"id":"012023102300","name":"ブラックサンダーミニバークリスマス(全6種)","nickname":"","size":"ミニ","flavors":[],"series":[],"image":["imag/01-2023/01202310230000.webp","imag/01-2023/01202310230001.webp","imag/01-2023/01202310230002.webp","imag/01-2023/01202310230003.webp","imag/01-2023/01202310230004.webp","imag/01-2023/01202310230005.webp"],
+                       "releaseDate":"2023/10/23","description":"",
+                       "officialLinks":[],"referenceLinks":[]}
+ ]
