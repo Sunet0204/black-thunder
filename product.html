@@ -16,7 +16,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>商品詳細</title>
+<title>商品詳細 | ブラックサンダー商品データベース</title>
+<meta name="description" content="ブラックサンダーの商品情報、発売時期、画像、紹介文を掲載しています。">
+<meta name="robots" content="index,follow">
 
 <style>
 body{
@@ -215,6 +217,52 @@ const id =
     params.get("id");
 
 
+// products/ 以下に置いた場合もJSONと一覧に正しくアクセスする
+const siteRoot = location.pathname.split('/').includes('products') ? '../' : './';
+$('backLink').href = siteRoot + 'index.html';
+
+function setMeta(name, content) {
+    let meta = document.querySelector(`meta[name="${name}"]`);
+    if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = name;
+        document.head.append(meta);
+    }
+    meta.content = content;
+}
+
+function setCanonical() {
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'canonical';
+        document.head.append(link);
+    }
+    // query型ページでは商品識別パラメータを残す
+    const url = new URL(location.href);
+    url.hash = '';
+    link.href = url.href;
+}
+
+function addStructuredData(item, images, name) {
+    const data = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name,
+        description: String(item.description || '').trim() || name,
+        url: location.href.split('#')[0]
+    };
+    if (images.length) data.image = images.map(src => new URL(src, location.href).href);
+    if (item.id != null) data.sku = String(item.id);
+    const old = document.getElementById('productStructuredData');
+    if (old) old.remove();
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'productStructuredData';
+    script.textContent = JSON.stringify(data).replace(/</g, '\u003c');
+    document.head.append(script);
+}
+
 // ==========================================
 // JSONの場所
 // ==========================================
@@ -228,7 +276,7 @@ function getJsonPath(
         type === "index"
     ) {
 
-        return `json/${year}.json`;
+        return `${siteRoot}json/${year}.json`;
 
     }
 
@@ -236,7 +284,7 @@ function getJsonPath(
         type === "thun2"
     ) {
 
-        return `json2/${year}-2.json`;
+        return `${siteRoot}json2/${year}-2.json`;
 
     }
 
@@ -244,7 +292,7 @@ function getJsonPath(
         type === "thun3"
     ) {
 
-        return `json3/${year}-3.json`;
+        return `${siteRoot}json3/${year}-3.json`;
 
     }
 
@@ -509,8 +557,11 @@ async function loadProduct() {
         $("productName").textContent =
             name;
 
-        document.title =
-            `${name} | ブラックサンダー`;
+        const yearLabel = /^\d{4}$/.test(String(year)) ? `${year}年` : '';
+        document.title = `${name} ${yearLabel}｜発売情報・画像 | ブラックサンダー商品データベース`;
+        const summary = String(item.description || '').replace(/\s+/g, ' ').trim();
+        setMeta('description', (summary || `${name}の発売情報や商品画像を掲載しています。`).slice(0, 145));
+        setCanonical();
 
 
         // ==========================================
@@ -545,7 +596,8 @@ async function loadProduct() {
                     );
 
                 img.src =
-                    image;
+                    new URL(image, new URL(siteRoot, location.href)).href;
+                img.decoding = 'async';
 
                 img.alt =
                     images.length === 1
@@ -567,6 +619,7 @@ async function loadProduct() {
 
         imageArea.hidden =
             images.length === 0;
+        addStructuredData(item, images.map(image => new URL(image, new URL(siteRoot, location.href)).href), name);
 
 
         // ==================================
