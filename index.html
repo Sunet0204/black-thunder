@@ -898,7 +898,7 @@ error
 /* ========================================
 種類変更
 ======================================== */
-async function changeType(type){
+async function changeType(type, restored = null){
 currentType = type;
 const token = ++loadToken;
 const config = types[type];
@@ -925,7 +925,22 @@ if(token !== loadToken){
 return;
 }
 updateCount();
+if(restored){
+  Object.keys(state).forEach(key => state[key] = restored.filters?.[key] ?? "");
+  els.search.value = restored.search ?? "";
+}
 createFilters();
+if(restored){
+  applyFilters();
+  if(!filtering()){
+    document.querySelectorAll("#tableArea table").forEach(table => {
+      const year = table.previousElementSibling.dataset.year;
+      table.classList.toggle("hidden", !(restored.openYears || []).includes(year));
+      heading(table);
+    });
+  }
+  restoreScroll(restored.scrollY || 0);
+}
 }
 /* ========================================
 フィルター値取得
@@ -1164,9 +1179,63 @@ $("showAllBtn")
 showAll
 );
 /* ========================================
+詳細ページから戻ったときの状態復元
+======================================== */
+const STORAGE_KEY = "blackThunderListState:" + location.pathname;
+if("scrollRestoration" in history){
+  history.scrollRestoration = "manual";
+}
+function saveListState(){
+  const openYears = [...document.querySelectorAll("#tableArea table")]
+    .filter(table => !table.classList.contains("hidden"))
+    .map(table => table.previousElementSibling.dataset.year);
+  const snapshot = {
+    type: currentType,
+    search: els.search.value,
+    filters: {...state},
+    openYears,
+    scrollY: window.scrollY
+  };
+  try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot)); }
+  catch(error){ console.warn("一覧状態の保存に失敗しました", error); }
+}
+function restoreScroll(y){
+  // JSONの読み込みとレイアウト確定後に位置を戻す
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    window.scrollTo(0, y);
+    // 遅れて読み込まれる画像による位置ずれを補正
+    setTimeout(() => window.scrollTo(0, y), 200);
+    setTimeout(() => window.scrollTo(0, y), 700);
+  }));
+}
+function readListState(){
+  try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null"); }
+  catch(error){ return null; }
+}
+// 商品リンクを開く直前とページ離脱時に記録する
+els.tables.addEventListener("click", event => {
+  if(event.target.closest('a[href]')) saveListState();
+});
+window.addEventListener("pagehide", saveListState);
+// 戻る操作でBFCacheから復帰した場合にも位置を戻す
+window.addEventListener("pageshow", event => {
+  if(event.persisted){
+    const saved = readListState();
+    if(saved) restoreScroll(saved.scrollY || 0);
+  }
+});
+/* ========================================
 初期表示
 ======================================== */
-changeType("index");
+const savedListState = readListState();
+// 通常の新規アクセスではなく履歴移動時のみ復元する
+const navigationEntry = performance.getEntriesByType("navigation")[0];
+const isBackForward = navigationEntry?.type === "back_forward";
+if(isBackForward && savedListState && types[savedListState.type]){
+  changeType(savedListState.type, savedListState);
+}else{
+  changeType("index");
+}
 </script>
 </body>
 </html>
