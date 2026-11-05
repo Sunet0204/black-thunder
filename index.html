@@ -50,7 +50,28 @@ margin-bottom:20px;
 margin:15px 0;
 }
 .filter-group{
-margin-bottom:8px;
+margin-bottom:12px;
+min-width:0;
+}
+.filter-group > strong{
+display:block;
+margin-bottom:6px;
+}
+.filter-scroll{
+display:flex;
+flex-wrap:nowrap;
+gap:6px;
+overflow-x:auto;
+overflow-y:hidden;
+-webkit-overflow-scrolling:touch;
+overscroll-behavior-x:contain;
+scrollbar-width:thin;
+padding:2px 0 8px;
+}
+.filter-scroll button{
+flex:0 0 auto;
+white-space:nowrap;
+margin:0 !important;
 }
 .filter-group button.selected{
 background:#333;
@@ -985,6 +1006,8 @@ document.createElement("strong");
 strong.textContent =
 `${title}：`;
 div.append(strong);
+const scroll = document.createElement("div");
+scroll.className = "filter-scroll";
 [
 ["すべて",""],
 ...list.map(
@@ -1010,8 +1033,9 @@ item === button
 );
 applyFilters();
 };
-div.append(button);
+scroll.append(button);
 });
+div.append(scroll);
 els.filters.append(div);
 }
 /* ========================================
