@@ -1190,7 +1190,7 @@ document
 const type =
 event.target.dataset.type;
 if(type){
-changeType(type);
+changeType(type).then(saveListState);
 }
 };
 els.search.addEventListener(
@@ -1203,63 +1203,78 @@ $("showAllBtn")
 showAll
 );
 /* ========================================
-詳細ページから戻ったときの状態復元
+一覧状態の保存と復元
 ======================================== */
 const STORAGE_KEY = "blackThunderListState:" + location.pathname;
-if("scrollRestoration" in history){
-  history.scrollRestoration = "manual";
+let restoringList = true;
+let scrollSaveTimer = null;
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+function readListState(){
+  try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null"); }
+  catch(error){ return null; }
 }
 function saveListState(){
+  if(restoringList) return;
   const openYears = [...document.querySelectorAll("#tableArea table")]
     .filter(table => !table.classList.contains("hidden"))
-    .map(table => table.previousElementSibling.dataset.year);
+    .map(table => String(table.previousElementSibling.dataset.year));
   const snapshot = {
     type: currentType,
     search: els.search.value,
     filters: {...state},
     openYears,
-    scrollY: window.scrollY
+    scrollY: window.scrollY,
+    horizontalFilters: [...els.filters.querySelectorAll(".filter-scroll")].map(el => el.scrollLeft)
   };
   try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot)); }
   catch(error){ console.warn("一覧状態の保存に失敗しました", error); }
 }
 function restoreScroll(y){
-  // JSONの読み込みとレイアウト確定後に位置を戻す
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    window.scrollTo(0, y);
-    // 遅れて読み込まれる画像による位置ずれを補正
-    setTimeout(() => window.scrollTo(0, y), 200);
-    setTimeout(() => window.scrollTo(0, y), 700);
-  }));
+  const target = Math.max(0, Number(y) || 0);
+  // JSONの読み込み後、画像読み込みなどによる高さの変化にも対応する
+  const go = () => window.scrollTo({top: target, left: 0, behavior: "instant"});
+  requestAnimationFrame(() => requestAnimationFrame(go));
+  [150, 400, 900, 1600].forEach(delay => setTimeout(go, delay));
 }
-function readListState(){
-  try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null"); }
-  catch(error){ return null; }
-}
-// 商品リンクを開く直前とページ離脱時に記録する
+// ページ移動の直前だけでなく、操作のたびに状態を保存する
 els.tables.addEventListener("click", event => {
   if(event.target.closest('a[href]')) saveListState();
+  else setTimeout(saveListState, 0);
 });
+els.filters.addEventListener("click", () => setTimeout(saveListState, 0));
+els.filters.addEventListener("scroll", () => setTimeout(saveListState, 0), true);
+els.search.addEventListener("input", saveListState);
+$("showAllBtn").addEventListener("click", () => setTimeout(saveListState, 0));
+window.addEventListener("scroll", () => {
+  clearTimeout(scrollSaveTimer);
+  scrollSaveTimer = setTimeout(saveListState, 100);
+}, {passive:true});
 window.addEventListener("pagehide", saveListState);
-// 戻る操作でBFCacheから復帰した場合にも位置を戻す
 window.addEventListener("pageshow", event => {
   if(event.persisted){
     const saved = readListState();
-    if(saved) restoreScroll(saved.scrollY || 0);
+    if(saved) restoreScroll(saved.scrollY);
   }
 });
+
 /* ========================================
-初期表示
+初期表示：通常のリンクで戻った場合も復元する
 ======================================== */
 const savedListState = readListState();
-// 通常の新規アクセスではなく履歴移動時のみ復元する
-const navigationEntry = performance.getEntriesByType("navigation")[0];
-const isBackForward = navigationEntry?.type === "back_forward";
-if(isBackForward && savedListState && types[savedListState.type]){
-  changeType(savedListState.type, savedListState);
-}else{
-  changeType("index");
-}
+(async () => {
+  if(savedListState && types[savedListState.type]){
+    await changeType(savedListState.type, savedListState);
+    [...els.filters.querySelectorAll(".filter-scroll")].forEach((el, i) => {
+      el.scrollLeft = savedListState.horizontalFilters?.[i] || 0;
+    });
+  }else{
+    await changeType("index");
+  }
+  restoringList = false;
+  if(savedListState) restoreScroll(savedListState.scrollY);
+  else saveListState();
+})();
 </script>
 </body>
 </html>
